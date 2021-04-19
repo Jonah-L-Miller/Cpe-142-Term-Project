@@ -36,8 +36,7 @@ if ((EX/MEM_RegWrite & (EX/MEM_RegisterOp1 != 0)) & (EX/MEM_RegisterOp1 = ID/EX_
 if (((MEM/WB_RegWrite & (MEM/WB_RegisterOp1 != 0)) & !(EX/MEM_RegWrite & (EX/MEM_RegisterOp1 != 0)) & (EX/MEM_RegisterOp1 = ID/EX_RegisterOp2)) & (MEM/WB_RegisterOp1 = ID/EX_RegisterOp2))
 	Forward_A = 2'b01;
 if (((MEM/WB_RegWrite & (MEM/WB_RegisterOp1 != 0)) & !(EX/MEM_RegWrite & (EX/MEM_RegisterOp1 != 0)) & (EX/MEM_RegisterOp1 = ID/EX_RegisterOp2)) & (MEM/WB_RegisterOp1 = ID/EX_RegisterOp2))
-	Forward_B = 2'b01;
-	
+	Forward_B = 2'b01;	
 end
 endmodule	
 	 
