@@ -3,7 +3,7 @@
 `include "EX_MEM_buffer.v"
 `include "MEM_WB_buffer.v"
 
-module forwarding_unit();
+module forwarding_unit(ID_EX_RegisterOp1, ID_EX_RegisterOp2, EX_MEM_RegisterOp1, MEM_WB_RegisterOp1);
 
 input[3:0] ID_EX_RegisterOp1, ID_EX_RegisterOp2, EX_MEM_RegisterOp1, MEM_WB_RegisterOp1;
 
