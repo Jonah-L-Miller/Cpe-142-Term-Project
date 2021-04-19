@@ -10,3 +10,9 @@ module mux2(in1,in2, out, s);
 		else
 			out = in2;
 endmodule
+// ACTION LOG
+// ACTION     DATE     USER
+// ----------------------------
+// COMPILE01  4-18-21  PAYNE
+//
+// ----------------------------

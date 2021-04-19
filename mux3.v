@@ -1,6 +1,6 @@
 module mux3(in1,in2, in3, out, s);
-	input [15:0] in1, in2, in3
-	input [1:0]s;
+	input [15:0] in1, in2, in3;
+	input [1:0] s;
 	
 	output reg [15:0] out;
 	
@@ -13,3 +13,9 @@ module mux3(in1,in2, in3, out, s);
 			default: out = out;
 		endcase
 endmodule
+// ACTION LOG
+// ACTION     DATE     USER     NOTES
+//------------------------------------
+// COMPILE01  4-18-01  PAYNE    NONE
+//
+//-------------------------------------
