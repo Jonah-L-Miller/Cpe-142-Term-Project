@@ -1,4 +1,4 @@
-`include "insruction_memory.v"
+`include "instruction_memory.v"
 
 module cpu(
 	input clk, 
