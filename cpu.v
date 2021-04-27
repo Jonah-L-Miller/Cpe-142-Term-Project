@@ -51,8 +51,8 @@ module cpu(
 
 	//instruction memory input and output
 	instruction_memory if_instruction_memory (
-		.if_from_pc(if_from_pc),				//adder that increments the address' memory to the next location ie. +2
-		.if_instruction(if_instruction)			//instruction leaving instruction memory and going into IF/ID buffer
+		.from_pc(if_from_pc),				//adder that increments the address' memory to the next location ie. +2
+		.instruction(if_instruction)			//instruction leaving instruction memory and going into IF/ID buffer
 	);	
 	
 
