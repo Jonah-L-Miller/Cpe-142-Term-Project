@@ -1,6 +1,7 @@
 `include "instruction_memory.v"
 `include "program_counter.v"
 `include "adder.v"
+`include "mux2.v"
 
 
 module cpu(
@@ -10,16 +11,16 @@ module cpu(
 
 ///// FETCH STAGE WIRES /////
 	wire [15:0] if_from_pc, if_instruction;
-	wire [15:0] if_pc_new_address, if_instruction_address, if_adder_result_address;
-	wire if_pc_stop;
-	
+	wire [15:0] if_pc_new_address, if_instruction_address, if_adder_result_address, ex_if_branch_location_result;
+	wire if_pc_stop, if_pc_mux;
+		
 
 ///// DECODE STAGE WIRES /////
 
 
 
 ///// EXECUTE STAGE WIRES /////
-
+	//ex_if_branch_location_result coming from EX branch execution to IF 
 
 
 ///// MEMORY STAGE WIRES /////
@@ -48,12 +49,15 @@ module cpu(
 		.in2(16'h0002),
 		.out(if_adder_result_address)
 		);
-
-	 
+		
+	//if_mux2
+	mux2 if_mux2(
+		.in1(if_adder_result_address),
+		.in2(ex_if_branch_location_result),
+		.s(if_pc_mux),
+		.out(if_pc_new_address)
+		);
 	
-
-
-
 	//instruction memory input and output
 	instruction_memory if_instruction_memory (
 		.from_pc(if_from_pc),				//adder that increments the address' memory to the next location ie. +2
