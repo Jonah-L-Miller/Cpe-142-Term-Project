@@ -6,7 +6,7 @@ module instruction_memory(adder,instruction);
 	always@(*)
 	begin
 		case(adder)
-//	 		 Address	                                  Instruction
+//	 		 Address	                                            Instruction
 			16'h0000:	instruction=16'hFE21;	//		00	ADD R14, R2
 			16'h0002:	instruction=16'hFB22;	//		02	SUB R11, R2
 			16'h0004:	instruction=16'h2388;	//		04	ORi R3, 0088
