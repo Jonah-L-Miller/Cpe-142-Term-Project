@@ -46,8 +46,13 @@ module cpu(
 	adder if_adder(
 		.in1(if_instruction_address),
 		.in2(16'h0002),
-		.out(if_adder_result_address
+		.out(if_adder_result_address)
 		);
+
+	 
+	
+
+
 
 	//instruction memory input and output
 	instruction_memory if_instruction_memory (

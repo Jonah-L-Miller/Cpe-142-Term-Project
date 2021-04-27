@@ -2,36 +2,39 @@
 
 module cpu_fixture();
 
-    reg clk, reset;
+    reg clock, reset;
     integer clock_cycles;
     
     initial 
         $vcdpluson;
     
     cpu CPU (
-        .clk(clk),
+        .clock(clock),
         .reset(reset)
     );
     
     initial 
     begin
         clock_cycles = 0;
-        clk = 0;
+        clock = 0;
         forever
         begin
-            #10 clk = ~clk;
-            if(reset == 1 && clk == 1)
+            #10 clock = ~clock;
+            if(reset == 0 && clock == 1)
                 clock_cycles = clock_cycles + 1;
         end
     end
     
-    always@(negedge clk)
+    always@(negedge clock)
     begin
-    $display("\n clock cycles = %d,   reset = %h",clock_cylces, reset);
+    $display("\n clock cycles = %d,   reset = %h",clock_cycles, reset);
     $display("-----IF-----");
     $display("IF_FROM_PC           = %h", CPU.if_from_pc);
     $display("IF_INSTRUCTION       = %h", CPU.if_instruction);
-    
+    $display("IF_PC_NEW_ADDRESS    = %h", CPU.if_pc_new_address);
+    $display("IF_INSTRUCTION_ADDRESS = %h",CPU.if_instruction_address);
+    $display("IF_PC_STOP  	   = %h",CPU.if_pc_stop);
+    $display("IF_ADDER_RESULT_ADDRESS = %h", CPU.if_adder_result_address);	    
     $display("-----ID-----");
     
     
@@ -72,7 +75,7 @@ module cpu_fixture();
         #20
         reset = 0;
         #40 
-        reset = 1;
+        
         
         #620
         $finish;
