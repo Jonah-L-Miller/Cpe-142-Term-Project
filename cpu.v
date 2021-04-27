@@ -1,8 +1,8 @@
 `include "insruction_memory.v"
 
 module cpu(
-			input clk, 
-			input reset
+	input clk, 
+	input reset
 );
 
 ///// FETCH STAGE WIRES /////
