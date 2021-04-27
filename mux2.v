@@ -3,7 +3,7 @@ module mux2(input [15:0] in1,in2,
 			output reg [15:0] out);
 	
 	always@(*)
-		if (s)
+		if (!s)
 			out = in1;
 		else
 			out = in2;

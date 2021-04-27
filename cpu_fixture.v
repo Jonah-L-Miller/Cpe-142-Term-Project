@@ -27,16 +27,22 @@ module cpu_fixture();
     
     always@(negedge clock)
     begin
-    $display("\n clock cycles = %d,   reset = %h",clock_cycles, reset);
+    	$display("\n clock cycles = %d,   reset = %h",clock_cycles, reset);
+	//IF-----
     $display("-----IF-----");
-    $display("IF_FROM_PC           = %h", CPU.if_from_pc);
-    $display("IF_INSTRUCTION       = %h", CPU.if_instruction);
-    $display("IF_PC_NEW_ADDRESS    = %h", CPU.if_pc_new_address);
-    $display("IF_INSTRUCTION_ADDRESS = %h",CPU.if_instruction_address);
-    $display("IF_PC_STOP  	   = %h",CPU.if_pc_stop);
-    $display("IF_ADDER_RESULT_ADDRESS = %h", CPU.if_adder_result_address);	    
+		$display("IF_ADDRESS_FROM_PC           = %h", CPU.if_address_from_pc);
+		$display("IF_INSTRUCTION       = %h", CPU.if_instruction);
+		$display("IF_PC_NEW_ADDRESS    = %h", CPU.if_pc_new_address);
+		$display("IF_PC_STOP  	   = %h",CPU.if_pc_stop);
+		$display("IF_ADDER_RESULT_ADDRESS = %h", CPU.if_adder_result_address);	  
+		$display("EX_IF_BRANCH_LOCATION_RESULT  	   = %h",CPU.ex_if_branch_location_result);
+		$display("IF_PC_MUX  	   = %h",CPU.if_pc_mux);
+	//ID-----
     $display("-----ID-----");
-    
+		$display("IF_ID_BUFFER_FLUSH       = %h",CPU.if_id_buffer_flush);
+		$display("IF_ID_BUFFER_HOLD        = %h",CPU.if_id_buffer_hold);
+		$display("ID_INSTRUCTION  	       = %h",CPU.id_intruction);
+		$display("ID_PC_NEXT_ADDRESS  	   = %h",CPU.id_pc_next_address);
     
     $display("-----EX-----");
     
@@ -76,8 +82,8 @@ module cpu_fixture();
         reset = 0;
         #40 
         
-        
-        #620
+        #60
+        //#620
         $finish;
     end
                    

@@ -2,6 +2,7 @@
 `include "program_counter.v"
 `include "adder.v"
 `include "mux2.v"
+`include "buffer.v"
 
 
 module cpu(
@@ -10,13 +11,14 @@ module cpu(
 );
 
 ///// FETCH STAGE WIRES /////
-	wire [15:0] if_from_pc, if_instruction;
-	wire [15:0] if_pc_new_address, if_instruction_address, if_adder_result_address, ex_if_branch_location_result;
+	wire [15:0] if_address_from_pc, if_instruction;
+	wire [15:0] if_pc_new_address, if_adder_result_address, ex_if_branch_location_result;
 	wire if_pc_stop, if_pc_mux;
 		
+	wire if_id_buffer_flush, if_id_buffer_hold;
 
 ///// DECODE STAGE WIRES /////
-
+	wire [15:0] id_intruction, id_pc_next_address;
 
 
 ///// EXECUTE STAGE WIRES /////
@@ -32,12 +34,13 @@ module cpu(
 
 
 ///// FETCH STAGE /////
-
+	assign if_pc_mux = 0;
+	assign if_pc_stop = 0;
 	
 	//program counter
 	program_counter if_program_counter(
 		.pc_new_address(if_pc_new_address),				//address from IF_MUX
-		.instruction_address(if_instruction_address),	//address from PC
+		.instruction_address(if_address_from_pc),	//address from PC
 		.pc_stop(if_pc_stop),							//pause pc with PC_pause or halt
 		.clock(clock),
 		.reset(reset)
@@ -45,7 +48,7 @@ module cpu(
 	
 	//adder
 	adder if_adder(
-		.in1(if_instruction_address),
+		.in1(if_address_from_pc),
 		.in2(16'h0002),
 		.out(if_adder_result_address)
 		);
@@ -60,13 +63,20 @@ module cpu(
 	
 	//instruction memory input and output
 	instruction_memory if_instruction_memory (
-		.from_pc(if_from_pc),				//adder that increments the address' memory to the next location ie. +2
+		.from_pc(if_address_from_pc),				//adder that increments the address' memory to the next location ie. +2
 		.instruction(if_instruction)			//instruction leaving instruction memory and going into IF/ID buffer
 	);	
 	
 
 ///// IF/ID BUFFER /////
-
+	buffer #(.N(32)) if_id_buffer(
+		.clock(clock),
+		.reset(reset),
+		.flush(if_id_buffer_flush),
+		.hold(if_id_buffer_hold),
+		.buffer_in({if_instruction, if_adder_result_address}),
+		.buffer_out({id_intruction, id_pc_next_address})
+		);
 
 
 ///// DECODE STAGE /////
