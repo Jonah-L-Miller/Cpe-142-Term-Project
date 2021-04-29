@@ -4,6 +4,9 @@
 `include "mux2.v"
 `include "buffer.v"
 `include "registers.v"
+`include "zero_extend_parameter.v"
+`include "sign_extend_parameter.v"\
+`include "left_shift.v"
 
 
 module cpu(
@@ -97,6 +100,12 @@ module cpu(
 	wire wb_id_write_r0;
 	
 	wire [15:0] id_read_data_1, id_read_data_2;
+	wire [15:0] id_jump_sign_extend, id_branch_sign_extend;
+	
+	wire id_branch_jump_selector;
+	wire [15:0] id_branch_jump_mux2_output;
+	wire [15:0] id_branch_jump_left_shift_output;
+	wire [15:0] id_pc_branch_result;
 	
 	mux2 id_read_reg_2_mux2 (
 		.in1(id_op2),
@@ -117,7 +126,40 @@ module cpu(
 		.read_data1(id_read_data_1),
 		.read_data2(id_read_data_2)		
 	);
+	
+	zero_extend_parameter id_ex_buffer_zero_extend #(N = 8)(
+		.in(id_immediate),
+		.out(id_zero_extended_immediate)
+	);
+	
+		//jump and branch
+	sign_extend_parameter id_jump_location #(N = 4)(
+		.in(id_op1),
+		.out(id_jump_sign_extend)
+	);
+	
+	sign_extend_parameter id_branch_location #(N = 4)(
+		.in(id_op2),
+		.out(id_branch_sign_extend)
+	);
+	
+	mux2 id_jump_branch_mux2(
+		.in1(id_jump_sign_extend),
+		.in2(id_branch_sign_extend),
+		.s(id_branch_jump_selector),
+		.out(id_branch_jump_mux2_output)
+	);
 
+	left_shift id_jump_branch_left_shift(
+		.in(id_branch_jump_mux2_output),
+		.out(id_branch_jump_left_shift_output)
+	);
+	
+	adder id_jump_branch_adder(
+		.in1(id_pc_next_address),
+		.in2(id_jump_branch_location),
+		.out(id_pc_branch_result)
+	);
 
 
 ///// ID/EX BUFFER /////
@@ -128,7 +170,7 @@ module cpu(
 	wire id_ex_data_memory_write_control, ex_mem_data_memory_write_control;
 	wire id_ex_data_memory_byte_enable_control, ex_mem_data_memory_byte_enable_control ;
 	wire [1:0]id_ex_register_write_control, ex_mem_register_write_control;
-	wire [15:0]id_pc_branch_result,ex_pc_branch_result;
+	wire [15:0] ex_pc_branch_result;
 	wire [15:0] ex_op1, ex_op2;
 	wire [3:0] ex_function_code;
 	/*
