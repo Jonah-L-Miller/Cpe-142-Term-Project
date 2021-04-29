@@ -121,7 +121,33 @@ module cpu(
 
 
 ///// ID/EX BUFFER /////
-
+	wire [3:0]id_read_data_1,ex_read_data_1;
+	wire [3:0]id_read_data_2,ex_read_data_2;
+	wire [1:0]id_alu_op;
+	wire [7:0]id_zero_extended_immediate, ex_zero_extended_immediate;
+	wire id_ex_data_memory_write_control, ex_mem_data_memory_write_control;
+	wire id_ex_data_memory_byte_enable_control, ex_mem_data_memory_byte_enable_control ;
+	wire [1:0]id_ex_register_write_control, ex_mem_register_write_control;
+	wire [15:0]id_pc_branch_result,ex_pc_branch_result;
+	wire [15:0] ex_op1, ex_op2;
+	wire [3:0] ex_function_code;
+	/*
+	wire [1:0] wb_id_reg_write_control
+	wire [3:0] id_opcode         \
+	wire [3:0] id_op1 			  \	
+	wire [3:0] id_op2 			   > already declared wires that we need for id/ex buffer
+	wire [7:0] id_immediate 	  /
+	wire [3:0] id_function_code  /
+   */                              
+	buffer #(.N(84)) id_ex_buffer(
+		.clock(clock),
+		.reset(reset),
+		.buffer_in({id_ex_register_write_control,id_ex_data_memory_write_control,id_ex_data_memory_byte_enable_control,
+					id_pc_branch_result,id_opcode,id_read_data_1,id_read_data_2,id_op1,id_op2,id_function_code,
+					id_zero_extended_immediate}),
+		.buffer_out({ex_mem_register_write_control,ex_mem_data_memory_write_control,ex_mem_data_memory_byte_enable_control,
+					ex_pc_branch_result,ex_opcode,ex_read_data_1,ex_read_data_2,ex_op1,ex_op2,ex_function_code,ex_zero_extended_immediate})
+		);
 
 
 ///// EXECUTE STAGE /////
