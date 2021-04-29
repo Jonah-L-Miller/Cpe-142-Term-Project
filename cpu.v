@@ -3,6 +3,7 @@
 `include "adder.v"
 `include "mux2.v"
 `include "buffer.v"
+`include "registers.v"
 
 
 module cpu(
@@ -11,14 +12,9 @@ module cpu(
 );
 
 ///// FETCH STAGE WIRES /////
-	wire [15:0] if_address_from_pc, if_instruction;
-	wire [15:0] if_pc_new_address, if_adder_result_address, ex_if_branch_location_result;
-	wire if_pc_stop, if_pc_mux;
-		
-	wire if_id_buffer_flush, if_id_buffer_hold;
 
-///// DECODE STAGE WIRES /////
-	wire [15:0] id_intruction, id_pc_next_address;
+
+
 
 
 ///// EXECUTE STAGE WIRES /////
@@ -36,6 +32,10 @@ module cpu(
 ///// FETCH STAGE /////
 	assign if_pc_mux = 0;
 	assign if_pc_stop = 0;
+	
+	wire [15:0] if_address_from_pc, if_instruction;
+	wire [15:0] if_pc_new_address, if_adder_result_address, ex_if_branch_location_result;
+	wire if_pc_stop, if_pc_mux, if_id_buffer_flush, if_id_buffer_hold;
 	
 	//program counter
 	program_counter if_program_counter(
@@ -69,6 +69,8 @@ module cpu(
 	
 
 ///// IF/ID BUFFER /////
+	wire [15:0] id_intruction, id_pc_next_address;
+	
 	buffer #(.N(32)) if_id_buffer(
 		.clock(clock),
 		.reset(reset),
@@ -80,6 +82,41 @@ module cpu(
 
 
 ///// DECODE STAGE /////
+	wire [3:0] id_opcode = id_instruction[15:12];
+	wire [3:0] id_op1 = id_instruction[11:8];
+	wire [3:0] id_op2 = id_instruction[7:4];
+	wire [7:0] id_immediate = id_instruction [7:0];
+	wire [3:0] id_function_code = id_instruction [3:0];
+	
+	wire [3:0] id_mux2_output;
+	wire id_mux2_selector;
+	wire [3:0] wb_id_write_reg;			//first section of naming scheme deals with the buffer source. wb comes from wb buffer, id comes from id_ buffer
+	wire [15:0] wb_id_write_data;
+	wire [15:0] wb_id_r0;
+	wire wb_id_reg_write_control;
+	wire wb_id_write_r0;
+	
+	wire [15:0] id_read_data_1, id_read_data_2;
+	
+	mux2 id_read_reg_2_mux2 (
+		.in1(id_op2),
+		.in2(4'h0),	//location of R0
+		.s(id_mux2_selector),
+		.out(id_mux2_output)
+	);
+	
+	registers id_registers(
+		.read_reg_1(id_op1),
+		.read_reg_2(id_mux2_output),
+		.write_reg(wb_id_write_reg),
+		.write_data(wb_id_write_data),
+		.r0(wb_id_r0),
+		.reg_write(wb_id_reg_write_control),
+		.reset(reset),
+		.write_r0(wb_id_write_r0),
+		.read_data1(id_read_data_1),
+		.read_data2(id_read_data_2)		
+	);
 
 
 
