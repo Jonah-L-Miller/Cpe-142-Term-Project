@@ -2,8 +2,7 @@ module registers(
 	input [4:0] read_reg1, read_reg2,
 	input [4:0] write_reg,
 	input [15:0] write_data, R0,
-	input reg_write, reset,
-	
+	input reg_write, reset, write_r0,	
 	
 	output reg [15:0] read_data1, read_data2
 	);
@@ -31,11 +30,13 @@ module registers(
 		end
 		else if (reg_write)
 			R[write_reg] = write_data;
+		else if (write_r0)
+				R[0] = R0;
 		else begin
 			read_data1 = R[read_reg1];
 			read_data2 = R[read_reg2];
 		end
 		
-		R[0] = R0;
+
 	end
 endmodule
