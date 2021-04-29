@@ -28,6 +28,7 @@ module alu_control(
 	
     always @(*) begin 
         case(ALUop) 
+            2'b00: ctrlOut[3:0] = 4'b1100; 
             2'b01: begin 
                 case(functCode) 
                     4'b0001: ctrlOut[3:0] = 4'b0001; // ADD
@@ -36,6 +37,8 @@ module alu_control(
                     4'b1000: ctrlOut[3:0] = 4'b1000; // DIV
                 endcase
             end 
+            2'b10: ctrlOut[3:0] = 4'b1110; 
+            2'b11: ctrlOut[3:0] = 4'b1111; 
         endcase 
     end 
 endmodule 
