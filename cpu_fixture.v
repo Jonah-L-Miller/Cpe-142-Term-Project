@@ -41,12 +41,12 @@ module cpu_fixture();
 		$display("-----ID-----\n");
 		$display("IF_ID_BUFFER_FLUSH       				= %h",CPU.if_id_buffer_flush);
 		$display("IF_ID_BUFFER_HOLD        				= %h",CPU.if_id_buffer_hold);
-		$display("ID_INSTRUCTION  	       				= %h",CPU.id_intruction);
+		$display("ID_INSTRUCTION  	       				= %h",CPU.id_instruction);
 		$display("ID_PC_NEXT_ADDRESS  	   				= %h",CPU.id_pc_next_address);
 		$display("ID_OPCODE  		  	   				= %h",CPU.id_opcode);
 		$display("ID_OP1  		  	   	   				= %h",CPU.id_op1);
 		$display("ID_OP2				   				= %h",CPU.id_op2);
-		$display("ID_IMMEDIATE			   				= %h",CPU.id_immdediate);
+		$display("ID_IMMEDIATE			   				= %h",CPU.id_immediate);
 		$display("ID_FUNCTION_CODE         				= %h",CPU.id_function_code);
 		$display("ID_MUX2_OUTPUT		   				= %h",CPU.id_mux2_output);
 		$display("ID_MUX2_SELECTOR         				= %h",CPU.id_mux2_selector);
@@ -104,7 +104,7 @@ module cpu_fixture();
         reset = 0;
         #40 
         
-        #60
+        #40
         //#620
         $finish;
     end

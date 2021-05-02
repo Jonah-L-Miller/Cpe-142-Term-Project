@@ -5,7 +5,7 @@
 `include "buffer.v"
 `include "registers.v"
 `include "zero_extend_parameter.v"
-`include "sign_extend_parameter.v"\
+`include "sign_extend_parameter.v"
 `include "left_shift.v"
 
 
@@ -21,7 +21,7 @@ module cpu(
 
 
 ///// EXECUTE STAGE WIRES /////
-	//ex_if_branch_location_result coming from EX branch execution to IF 
+	//ex_if_branch_location_result coming from EX branch execution to IF                                                                                                            
 
 
 ///// MEMORY STAGE WIRES /////
@@ -72,7 +72,7 @@ module cpu(
 	
 
 ///// IF/ID BUFFER /////
-	wire [15:0] id_intruction, id_pc_next_address;
+	wire [15:0] id_instruction, id_pc_next_address;
 	
 	buffer #(.N(32)) if_id_buffer(
 		.clock(clock),
@@ -80,7 +80,7 @@ module cpu(
 		.flush(if_id_buffer_flush),
 		.hold(if_id_buffer_hold),
 		.buffer_in({if_instruction, if_adder_result_address}),
-		.buffer_out({id_intruction, id_pc_next_address})
+		.buffer_out({id_instruction, id_pc_next_address})
 		);
 
 
@@ -90,7 +90,8 @@ module cpu(
 	wire [3:0] id_op2 = id_instruction[7:4];
 	wire [7:0] id_immediate = id_instruction [7:0];
 	wire [3:0] id_function_code = id_instruction [3:0];
-	
+	wire [15:0]read_reg1, read_reg2;
+
 	wire [3:0] id_mux2_output;
 	wire id_mux2_selector;
 	wire [3:0] wb_id_write_reg;			//first section of naming scheme deals with the buffer source. wb comes from wb buffer, id comes from id_ buffer
@@ -115,8 +116,8 @@ module cpu(
 	);
 	
 	registers id_registers(
-		.read_reg_1(id_op1),
-		.read_reg_2(id_mux2_output),
+		.read_reg1(id_op1),
+		.read_reg2(id_mux2_output),
 		.write_reg(wb_id_write_reg),
 		.write_data(wb_id_write_data),
 		.r0(wb_id_r0),
@@ -127,18 +128,18 @@ module cpu(
 		.read_data2(id_read_data_2)		
 	);
 	
-	zero_extend_parameter id_ex_buffer_zero_extend #(N = 8)(
+	zero_extend #(.N(8))id_ex_buffer_zero_extend(
 		.in(id_immediate),
 		.out(id_zero_extended_immediate)
 	);
 	
 		//jump and branch
-	sign_extend_parameter id_jump_location #(N = 4)(
+	sign_extend #(.N(4))id_jump_location(
 		.in(id_op1),
 		.out(id_jump_sign_extend)
 	);
 	
-	sign_extend_parameter id_branch_location #(N = 4)(
+	sign_extend #(.N(8))id_branch_location(
 		.in(id_op2),
 		.out(id_branch_sign_extend)
 	);
