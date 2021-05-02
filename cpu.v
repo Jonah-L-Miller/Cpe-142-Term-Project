@@ -114,7 +114,7 @@ module cpu(
 	wire [7:0]id_zero_extended_immediate, ex_zero_extended_immediate;
 
 	
-	mux2 id_read_reg_2_mux2 (
+	mux2 #(.N(4)) id_read_reg_2_mux2 (
 		.in1(id_op2),
 		.in2(4'h0),	//location of R0
 		.s(id_mux2_selector),
@@ -209,6 +209,24 @@ module cpu(
 		.out(ex_funct_code_sign_extended)
 	);
 	
+	mux2 #(.N(1)) ex_mux2_ex_mem_reg_wrt_ctrl_flush(	//ex_mem_register_write_control		
+		.in1(ex_mem_register_write_control),
+		.in2(1'b0),
+		.out(ex_mem_reg_wrt_ctrl_flush)
+	);
+	
+	mux2 #(.N(1)) ex_mux2_ex_mem_data_mem_wrt_ctrl_flush(	//ex_mem_data_memory_write_control		
+		.in1(ex_mem_data_memory_write_control),
+		.in2(1'b0),
+		.out(ex_mem_data_mem_wrt_ctrl)	
+	);
+	
+	mux2 #(.N(1)) ex_mux2_ex_mem_data_mem_byte_enable_flush(	//ex_mem_data_memory_byte_enable_control
+		.in1(ex_mem_data_memory_byte_enable_control),
+		.in2(1'b0),
+		.out(ex_mem_data_mem_byte_ctrl)	
+	);
+	
 	mux4 ex_mux4_alu_in1(
 		.in1(ex_read_data_1),
 		.in2(mem_ex_forwarded_alu_output),
@@ -245,7 +263,32 @@ module cpu(
 
 
 ///// EX/MEM BUFFER /////
-
+	wire mem_wb_reg_wrt_ctrl_flush, mem_wb_data_mem_wrt_ctrl, mem_wb_data_mem_byte_ctrl;
+	wire [15:0] mem_wb_alu_r0_result, mem_wb_alu_output;
+	wire [3:0] mem_op1;
+	
+	buffer #(.N(39)) ex_mem_buffer(
+		.clock(clock),
+		.reset(reset),
+		//.flush(flush),
+		//.hold(.hold),
+		.buffer_in({
+			ex_mem_reg_wrt_ctrl_flush,
+			ex_mem_data_mem_wrt_ctrl,
+			ex_mem_data_mem_byte_ctrl,
+			ex_mem_alu_r0_result,
+			ex_mem_alu_output,
+			ex_op1
+		}),
+		.buffer_out({
+			mem_wb_reg_wrt_ctrl_flush,
+			mem_wb_data_mem_wrt_ctrl,
+			mem_wb_data_mem_byte_ctrl,
+			mem_wb_alu_r0_result,
+			mem_wb_alu_output,
+			mem_op1
+		})
+	);
 
 
 ///// MEMORY STAGE /////
