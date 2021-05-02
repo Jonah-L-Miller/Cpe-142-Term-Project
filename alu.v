@@ -1,11 +1,12 @@
-module alu(in1, in2, out, r0, con); //compiles, hPAYNE (4/18/21)
-	input [15:0] in1, in2;
-	input [3:0] con;
-	
-	output reg [15:0] out, r0;
+module alu(	input [15:0] in1, in2, 
+			output reg [15:0] out, r0,
+			output reg [1:0] branch_result,
+			output reg overflow_flag,
+			input [3:0] ctrl); //compiles, hPAYNE (4/18/21)
+
 	
 	always@(*) begin	//falling edge of clock?
-		case (con)	
+		case (ctrl)	
 			4'h 1:	out = in1 + in2;		//0001
 			4'h 2:	out = in1 - in2;		//0010
 			4'h 4:	{r0, out} = in1 * in2;  //0100
