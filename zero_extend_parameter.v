@@ -3,8 +3,11 @@ module zero_extend #(parameter N = 12)(
 	output reg [15:0] out
 	);
 	
+	parameter [32:0] temp = 32'h00000000;
+	
 	always@(*) begin
-		out = {16'b 0000000000000000, in} [15:0]
+		temp = {16'h0000, in};
+		out = temp [15:0];
 	end
 	
 endmodule
