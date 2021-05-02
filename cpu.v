@@ -108,6 +108,9 @@ module cpu(
 	wire [15:0] id_branch_jump_left_shift_output;
 	wire [15:0] id_pc_branch_result;
 	
+	wire [7:0]id_zero_extended_immediate, ex_zero_extended_immediate;
+
+	
 	mux2 id_read_reg_2_mux2 (
 		.in1(id_op2),
 		.in2(4'h0),	//location of R0
@@ -167,7 +170,6 @@ module cpu(
 	wire [3:0]id_read_data_1,ex_read_data_1;
 	wire [3:0]id_read_data_2,ex_read_data_2;
 	wire [1:0]id_alu_op;
-	wire [7:0]id_zero_extended_immediate, ex_zero_extended_immediate;
 	wire id_ex_data_memory_write_control, ex_mem_data_memory_write_control;
 	wire id_ex_data_memory_byte_enable_control, ex_mem_data_memory_byte_enable_control ;
 	wire [1:0]id_ex_register_write_control, ex_mem_register_write_control;

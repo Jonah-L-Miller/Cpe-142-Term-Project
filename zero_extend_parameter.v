@@ -3,7 +3,7 @@ module zero_extend #(parameter N = 12)(
 	output reg [15:0] out
 	);
 	
-	parameter [32:0] temp = 32'h00000000;
+	reg [32:0] temp = 32'h00000000;
 	
 	always@(*) begin
 		temp = {16'h0000, in};

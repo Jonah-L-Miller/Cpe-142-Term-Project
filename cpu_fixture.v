@@ -5,8 +5,8 @@ module cpu_fixture();
     reg clock, reset;
     integer clock_cycles;
     
-    initial 
-        $vcdpluson;
+   // initial 
+       // $vcdpluson;
     
     cpu CPU (
         .clock(clock),
