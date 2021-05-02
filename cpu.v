@@ -7,6 +7,9 @@
 `include "zero_extend_parameter.v"
 `include "sign_extend_parameter.v"
 `include "left_shift.v"
+`include "mux4.v"
+`include "alu.v"
+`include "alu_op.v"
 
 
 module cpu(
@@ -117,7 +120,7 @@ module cpu(
 		.s(id_mux2_selector),
 		.out(id_mux2_output)
 	);
-	
+
 	registers id_registers(
 		.read_reg1(id_op1),
 		.read_reg2(id_mux2_output),
@@ -172,7 +175,7 @@ module cpu(
 	wire [1:0]id_alu_op;
 	wire id_ex_data_memory_write_control, ex_mem_data_memory_write_control;
 	wire id_ex_data_memory_byte_enable_control, ex_mem_data_memory_byte_enable_control ;
-	wire [1:0]id_ex_register_write_control, ex_mem_register_write_control;
+	wire [1:0]id_ex_register_write_control, ex_mem_register_write_control,ctrl_id_ex_alu_op, ctrl_ex_alu_op;
 	wire [15:0] ex_pc_branch_result;
 	wire [15:0] ex_op1, ex_op2;
 	wire [3:0] ex_function_code;
@@ -187,16 +190,58 @@ module cpu(
 	buffer #(.N(84)) id_ex_buffer(
 		.clock(clock),
 		.reset(reset),
-		.buffer_in({id_ex_register_write_control,id_ex_data_memory_write_control,id_ex_data_memory_byte_enable_control,
+		.buffer_in({id_ex_register_write_control,id_ex_data_memory_write_control,id_ex_data_memory_byte_enable_control, ctrl_id_ex_alu_op,
 					id_pc_branch_result,id_opcode,id_read_data_1,id_read_data_2,id_op1,id_op2,id_function_code,
 					id_zero_extended_immediate}),
-		.buffer_out({ex_mem_register_write_control,ex_mem_data_memory_write_control,ex_mem_data_memory_byte_enable_control,
+		.buffer_out({ex_mem_register_write_control,ex_mem_data_memory_write_control,ex_mem_data_memory_byte_enable_control, ctrl_ex_alu_op,
 					ex_pc_branch_result,ex_opcode,ex_read_data_1,ex_read_data_2,ex_op1,ex_op2,ex_function_code,ex_zero_extended_immediate})
 		);
 
 
 ///// EXECUTE STAGE /////
-
+	wire [15:0] mem_ex_forwarded_alu_output, wb_ex_write_data, ex_funct_code_sign_extended, ex_mux_a_output, ex_mux_b_output, ex_mem_alu_output, ex_mem_alu_r0_result;
+	wire [1:0] forward_a, forward_b, ex_ctrl_alu_branch_result;
+	wire ex_ctrl_alu_overflow_flag;
+	wire [3:0] ex_alu_op_ctrl;
+	
+	sign_extend #(.N(4)) ex_func_code_sign_extend_comp (
+		.in(ex_function_code),
+		.out(ex_funct_code_sign_extended)
+	);
+	
+	mux4 ex_mux4_alu_in1(
+		.in1(ex_read_data_1),
+		.in2(mem_ex_forwarded_alu_output),
+		.in3(wb_ex_write_data), 
+		.in4(ex_funct_code_sign_extended),
+		.s(forward_a),
+		.out(ex_mux_a_output)
+	);
+	
+	mux4 ex_mux4_alu_in2(
+		.in1(ex_read_data_2),
+		.in2(mem_ex_forwarded_alu_output),
+		.in3(wb_ex_write_data), 
+		.in4(ex_zero_extended_immediate),
+		.s(forward_b),
+		.out(ex_mux_b_output)
+	);
+	
+	alu_ctrl ex_alu_ctrl( //ALU CONTROL UNIT
+		.func(ex_function_code),
+		.op(ctrl_ex_alu_op),
+		.out(ex_alu_op_ctrl)
+	);
+	
+	alu ex_alu(
+		.in1(ex_mux_a_output),
+		.in2(ex_mux_b_output),
+		.out(ex_mem_alu_output),
+		.r0(ex_mem_alu_r0_result),
+		.branch_result(ex_ctrl_alu_branch_result),
+		.overflow_flag(ex_ctrl_alu_overflow_flag),
+		.ctrl(ex_alu_op_ctrl)
+	);
 
 
 ///// EX/MEM BUFFER /////
