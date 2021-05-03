@@ -63,6 +63,3 @@ module data_memory(
 		end
     end 
 endmodule
-
-
-lw $r1, 4($r3)
