@@ -1,10 +1,10 @@
 module data_memory(
-	input memWrite, reset, byte_en
+	input memWrite, reset, byte_en,
 	input [15:0] address, writeData,
 	output reg [15:0] readData
 	);
 	
-	reg [7:0] mem [15:0]
+	reg [7:0] mem [15:0];
 	
 	integer i;
 	
@@ -59,7 +59,7 @@ module data_memory(
 			end 
 		else begin
 			mem[0] = mem[0];
-			readData[0] = read[0];
+			readData[0] = readData[0];
 		end
     end 
 endmodule
