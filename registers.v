@@ -1,6 +1,6 @@
 module registers(
-	input [4:0] read_reg1, read_reg2,
-	input [4:0] write_reg,
+	input [3:0] read_reg1, read_reg2,
+	input [3:0] write_reg,
 	input [15:0] write_data, r0,
 	input [1:0] reg_write,	//reg write and r0 write
 	input reset,
