@@ -2,7 +2,8 @@ module registers(
 	input [4:0] read_reg1, read_reg2,
 	input [4:0] write_reg,
 	input [15:0] write_data, r0,
-	input reg_write, reset, write_r0,	
+	input [1:0] reg_write,	//reg write and r0 write
+	input reset,
 	
 	output reg [15:0] read_data1, read_data2
 	);
@@ -28,9 +29,9 @@ module registers(
 			R[4'hE] = 16'h 0011;
 			R[4'hF] = 16'h 0000;
 		end
-		else if (reg_write)
+		else if (reg_write == 2'b11)
 			R[write_reg] = write_data;
-		else if (write_r0)
+		else if (reg_write == 2'b01)
 				R[0] = r0;
 		else begin
 			read_data1 = R[read_reg1];
