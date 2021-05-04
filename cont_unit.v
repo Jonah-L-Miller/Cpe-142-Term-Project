@@ -29,7 +29,6 @@ module control_unit(
 				
 				mux_a = 2'b00;	//EX MUXA
 				mux_b = 2'b11;	//EX MUXB
-				vc
 				mux_c = 1'b1;	//WB MUXC
 				reg_write = 2'b11;	//WB_ID REGWRITE
 				r0_select =1'b0;
