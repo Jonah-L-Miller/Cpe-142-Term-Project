@@ -1,7 +1,7 @@
 module control_unit(
-	input [3:0] id_opcode, 
+	input [3:0] opcode, 
 	input [1:0] branch_result,
-	input overflow_flag, reset,
+	input overflow_flag, reset,	//OVERFLOW FLAG
 	
 	output reg ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c, r0_select,
 	output reg [1:0] alu_op, mux_a, mub_b, reg_write
@@ -13,7 +13,7 @@ module control_unit(
 		if (!reset)
 			{ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c,alu_op, mux_a, mub_b, reg_write} = 17'h00000;
 
-		case (id_opcode)
+		case (opcode)
 			4'b 1111: begin	//a
 				alu_op = 2'b 01;
 				mux_a = 2'b00;

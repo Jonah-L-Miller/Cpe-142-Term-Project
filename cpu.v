@@ -11,6 +11,7 @@
 `include "alu.v"
 `include "alu_op.v"
 `include "data_memory.v"
+`include "cont_unit.v"
 
 
 module cpu(
@@ -19,11 +20,11 @@ module cpu(
 );
 
 ///// FETCH STAGE WIRES /////
+	wire [15:0] if_address_from_pc, if_instruction;
+	wire [15:0] if_pc_new_address, if_adder_result_address, ex_if_branch_location_result;
+	wire if_pc_stop, if_pc_mux, if_id_buffer_flush, if_id_buffer_hold;
 
-
-
-
-
+	wire [15:0] id_instruction, id_pc_next_address;
 ///// EXECUTE STAGE WIRES /////
 	//ex_if_branch_location_result coming from EX branch execution to IF                                                                                                            
 
@@ -37,14 +38,7 @@ module cpu(
 
 
 ///// FETCH STAGE /////
-	assign if_pc_mux = 0;
-	assign if_pc_stop = 0;
 	
-	wire [15:0] if_address_from_pc, if_instruction;
-	wire [15:0] if_pc_new_address, if_adder_result_address, ex_if_branch_location_result;
-	wire if_pc_stop, if_pc_mux, if_id_buffer_flush, if_id_buffer_hold;
-	
-	//program counter
 	program_counter IF_PROGRAM_COUNTER(
 		.pc_new_address(if_pc_new_address),				//address from IF_MUX
 		.instruction_address(if_address_from_pc),	//address from PC
@@ -53,14 +47,14 @@ module cpu(
 		.reset(reset)
 		);
 	
-	//adder
+
 	adder IF_ADDER(
 		.in1(if_address_from_pc),
 		.in2(16'h0002),
 		.out(if_adder_result_address)
 		);
 		
-	//if_mux2
+
 	mux2 IF_MUX2(
 		.in1(if_adder_result_address),
 		.in2(ex_if_branch_location_result),
@@ -68,7 +62,7 @@ module cpu(
 		.out(if_pc_new_address)
 		);
 	
-	//instruction memory input and output
+
 	instruction_memory IF_INSTRUCTION_MEMORY (
 		.from_pc(if_address_from_pc),				//adder that increments the address' memory to the next location ie. +2
 		.instruction(if_instruction)			//instruction leaving instruction memory and going into IF/ID buffer
@@ -76,7 +70,7 @@ module cpu(
 	
 
 ///// IF/ID BUFFER /////
-	wire [15:0] id_instruction, id_pc_next_address;
+
 	
 	buffer #(.N(32)) IF_ID_BUFFER(
 		.clock(clock),
@@ -120,7 +114,31 @@ module cpu(
 	wire [15:0] id_pc_branch_result;
 	
 	wire [15:0]id_zero_extended_immediate, ex_zero_extended_immediate;
+	
+	wire ctrl_id_ex_buffer_flush, ctrl_id_buffer_flush, ctrl_id_halt, ctrl_id_if_buffer_flush;
+	
+	wire [1:0] id_ex_mux_a_ctrl, id_ex_mux_b_ctrl
 
+	control_unit CTRL_UNT(
+		.opcode(id_opcode),
+		.branch_result(ex_ctrl_alu_branch_result),
+		.overflow_flag(overflow_flag),
+		.reset(reset),
+		.ex_flush(ctrl_id_ex_buffer_flush),
+		.id_flush(ctrl_id_buffer_flush),
+		.halt(ctrl_id_halt),
+		.if_flush(ctrl_id_if_buffer_flush),
+		.pc_op(if_pc_mux)
+		.b_jmp(id_branch_jump_selector),
+		.byte_en(id_ex_data_memory_byte_enable_control),
+		.mem_write(id_ex_data_memory_write_control),
+		.mux_c(id_ex_mux_c_wb_data_ctrl),
+		.r0_select(id_mux2_selector),
+		.alu_op(ctrl_id_ex_alu_op),
+		.mux_a(id_ex_mux_a_ctrl),
+		.mux_b(id_ex_mux_b_ctrl), 
+		.reg_write(id_ex_register_write_control)
+	);
 	
 	mux2 #(.N(4)) ID_READ_REG_2_MUX2 (
 		.in1(id_op2),
