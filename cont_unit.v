@@ -181,7 +181,7 @@ module control_unit(
 					r0_select =1'b0;
 				end
 			end
-			4'b 0100: begin	//bgt
+			4'b 0100: begin	//bgt//
 				if(branch_result == 2'b10) begin
 					alu_op = 2'b 00;
 					
