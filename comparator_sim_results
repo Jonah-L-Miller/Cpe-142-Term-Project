@@ -1,0 +1,63 @@
+Chronologic VCS simulator copyright 1991-2018
+Contains Synopsys proprietary information.
+Compiler version O-2018.09-SP2-3_Full64; Runtime version O-2018.09-SP2-3_Full64;  May  4 14:03 2021
+IN1    =    0000
+IN2    =    0000
+RESULT =    01
+==============
+
+
+IN1    =    000a
+IN2    =    0008
+RESULT =    10
+==============
+
+
+IN1    =    0002
+IN2    =    0110
+RESULT =    11
+==============
+
+
+IN1    =    012c
+IN2    =    012c
+RESULT =    01
+==============
+
+
+IN1    =    ffba
+IN2    =    ff88
+RESULT =    10
+==============
+
+
+IN1    =    ff38
+IN2    =    ffc4
+RESULT =    11
+==============
+
+
+IN1    =    ffa6
+IN2    =    ffa6
+RESULT =    01
+==============
+
+
+IN1    =    0078
+IN2    =    fff1
+RESULT =    10
+==============
+
+
+IN1    =    fff3
+IN2    =    0016
+RESULT =    11
+==============
+
+
+$finish called from file "fixture_comparator.v", line 63.
+$finish at simulation time                  100
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 100
+CPU Time:      0.290 seconds;       Data structure size:   0.0Mb
+Tue May  4 14:03:20 2021
