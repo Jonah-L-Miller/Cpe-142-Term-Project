@@ -1,44 +1,50 @@
-`timescale 1ns_1ps
-`include "ID_EX_buffer.v"
-`include "EX_MEM_buffer.v"
-`include "MEM_WB_buffer.v"
+module fowarding_unit(
+		input [1:0] ex_regwrite, mem_regwrite,
+		input [3:0] id_op1, ex_op1, mem_op1, id_op2, ex_op2, 
+		input mem_muxc,
+		output reg [2:0] forward_a, forward_b
+    );
+    
+    always @(*) begin 
+		if (mem_regwrite == 2'b11 and mem_op1 == ex_op1)
+			forward_a = 3'b001;
+		else
+			forward_a = 3'b000;
+		
+		if (wb_regwrite == 2'b11 and wb_op1 == ex_op1)
+			forward_a = 3'b010;
+		else
+			forward_a = 3'b000;
+			
+		if (mem_regwrite = 2'b11 and mem_op1 == ex_op2)
+			forward_b = 3'b001;
+		else
+			forward_b = 3'b000;
+		
+		if (wb_regwrite = 2'b11 and wb_op1 == ex_op2)
+			forward_b = 3'b010;
+		else
+			forward_b = 3'b000;
+			
+		if (mem_op1 == ex_op1 and mem_muxc == 1)
+			forward_a = 3'b100;
+		else
+			forward_a = 3'b000;
+		
+		if (mem_op1 == ex_op2 and mem_muxc == 1)
+			forward_b = 3'b100;
+		else
+			forward_b = 3'b000;
+			
+		if (mem_op1 == id_op1 and mem_regwrite == 2'b11)
+			forward_branch = 1'b1;
+		else
+			forward_branch = 1'b0;
+			
+		if (mem_op1 == id_op1 and mem_regwrite != 2'b11)
+			forward_branch = 1'b1;
+		else
+			forward_branch = 1'b0;
 
-module forwarding_unit(ID_EX_RegisterOp1, ID_EX_RegisterOp2, EX_MEM_RegisterOp1, MEM_WB_RegisterOp1);
-
-input[3:0] ID_EX_RegisterOp1, ID_EX_RegisterOp2, EX_MEM_RegisterOp1, MEM_WB_RegisterOp1;
-
-reg output[1:0] Forward_A, Forward_B = 0;
-
-//Instantiations
-ID_EX_buffer ID_EX( 
-	.ID_EX_RegisterOp1 (ID_EX_RegisterOp1),
-	.ID_EX_RegisterOp2 (ID_EX_RegisterOp2);
-);
-
-EX_MEM_buffer EX_MEM( 
-	.EX_MEM_RegisterOp1 (EX_MEM_RegisterOp1),
-);
-
-MEM_WB_buffer MEM_WB( 
-	.MEM_WB_RegisterOp1 (MEM_WB_RegisterOp1)
-);
-
-always@(*)
-begin
-
-//Execution Hazards
-if ((EX_MEM_RegWrite & (EX_MEM_RegisterOp1 != 0)) & (EX_MEM_RegisterOp1 = ID_EX_RegisterOp1))
-	Forward_A = 2'b10; 
-if ((EX_MEM_RegWrite & (EX_MEM_RegisterOp1 != 0)) & (EX_MEM_RegisterOp1 = ID_EX_RegisterOp2))
-	Forward_B = 2'b10;	 
-	
-//Memory Hazards
-if (((MEM_WB_RegWrite & (MEM_WB_RegisterOp1 != 0)) & !(EX_MEM_RegWrite & (EX_MEM_RegisterOp1 != 0)) & (EX_MEM_RegisterOp1 = ID_EX_RegisterOp2)) & (MEM_WB_RegisterOp1 = ID_EX_RegisterOp2))
-	Forward_A = 2'b01;
-if (((MEM_WB_RegWrite & (MEM_WB_RegisterOp1 != 0)) & !(EX_MEM_RegWrite & (EX_MEM_RegisterOp1 != 0)) & (EX_MEM_RegisterOp1 = ID_EX_RegisterOp2)) & (MEM_WB_RegisterOp1 = ID_EX_RegisterOp2))
-	Forward_B = 2'b01;
-	
-end
+    end 
 endmodule	
-//	 
-	
