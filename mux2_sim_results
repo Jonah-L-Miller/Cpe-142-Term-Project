@@ -1,0 +1,30 @@
+Chronologic VCS simulator copyright 1991-2018
+Contains Synopsys proprietary information.
+Compiler version O-2018.09-SP2-3_Full64; Runtime version O-2018.09-SP2-3_Full64;  May  4 11:05 2021
+IN1  = abcd
+IN2  = 0123
+S    = 0
+OUT  = abcd
+---------
+
+
+IN1  = abcd
+IN2  = 0123
+S    = 1
+OUT  = 0123
+---------
+
+
+IN1  = abcd
+IN2  = 0123
+S    = 0
+OUT  = abcd
+---------
+
+
+$finish called from file "fixture_mux2.v", line 39.
+$finish at simulation time                   40
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 40
+CPU Time:      0.310 seconds;       Data structure size:   0.0Mb
+Tue May  4 11:05:11 2021
