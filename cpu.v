@@ -12,7 +12,7 @@
 `include "alu_op.v"
 `include "data_memory.v"
 `include "cont_unit.v"
-
+`include "hazard_unit.v"
 
 module cpu(
 	input clock, 
@@ -117,9 +117,9 @@ module cpu(
 	
 	wire ctrl_id_ex_buffer_flush, ctrl_id_buffer_flush, ctrl_id_halt, ctrl_id_if_buffer_flush;
 	
-	wire [1:0] id_ex_mux_a_ctrl, id_ex_mux_b_ctrl
+	wire [1:0] id_ex_mux_a_ctrl, id_ex_mux_b_ctrl;
 
-	control_unit CTRL_UNT(
+	control_unit CTRL_UNIT(
 		.opcode(id_opcode),
 		.branch_result(ex_ctrl_alu_branch_result),
 		.overflow_flag(overflow_flag),
@@ -128,7 +128,7 @@ module cpu(
 		.id_flush(ctrl_id_buffer_flush),
 		.halt(ctrl_id_halt),
 		.if_flush(ctrl_id_if_buffer_flush),
-		.pc_op(if_pc_mux)
+		.pc_op(if_pc_mux),
 		.b_jmp(id_branch_jump_selector),
 		.byte_en(id_ex_data_memory_byte_enable_control),
 		.mem_write(id_ex_data_memory_write_control),
@@ -396,7 +396,18 @@ module cpu(
 
 
 ///// HAZARD UNIT /////
-
+	wire mux_c_ex_ctrl;
+	
+	hazard_unit HAZ_UNIT(
+		.ex_memread(mux_c_ex_ctrl),
+		.id_op1(id_op1),
+		.ex_op1(ex_op1),
+		.id_op2(id_op2),
+		.ex_op2(ed_op2),
+		.id_flush(id_flush),
+		.pc_pause(pc_stop),
+		.if_id_flush(if_id_buffer_flush)
+	);
 
 
 endmodule
