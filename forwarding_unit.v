@@ -40,5 +40,5 @@ if (((MEM_WB_RegWrite & (MEM_WB_RegisterOp1 != 0)) & !(EX_MEM_RegWrite & (EX_MEM
 	
 end
 endmodule	
-	 
+//	 
 	
