@@ -6,7 +6,11 @@ module alu(	input signed [15:0] in1, in2,
 	
 	always@(*) begin	//falling edge of clock?
 		case (ctrl)	
-			4'h 1:	out = in1 + in2;		//0001
+			4'h 1: begin
+				out = in1 + in2;		//0001
+				
+				//overflow_flag = 1'b1;
+			end
 			4'h 2:	out = in1 - in2;		//0010
 			4'h 4:	{r0, out} = in1 * in2;  //0100
 			4'h 8:	begin //1000
@@ -19,8 +23,26 @@ module alu(	input signed [15:0] in1, in2,
 			4'h E: out = in1 | in2;	//1110 ORI
 			4'h F: out = in1 + in2;	//1111 ADD NO FUNC
 			default: out = out;
-			
 		endcase
+		
+		if (in1 > 0)	//in1 positive
+			if (in2 > 0) //in2 positive
+				if (out < 0 and (ctrl == 4'h 1 or ctrl == 4'h 4 or ctrl == 4'h8 or ctrl == 4'h F))	//output is negative for add, mult, div
+					overflow_flag = 1'b1;
+				else
+					overflow_flag = 1'b0;
+			else	//in2 negative
+				if (out < 0 and ctrl == 4'h2)	//if in1 - (-in2)<0
+					overflow_flag = 1'b1;
+				else
+					overflow_flag = 1'b0;
+		else //in1 negative
+			if (in2 < 0 and (ctrl == 4'h4 or ctrl == 4'h8) and out < 0)	//in2/out negative for mult/divide
+				overflow_flag = 1'b1;
+			else
+				overflow_flag = 1'b0;
+	
+
 	end
 endmodule
 /*_________________ACTION LOG_______________*/

@@ -1,9 +1,9 @@
 module control_unit(
 	input [3:0] opcode, 
 	input [1:0] branch_result,
-	input overflow_flag, reset,	//OVERFLOW FLAG
+	input overflow_flag, reset,
 	
-	output reg ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c, r0_select,
+	output reg ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c, r0_select, overflow_error_warning
 	output reg [1:0] alu_op, mux_a, mux_b, reg_write
 	);
 	
@@ -11,7 +11,7 @@ module control_unit(
 	
 	always@(*) begin
 		if (!reset)
-			{ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c,alu_op, mux_a, mux_b, reg_write} = 17'h00000;
+			{ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c,alu_op, mux_a, mux_b, reg_write, overflow_error_warning} = 18'h00000;
 
 		case (opcode)
 			4'b 1111: begin	//a
@@ -293,7 +293,7 @@ module control_unit(
 				r0_select =1'b0;
 			end
 			4'b 0000: begin	//halt
-				alu_op = 2'b 11;
+				alu_op = 2'b 00;
 				
 				ex_flush = 1'b0;
 				id_flush = 1'b0;
@@ -317,6 +317,15 @@ module control_unit(
 			end
 			default: {ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c,alu_op, mux_a, mux_b, reg_write} = 17'h00000;
 		endcase
+		
+		if (overflow_flag) begin
+			halt = 1'b1;
+			if_flush = 1'b1;
+			overflow_error_warning = 1'b1;
+			id_flush = 1'b1;
+			ex_flush = 1'b1;
+		end
+			
 		
 	end
 endmodule
