@@ -3,10 +3,10 @@ module sign_extend #(parameter N = 12)(
 	output reg [15:0] out
 	);
 	
-	reg [32:0] temp = 32'h 11111111;
+	reg [32:0] temp = 32'h FFFFFFFF;
 	
 	always@(*) begin
-		temp = {16'h 1111, in};
+		temp = {16'h FFFF, in};
 		out = temp [15:0];
 	end
 	

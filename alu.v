@@ -1,7 +1,7 @@
 module alu(	input [15:0] in1, in2, 
 			output reg [15:0] out, r0,
 			output reg [1:0] branch_result,
-			output reg overflow_flag,
+			output reg overflow_flag,	//OVERFLOW FLAG
 			input [3:0] ctrl); //compiles, hPAYNE (4/18/21)
 
 	

@@ -2,7 +2,8 @@ module program_counter (
 	input [15:0] pc_new_address,
 	input pc_stop, clock, reset,
 	
-	output reg [15:0] instruction_address);
+	output reg [15:0] instruction_address
+	);
 	
 	always@(posedge clock or negedge reset) begin
 		if (reset)

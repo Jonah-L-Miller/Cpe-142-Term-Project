@@ -1,4 +1,4 @@
-module mux3(input {15:0] in1,in2, in3
+module mux3(input [15:0] in1,in2, in3
 			input [1:0] s,
 			output reg [15:0] out);
 	
