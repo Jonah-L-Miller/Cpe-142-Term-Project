@@ -13,36 +13,59 @@ module cpu_fixture();
         .reset(reset)
     );
     
-    initial 
-    begin
-        clock_cycles = 0;
-        clock = 0;
-        forever
-        begin
-            #10 clock = ~clock;
-			/*
-            if(reset == 1 && clock == 1)
+    if(clock == 1)
                 clock_cycles = clock_cycles + 1;
-			*/
-			if(clock == 1)
-				clock_cycles = clock_cycles + 1;
-			if(reset == 0)
-				clock_cycles = 0;
-        end
-    end
-	
-	
+            if(reset == 0)
+                clock_cycles = 0;
+	initial 
+		begin
+			clock_cycles = 0;
+			clock = 0;
+			forever
+			begin
+				#10 clock = ~clock;
+				/*
+				if(reset == 1 && clock == 1)
+					clock_cycles = clock_cycles + 1;
+				*/
+				if(clock == 1)
+					clock_cycles = clock_cycles + 1;
+				if(reset == 0)
+					clock_cycles = 0;
+			end
+		end
     //\nclock cycles = %d  reset = %h",clock_cycles,reset
     always@(negedge clock)
     begin
 		$display("\n------------------------------------------");
     	$display("\nclock_cycles = %d  reset = %h",clock_cycles,reset);
 		$display("\n------------------------------------------");
-		$display("\n----------IF/ID BUFFER OUTPUT-----------");
+		$display("\n----------IF/ID BUFFER-----------");
+			$display("\nInputs");
+			$display("------");
+			$display("IF_INSTRUCTION					=%h",CPU.if_instruction);
+			$display("IF_ADDER_RESULT_ADDRESS				=%h",CPU.if_adder_result_address);
+			$display("\nOutputs");
+			$display("------");
 			$display("ID_INSTRUCTION					=%h",CPU.id_instruction);
 			$display("ID_PC_NEXT_ADDRESS				=%h",CPU.id_pc_next_address);
-		
-		$display("\n----------ID/EX BUFFER OUTPUT-----------");
+		$display("\n----------ID/EX BUFFER-----------");
+			
+			$display("\nInputs");
+			$display("------");
+			$display("ID_EX_REGISTER_WRITE_CONTROL			=%h",CPU.id_ex_register_write_control);
+			$display("ID_EX_DATA_MEMORY_WRITE_CONTROL			=%h",CPU.id_ex_data_memory_write_control);
+			$display("ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=%h",CPU.id_ex_data_memory_byte_enable_control);
+			$display("CTRL_ID_EX_ALU_OP				=%h",CPU.ctrl_id_ex_alu_op);
+			$display("ID_PC_BRANCH_RESULT				=%h",CPU.id_pc_branch_result);
+			$display("ID_READ_DATA_1					=%h",CPU.id_read_data_1);
+			$display("ID_READ_DATA_2					=%h",CPU.id_read_data_2);
+			$display("ID_OP1						=%h",CPU.id_op1);
+			$display("ID_OP2						=%h",CPU.id_op2);
+			$display("ID_FUNCTION_CODE				=%h",CPU.id_function_code);
+			$display("ID_ZERO_EXTENDED_IMMEDIATE			=%h",CPU.id_zero_extended_immediate);				
+			$display("\nOutputs");
+			$display("------");		
 			$display("EX_MEM_REGISTER_WRITE_CONTROL			=%h",CPU.ex_mem_register_write_control);
 			$display("EX_MEM_DATA_MEMORY_WRITE_CONTROL		=%h",CPU.ex_mem_data_memory_write_control);
 			$display("EX_MEM_DATA_MEMORY_BYTE_ENABLE_CONTROL		=%h",CPU.ex_mem_data_memory_byte_enable_control);
@@ -55,7 +78,17 @@ module cpu_fixture();
 			$display("EX_FUNCTION_CODE				=%h",CPU.ex_function_code);
 			$display("EX_ZERO_EXTENDED_IMMEDIATE			=%h",CPU.ex_zero_extended_immediate);
 			
-		$display("\n----------EX/MEM BUFFER OUTPUT----------");
+		$display("\n----------EX/MEM BUFFER----------");
+			$display("\nInputs");
+			$display("------");
+			$display("ex_mem_reg_wrt_ctrl_flush			=%h",CPU.ex_mem_reg_wrt_ctrl_flush);
+			$display("ex_mem_data_mem_wrt_ctrl			=%h",CPU.ex_mem_data_mem_wrt_ctrl);
+			$display("ex_mem_data_mem_byte_ctrl			=%h",CPU.ex_mem_data_mem_byte_ctrl);
+			$display("ex_mem_alu_r0_result				=%h",CPU.ex_mem_alu_r0_result);
+			$display("ex_mem_alu_output				=%h",CPU.ex_mem_alu_output);
+			$display("ex_op1						=%h",CPU.ex_op1);			
+			$display("\nOutputs");
+			$display("------");
 			$display("MEM_WB_REG_WRT_CTRL_FLUSH			=%h",CPU.mem_wb_reg_wrt_ctrl_flush);
 			$display("MEM_WB_DATA_MEM_WRT_CTRL			=%h",CPU.mem_wb_data_mem_wrt_ctrl);
 			$display("MEM_WB_DATA_MEM_BYTE_CTRL			=%h",CPU.mem_wb_data_mem_byte_ctrl);
@@ -63,12 +96,22 @@ module cpu_fixture();
 			$display("MEM_WB_ALU_OUTPUT				=%h",CPU.mem_wb_alu_output);
 			$display("MEM_OP1						=%h",CPU.mem_op1);
 			
-		$display("\n----------MEM/WB BUFFER OUTPUT----------");
-			$display("mem_wb_reg_wrt_ctrl_flush			=%h",CPU.mem_wb_reg_wrt_ctrl_flush);
-			$display("mem_wb_alu_r0_result				=%h",CPU.mem_wb_alu_r0_result);
-			$display("mem_wb_data_line				=%h",CPU.mem_wb_data_line);
-			$display("mem_wb_alu_output				=%h",CPU.mem_wb_alu_output);
-			$display("mem_op1						=%h",CPU.mem_op1);
+		$display("\n----------MEM/WB BUFFER----------");
+			$display("\nInputs");
+			$display("------");
+			$display("MEM_WB_REG_WRT_CTRL_FLUSH			=%h",CPU.mem_wb_reg_wrt_ctrl_flush);
+			$display("MEM_WB_ALU_R0_RESULT				=%h",CPU.mem_wb_alu_r0_result);
+			$display("MEM_WB_DATA_LINE				=%h",CPU.mem_wb_data_line);
+			$display("MEM_WB_ALU_OUTPUT				=%h",CPU.mem_wb_alu_output);
+			$display("MEM_OP1						=%h",CPU.mem_op1);
+			
+			$display("\nOutputs");
+			$display("------");
+			$display("MEM_WB_REG_WRT_CTRL_FLUSH			=%h",CPU.mem_wb_reg_wrt_ctrl_flush);
+			$display("MEM_WB_ALU_R0_RESULT				=%h",CPU.mem_wb_alu_r0_result);
+			$display("MEM_WB_DATA_LINE				=%h",CPU.mem_wb_data_line);
+			$display("MEM_WB_ALU_OUTPUT				=%h",CPU.mem_wb_alu_output);
+			$display("MEM_OP1						=%h",CPU.mem_op1);
 			
 		
 			
@@ -82,7 +125,6 @@ module cpu_fixture();
 		$display("IF_ADDER_RESULT_ADDRESS 			= %h", CPU.if_adder_result_address);	  
 		$display("EX_IF_BRANCH_LOCATION_RESULT  	   		= %h",CPU.ex_if_branch_location_result);
 		$display("IF_PC_MUX  	   				= %h",CPU.if_pc_mux);
-	
 	//ID-----
 		$display("\n-----ID-----\n");
 		$display("IF_ID_BUFFER_FLUSH				= %h",CPU.if_id_buffer_flush);
@@ -233,17 +275,17 @@ module cpu_fixture();
     //  display "Program HALT"      
     end
     
-    initial begin
-		reset = 1;
-		#10
-        reset = 0;
-        #20
-        reset = 1;
-        #40 
-        
-        #40
-        //#620
-        $finish;
-    end
+	initial begin
+			reset = 1;
+			#10
+			reset = 0;
+			#20
+			reset = 1;
+			#40 
+
+			#40
+			//#620
+			$finish;
+		end
                    
 endmodule
