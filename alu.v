@@ -1,5 +1,6 @@
 module alu(	input signed [15:0] in1, in2, 
 			input [3:0] ctrl,
+			input reset,
 			output reg signed[15:0] out, r0,
 			output reg overflow_flag	//OVERFLOW FLAG		
 		); //compiles, hPAYNE (4/18/21)
