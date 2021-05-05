@@ -1,8 +1,9 @@
-module fowarding_unit(
+module forwarding_unit(
 		input [1:0] ex_regwrite, mem_regwrite,
 		input [3:0] id_op1, ex_op1, mem_op1, id_op2, ex_op2, 
 		input mem_muxc,
-		output reg [2:0] forward_a, forward_b
+		output reg [2:0] forward_a, forward_b,
+		output reg forward_branch
     );
     
     always @(*) begin 
