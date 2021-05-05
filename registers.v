@@ -11,7 +11,7 @@ module registers(
 	reg [15:0] R [15:0];
 	
 	always@(*) begin
-		if (reset) begin
+		if (!reset) begin
 			R[4'h0] = 16'h 0000;
 			R[4'h1] = 16'h 7B18;
 			R[4'h2] = 16'h 245B;

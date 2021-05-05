@@ -6,7 +6,7 @@ module program_counter (
 	);
 	
 	always@(posedge clock or negedge reset) begin
-		if (reset)
+		if (!reset)
 			instruction_address = 16'h 0000;
 		else begin
 			if (pc_stop)

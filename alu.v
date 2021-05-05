@@ -1,5 +1,5 @@
 module alu(	input signed [15:0] in1, in2, 
-			output signed reg [15:0] out, r0,
+			output reg signed[15:0] out, r0,
 			output reg overflow_flag,	//OVERFLOW FLAG
 			input [3:0] ctrl); //compiles, hPAYNE (4/18/21)
 
@@ -27,17 +27,17 @@ module alu(	input signed [15:0] in1, in2,
 		
 		if (in1 > 0)	//in1 positive
 			if (in2 > 0) //in2 positive
-				if (out < 0 and (ctrl == 4'h 1 or ctrl == 4'h 4 or ctrl == 4'h8 or ctrl == 4'h F))	//output is negative for add, mult, div
+				if (out < 0 && (ctrl == 4'h 1 || ctrl == 4'h 4 || ctrl == 4'h8 || ctrl == 4'h F))	//output is negative for add, mult, div
 					overflow_flag = 1'b1;
 				else
 					overflow_flag = 1'b0;
 			else	//in2 negative
-				if (out < 0 and ctrl == 4'h2)	//if in1 - (-in2)<0
+				if (out < 0 && ctrl == 4'h2)	//if in1 - (-in2)<0
 					overflow_flag = 1'b1;
 				else
 					overflow_flag = 1'b0;
 		else //in1 negative
-			if (in2 < 0 and (ctrl == 4'h4 or ctrl == 4'h8) and out < 0)	//in2/out negative for mult/divide
+			if (in2 < 0 && (ctrl == 4'h4 || ctrl == 4'h8) && out < 0)	//in2/out negative for mult/divide
 				overflow_flag = 1'b1;
 			else
 				overflow_flag = 1'b0;

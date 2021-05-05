@@ -9,7 +9,7 @@ module data_memory(
 	integer i;
 	
 	always@(*)begin 
-		if(reset) begin 
+		if(!reset) begin 
 
 			
 			for (i = 0;i<32767;i = i+1)

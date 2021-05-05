@@ -20,10 +20,18 @@ module cpu_fixture();
         forever
         begin
             #10 clock = ~clock;
-            if(reset == 0 && clock == 1)
+			/*
+            if(reset == 1 && clock == 1)
                 clock_cycles = clock_cycles + 1;
+			*/
+			if(clock == 1)
+				clock_cycles = clock_cycles + 1;
+			if(reset == 0)
+				clock_cycles = 0;
         end
     end
+	
+	
     //\nclock cycles = %d  reset = %h",clock_cycles,reset
     always@(negedge clock)
     begin
@@ -33,7 +41,7 @@ module cpu_fixture();
 		$display("\n----------IF/ID BUFFER OUTPUT-----------");
 			$display("ID_INSTRUCTION					=%h",CPU.id_instruction);
 			$display("ID_PC_NEXT_ADDRESS				=%h",CPU.id_pc_next_address);
-			
+		
 		$display("\n----------ID/EX BUFFER OUTPUT-----------");
 			$display("EX_MEM_REGISTER_WRITE_CONTROL			=%h",CPU.ex_mem_register_write_control);
 			$display("EX_MEM_DATA_MEMORY_WRITE_CONTROL		=%h",CPU.ex_mem_data_memory_write_control);
@@ -74,6 +82,7 @@ module cpu_fixture();
 		$display("IF_ADDER_RESULT_ADDRESS 			= %h", CPU.if_adder_result_address);	  
 		$display("EX_IF_BRANCH_LOCATION_RESULT  	   		= %h",CPU.ex_if_branch_location_result);
 		$display("IF_PC_MUX  	   				= %h",CPU.if_pc_mux);
+	
 	//ID-----
 		$display("\n-----ID-----\n");
 		$display("IF_ID_BUFFER_FLUSH				= %h",CPU.if_id_buffer_flush);
@@ -225,9 +234,11 @@ module cpu_fixture();
     end
     
     initial begin
-        reset = 1;
-        #20
+		reset = 1;
+		#10
         reset = 0;
+        #20
+        reset = 1;
         #40 
         
         #40

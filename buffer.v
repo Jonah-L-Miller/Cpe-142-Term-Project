@@ -13,7 +13,7 @@ module buffer #(parameter N = 32)(
 				insert_bubble <= 1'b0;
 				
 			for (i=0; i<N; i=i+1)
-				buffer_out <= 0;
+				buffer_out[i] <= 0;
 		end
 		else if (hold)
 			buffer_out <= buffer_out;

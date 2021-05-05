@@ -307,7 +307,6 @@ module cpu(
 		.in2(ex_mux_b_output),
 		.out(ex_mem_alu_output),
 		.r0(ex_mem_alu_r0_result),
-		.branch_result(ex_ctrl_alu_branch_result),
 		.overflow_flag(ex_ctrl_alu_overflow_flag),
 		.ctrl(ex_alu_op_ctrl)
 	);
