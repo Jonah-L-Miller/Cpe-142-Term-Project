@@ -14,7 +14,7 @@
 `include "cont_unit.v"
 `include "hazard_unit.v"
 `include "forwarding_unit.v"
-
+`include "mux5.v"
 module cpu(
 	input clock, 
 	input reset
@@ -120,26 +120,7 @@ module cpu(
 	
 	wire [1:0] id_ex_mux_a_ctrl, id_ex_mux_b_ctrl;
 
-	control_unit CTRL_UNIT(
-		.opcode(id_opcode),
-		.branch_result(ex_ctrl_alu_branch_result),
-		.overflow_flag(overflow_flag),
-		.reset(reset),
-		.ex_flush(ctrl_id_ex_buffer_flush),
-		.id_flush(ctrl_id_buffer_flush),
-		.halt(ctrl_id_halt),
-		.if_flush(ctrl_id_if_buffer_flush),
-		.pc_op(if_pc_mux),
-		.b_jmp(id_branch_jump_selector),
-		.byte_en(id_ex_data_memory_byte_enable_control),
-		.mem_write(id_ex_data_memory_write_control),
-		.mux_c(id_ex_mux_c_wb_data_ctrl),
-		.r0_select(id_mux2_selector),
-		.alu_op(ctrl_id_ex_alu_op),
-		.mux_a(id_ex_mux_a_ctrl),
-		.mux_b(id_ex_mux_b_ctrl), 
-		.reg_write(id_ex_register_write_control)
-	);
+	
 	
 	mux2 #(.N(4)) ID_READ_REG_2_MUX2 (
 		.in1(id_op2),
@@ -247,7 +228,8 @@ module cpu(
 
 ///// EXECUTE STAGE /////
 	wire [15:0] mem_ex_forwarded_alu_output, wb_ex_write_data, ex_funct_code_sign_extended, ex_mux_a_output, ex_mux_b_output, ex_mem_alu_output, ex_mem_alu_r0_result;
-	wire [1:0] forward_a, forward_b, ex_ctrl_alu_branch_result, ex_mem_reg_wrt_ctrl_flush;
+	wire [1:0] ex_ctrl_alu_branch_result, ex_mem_reg_wrt_ctrl_flush;
+	wire [2:0] forward_a, forward_b;
 	wire ex_ctrl_alu_overflow_flag, ex_mem_data_mem_wrt_ctrl,ex_mem_data_mem_byte_ctrl;
 	wire [3:0] ex_alu_op_ctrl;
 	wire ctrl_ex_flush;
@@ -277,21 +259,23 @@ module cpu(
 		.s(ctrl_ex_flush),
 		.out(ex_mem_data_mem_byte_ctrl)	
 	);
-	
-	mux4 EX_MUX4_ALU_IN1(
+	wire [15:0] mem_ex_read_data;
+	mux5 EX_MUX5_ALU_IN1(
 		.in1(ex_read_data_1),
 		.in2(mem_ex_forwarded_alu_output),
 		.in3(wb_ex_write_data), 
-		.in4(ex_funct_code_sign_extended),	//SE IMMEDIATE
+		.in4(ex_funct_code_sign_extended),
+		.in5(mem_ex_read_data),//SE IMMEDIATE
 		.s(forward_a),
 		.out(ex_mux_a_output)
 	);
 	
-	mux4 EX_MUX4_ALU_IN2(
+	mux5 EX_MUX5_ALU_IN2(
 		.in1(ex_read_data_2),
 		.in2(mem_ex_forwarded_alu_output),
 		.in3(wb_ex_write_data), 
 		.in4(ex_zero_extended_immediate),
+		.in5(mem_ex_read_data),
 		.s(forward_b),
 		.out(ex_mux_b_output)
 	);
@@ -303,6 +287,7 @@ module cpu(
 	);
 	
 	alu EX_ALU(
+		.reset(reset),
 		.in1(ex_mux_a_output),
 		.in2(ex_mux_b_output),
 		.out(ex_mem_alu_output),
@@ -387,19 +372,41 @@ module cpu(
 
 
 ///// CONTROL UNIT /////
-
-
+	wire overflow_error_warning;
+	control_unit CTRL_UNIT(
+		.opcode(id_opcode),
+		.branch_result(ex_ctrl_alu_branch_result),
+		.overflow_flag(overflow_error_warning),
+		.reset(reset),
+		.ex_flush(ctrl_id_ex_buffer_flush),
+		.id_flush(ctrl_id_buffer_flush),
+		.halt(ctrl_id_halt),
+		.if_flush(ctrl_id_if_buffer_flush),
+		.pc_op(if_pc_mux),
+		.b_jmp(id_branch_jump_selector),
+		.byte_en(id_ex_data_memory_byte_enable_control),
+		.mem_write(id_ex_data_memory_write_control),
+		.mux_c(id_ex_mux_c_wb_data_ctrl),
+		.r0_select(id_mux2_selector),
+		.overflow_error_warning(overflow_error_warning),
+		.alu_op(ctrl_id_ex_alu_op),
+		.mux_a(id_ex_mux_a_ctrl),
+		.mux_b(id_ex_mux_b_ctrl), 
+		.reg_write(id_ex_register_write_control)
+	);
 
 
 ///// FORWARDING UNIT /////
 	wire mem_muxc, forward_branch;
-	wire [3:0] ex_regwrite, mem_regwrite;
-	
+	wire [1:0] ex_regwrite, mem_regwrite, wb_regwrite;
+	wire [3:0] wb_op1;
 	forwarding_unit FORWARDING_UNIT(
 		.ex_regwrite(ex_regwrite),
 		.mem_regwrite(mem_regwrite),
+		.wb_regwrite(wb_regwrite),
 		.id_op1(id_op1),
 		.ex_op1(ex_op1),
+		.wb_op1(wb_op1),
 		.mem_op1(mem_op1),
 		.id_op2(id_op2),
 		.ex_op2(ex_op2),
@@ -418,7 +425,7 @@ module cpu(
 		.id_op1(id_op1),
 		.ex_op1(ex_op1),
 		.id_op2(id_op2),
-		.ex_op2(ed_op2),
+		.ex_op2(ex_op2),
 		.id_flush(id_flush),
 		.pc_pause(pc_stop),
 		.if_id_flush(if_id_buffer_flush)
