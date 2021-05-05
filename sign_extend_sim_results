@@ -1,0 +1,64 @@
+Chronologic VCS simulator copyright 1991-2018
+Contains Synopsys proprietary information.
+Compiler version O-2018.09-SP2-3_Full64; Runtime version O-2018.09-SP2-3_Full64;  May  4 18:39 2021
+IN  = 00
+OUT = ff00
+========
+
+
+IN  = 19
+OUT = ff19
+========
+
+
+IN  = 32
+OUT = ff32
+========
+
+
+IN  = 4b
+OUT = ff4b
+========
+
+
+IN  = 64
+OUT = ff64
+========
+
+
+IN  = 7d
+OUT = ff7d
+========
+
+
+IN  = 96
+OUT = ff96
+========
+
+
+IN  = af
+OUT = ffaf
+========
+
+
+IN  = c8
+OUT = ffc8
+========
+
+
+IN  = e1
+OUT = ffe1
+========
+
+
+IN  = fa
+OUT = fffa
+========
+
+
+$finish called from file "fixture_sign_extend.v", line 28.
+$finish at simulation time                  130
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 130
+CPU Time:      0.290 seconds;       Data structure size:   0.0Mb
+Tue May  4 18:39:55 2021
