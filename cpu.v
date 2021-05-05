@@ -13,6 +13,7 @@
 `include "data_memory.v"
 `include "cont_unit.v"
 `include "hazard_unit.v"
+`include "comparator.v"
 
 module cpu(
 	input clock, 
@@ -118,10 +119,12 @@ module cpu(
 	wire ctrl_id_ex_buffer_flush, ctrl_id_buffer_flush, ctrl_id_halt, ctrl_id_if_buffer_flush;
 	
 	wire [1:0] id_ex_mux_a_ctrl, id_ex_mux_b_ctrl;
+	
+	wire [1:0] comp_ctrl_branch_result;
 
 	control_unit CTRL_UNIT(
 		.opcode(id_opcode),
-		.branch_result(ex_ctrl_alu_branch_result),
+		.branch_result(comp_ctrl_branch_result),
 		.overflow_flag(overflow_flag),
 		.reset(reset),
 		.ex_flush(ctrl_id_ex_buffer_flush),
@@ -157,6 +160,12 @@ module cpu(
 		.reset(reset),
 		.read_data1(id_read_data_1),
 		.read_data2(id_read_data_2)		
+	);
+	
+	comparator ID_COMPARATOR(
+		.in1(id_read_data_1),
+		.in2(id_read_data_2),
+		.result(comp_ctrl_branch_result);
 	);
 	
 	zero_extend #(.N(8))ID_EX_BUFFER_ZERO_EXTEND(
@@ -246,7 +255,7 @@ module cpu(
 
 ///// EXECUTE STAGE /////
 	wire [15:0] mem_ex_forwarded_alu_output, wb_ex_write_data, ex_funct_code_sign_extended, ex_mux_a_output, ex_mux_b_output, ex_mem_alu_output, ex_mem_alu_r0_result;
-	wire [1:0] forward_a, forward_b, ex_ctrl_alu_branch_result, ex_mem_reg_wrt_ctrl_flush;
+	wire [1:0] forward_a, forward_b, ex_mem_reg_wrt_ctrl_flush;
 	wire ex_ctrl_alu_overflow_flag, ex_mem_data_mem_wrt_ctrl,ex_mem_data_mem_byte_ctrl;
 	wire [3:0] ex_alu_op_ctrl;
 	wire ctrl_ex_flush;
@@ -306,7 +315,6 @@ module cpu(
 		.in2(ex_mux_b_output),
 		.out(ex_mem_alu_output),
 		.r0(ex_mem_alu_r0_result),
-		.branch_result(ex_ctrl_alu_branch_result),
 		.overflow_flag(ex_ctrl_alu_overflow_flag),
 		.ctrl(ex_alu_op_ctrl)
 	);
