@@ -12,11 +12,7 @@ module cpu_fixture();
         .clock(clock),
         .reset(reset)
     );
-    
-    if(clock == 1)
-                clock_cycles = clock_cycles + 1;
-            if(reset == 0)
-                clock_cycles = 0;
+
 	initial 
 		begin
 			clock_cycles = 0;
