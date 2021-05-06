@@ -103,15 +103,15 @@ module cpu_fixture();
 			
 			$display("\nOutputs");
 			$display("------");
-			$display("MEM_WB_REG_WRT_CTRL_FLUSH			=%h",CPU.mem_wb_reg_wrt_ctrl_flush);
-			$display("MEM_WB_ALU_R0_RESULT				=%h",CPU.mem_wb_alu_r0_result);
-			$display("MEM_WB_DATA_LINE				=%h",CPU.mem_wb_data_line);
-			$display("MEM_WB_ALU_OUTPUT				=%h",CPU.mem_wb_alu_output);
-			$display("MEM_OP1						=%h",CPU.mem_op1);
+			$display("wb_id_reg_write_control			=%h",CPU.wb_id_reg_write_control);
+			$display("wb_id_r0				=%h",CPU.wb_id_r0);
+			$display("wb_data_line				=%h",CPU.wb_data_line);
+			$display("wb_alu_output				=%h",CPU.wb_alu_output);
+			$display("wb_id_write_reg						=%h",CPU.wb_id_write_reg);
 			
 		
-			
-		
+/*			
+		////
 	//IF-----
 		$display("\n-----IF-----\n");
 		$display("IF_ADDRESS_FROM_PC           			= %h", CPU.if_address_from_pc);
@@ -164,7 +164,7 @@ module cpu_fixture();
 		$display("EX_OPCODE					=%h",CPU.ex_opcode);
 		
 		
-				
+*/	//			
     	$display("\n-----EX-----");
 		//$display("			=%h",CPU.);
 		$display("MEM_EX_FORWARDED_ALU_OUTPUT			=%h",CPU.mem_ex_forwarded_alu_output);
@@ -185,7 +185,7 @@ module cpu_fixture();
 		$display("CTRL_EX_FLUSH					=%h",CPU.ctrl_ex_flush);
 
     
-    
+ /*   
 	$display("\n-----EX/MEM buffer-----");
 		$display("MEM_WB_REG_WRT_CTRL_FLUSH			=%h",CPU.mem_wb_reg_wrt_ctrl_flush);
 		$display("MEM_WB_DATA_MEM_WRT_CTRL			=%h",CPU.mem_wb_data_mem_wrt_ctrl);
@@ -261,7 +261,7 @@ module cpu_fixture();
 		$display("PC_STOP						=%h",CPU.pc_stop);
 		$display("IF_ID_BUFFER_FLUSH				=%h",CPU.if_id_buffer_flush);
 ;
-		
+*/		
     
     //if(function code error)
     //  display "ERROR unknown function code"
@@ -279,7 +279,7 @@ module cpu_fixture();
 			reset = 1;
 			#40 
 
-			#40
+			#400
 			//#620
 			$finish;
 		end
