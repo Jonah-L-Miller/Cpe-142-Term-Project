@@ -23,4 +23,5 @@ module comparator(
 		else
 			result = 2'b00;		
 	end
+	
 endmodule

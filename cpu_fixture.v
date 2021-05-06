@@ -67,7 +67,6 @@ module cpu_fixture();
 			$display("EX_MEM_DATA_MEMORY_WRITE_CONTROL		=%h",CPU.ex_mem_data_memory_write_control);
 			$display("EX_MEM_DATA_MEMORY_BYTE_ENABLE_CONTROL		=%h",CPU.ex_mem_data_memory_byte_enable_control);
 			$display("CTRL_EX_ALU_OP					=%h",CPU.ctrl_ex_alu_op);
-			$display("EX_PC_BRANCH_RESULT				=%h",CPU.ex_pc_branch_result);
 			$display("EX_READ_DATA_1					=%h",CPU.ex_read_data_1);
 			$display("EX_READ_DATA_2					=%h",CPU.ex_read_data_2);
 			$display("EX_OP1						=%h",CPU.ex_op1);

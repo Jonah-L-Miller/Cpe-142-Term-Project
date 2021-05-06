@@ -14,7 +14,7 @@
 `include "cont_unit.v"
 `include "hazard_unit.v"
 `include "forwarding_unit.v"
-
+`include "comparator.v"
 
 
 module cpu(
@@ -28,18 +28,85 @@ module cpu(
 	wire if_pc_stop, if_pc_mux, if_id_buffer_flush, if_id_buffer_hold;
 
 	wire [15:0] id_instruction, id_pc_next_address;
-///// EXECUTE STAGE WIRES /////
-	//ex_if_branch_location_result coming from EX branch execution to IF                                                                                                            
+	
+///// DECODE STAGE WIRES /////	
+	wire [3:0] id_opcode = id_instruction[15:12];
+	wire [3:0] id_op1 = id_instruction[11:8];
+	wire [3:0] id_op2 = id_instruction[7:4];
+	wire [7:0] id_immediate = id_instruction [7:0];
+	wire [3:0] id_function_code = id_instruction [3:0];
+	wire [15:0]read_reg1, read_reg2;
+	wire [11:0] id_jmp;
+	wire [7:0] id_branch;
 
+	wire [3:0] id_mux2_output;
+	wire id_mux2_selector;
+	wire [3:0] wb_id_write_reg;			//first section of naming scheme deals with the buffer source. wb comes from wb buffer, id comes from id_ buffer
+	wire [15:0] wb_id_write_data;
+	wire [15:0] wb_id_r0;
+	wire [1:0] wb_id_reg_write_control;
+	
+	wire [15:0] id_read_data_1, id_read_data_2;
+	wire [15:0] id_jump_sign_extend, id_branch_sign_extend;
+	
+	wire id_branch_jump_selector;
+	wire [15:0] id_branch_jump_mux2_output;
+	wire [15:0] id_branch_jump_left_shift_output;
+	wire [15:0] id_pc_branch_result;
+	
+	wire [15:0]id_zero_extended_immediate, ex_zero_extended_immediate;
+	
+	wire ctrl_id_ex_buffer_flush, ctrl_id_buffer_flush, ctrl_id_halt, ctrl_id_if_buffer_flush;
+	
+	wire id_ex_alu_src_a, id_ex_alu_src_b;
+	
+	wire [15:0] id_branch_mux_output;
+	
+	wire [1:0] ex_ctrl_alu_branch_result;
+///// EXECUTE STAGE WIRES /////
+    
+	wire [15:0] mem_ex_forwarded_alu_output, wb_ex_write_data, ex_funct_code_sign_extended, ex_mux_a_output, ex_mux_b_output, ex_mem_alu_output, ex_mem_alu_r0_result;
+	wire [1:0] ex_mem_reg_wrt_ctrl_flush;
+	wire [1:0] forward_a, forward_b;
+	wire ex_ctrl_alu_overflow_flag, ex_mem_data_mem_wrt_ctrl,ex_mem_data_mem_byte_ctrl;
+	wire [3:0] ex_alu_op_ctrl;
+	wire ctrl_ex_flush;
+
+	wire [15:0] ex_alu_src_a_output,ex_alu_src_b_output;
+	
+	wire [15:0] mem_ex_read_data;
 
 ///// MEMORY STAGE WIRES /////
+	wire [15:0] mem_wb_data_line;
+
+
+///// WRITEBACK STAGE WIRES /////
 
 
 
-///// WRITEBACK STAGE WIRES /////ex_mem_reg_wrt_ctrl_flush
+///// ID/EX BUFFER WIRES /////
+	wire [15:0] ex_read_data_1;
+	wire [15:0] ex_read_data_2;
+	wire [1:0]id_alu_op;
+	wire id_ex_data_memory_write_control, ex_mem_data_memory_write_control;
+	wire id_ex_data_memory_byte_enable_control, ex_mem_data_memory_byte_enable_control ;
+	wire [1:0]id_ex_register_write_control, ex_mem_register_write_control,ctrl_id_ex_alu_op, ctrl_ex_alu_op;
 
-
-
+	wire [3:0] ex_op1, ex_op2;
+	wire [3:0] ex_function_code, ex_opcode;
+	
+	wire ex_alu_src_a, ex_alu_src_b;
+	
+///// EX/MEM BUFFER WIRES /////	
+	wire [1:0] mem_wb_reg_wrt_ctrl_flush;
+	wire mem_wb_data_mem_wrt_ctrl, mem_wb_data_mem_byte_ctrl;
+	wire [15:0] mem_wb_alu_r0_result, mem_wb_alu_output;
+	wire [3:0] mem_op1;
+	
+///// MEM/WB BUFFER WIRES /////	
+	wire [15:0] wb_data_line, wb_alu_output;
+	wire mux_c_wb_data_ctrl;
+	
 ///// FETCH STAGE /////
 	
 	program_counter IF_PROGRAM_COUNTER(
@@ -57,7 +124,6 @@ module cpu(
 		.out(if_adder_result_address)
 		);
 		
-
 	mux2 IF_MUX2(
 		.in1(if_adder_result_address),
 		.in2(ex_if_branch_location_result),
@@ -90,39 +156,8 @@ module cpu(
 		})
 		);
 
-
 ///// DECODE STAGE /////
-	wire [3:0] id_opcode = id_instruction[15:12];
-	wire [3:0] id_op1 = id_instruction[11:8];
-	wire [3:0] id_op2 = id_instruction[7:4];
-	wire [7:0] id_immediate = id_instruction [7:0];
-	wire [3:0] id_function_code = id_instruction [3:0];
-	wire [15:0]read_reg1, read_reg2;
-	wire [11:0] id_jmp;
-	wire [7:0] id_branch;
 
-	wire [3:0] id_mux2_output;
-	wire id_mux2_selector;
-	wire [3:0] wb_id_write_reg;			//first section of naming scheme deals with the buffer source. wb comes from wb buffer, id comes from id_ buffer
-	wire [15:0] wb_id_write_data;
-	wire [15:0] wb_id_r0;
-	wire [1:0] wb_id_reg_write_control;
-	
-	wire [15:0] id_read_data_1, id_read_data_2;
-	wire [15:0] id_jump_sign_extend, id_branch_sign_extend;
-	
-	wire id_branch_jump_selector;
-	wire [15:0] id_branch_jump_mux2_output;
-	wire [15:0] id_branch_jump_left_shift_output;
-	wire [15:0] id_pc_branch_result;
-	
-	wire [15:0]id_zero_extended_immediate, ex_zero_extended_immediate;
-	
-	wire ctrl_id_ex_buffer_flush, ctrl_id_buffer_flush, ctrl_id_halt, ctrl_id_if_buffer_flush;
-	
-	wire id_ex_alu_src_a, id_ex_alu_src_b;
-
-	
 	mux2 #(.N(4)) ID_READ_REG_2_MUX2 (
 		.in1(id_op2),
 		.in2(4'h0),	//location of R0
@@ -175,20 +210,23 @@ module cpu(
 		.in2(id_branch_jump_left_shift_output),
 		.out(id_pc_branch_result)
 	);
-
+	
+	//branch logic
+	mux2 ID_BRANCH_MUX(
+		.in1(id_read_data_1),
+		.in2(mem_ex_forwarded_alu_output),
+		.s(forward_branch),
+		.out(id_branch_mux_output)
+	);
+	
+	comparator ID_BRANCH_LOGIC_COMPARATOR(
+		.in1(id_branch_mux_output),
+		.in2(id_read_data_2),
+		.result(ex_ctrl_alu_branch_result)
+	);
 
 ///// ID/EX BUFFER /////
-	wire [15:0] ex_read_data_1;
-	wire [15:0] ex_read_data_2;
-	wire [1:0]id_alu_op;
-	wire id_ex_data_memory_write_control, ex_mem_data_memory_write_control;
-	wire id_ex_data_memory_byte_enable_control, ex_mem_data_memory_byte_enable_control ;
-	wire [1:0]id_ex_register_write_control, ex_mem_register_write_control,ctrl_id_ex_alu_op, ctrl_ex_alu_op;
-	wire [15:0] ex_pc_branch_result;
-	wire [3:0] ex_op1, ex_op2;
-	wire [3:0] ex_function_code, ex_opcode;
-	
-	wire ex_alu_src_a, ex_alu_src_b;
+
 	/*
 	wire [1:0] wb_id_reg_write_control
 	wire [3:0] id_opcode         \
@@ -197,34 +235,32 @@ module cpu(
 	wire [7:0] id_immediate 	  /
 	wire [3:0] id_function_code  /
    */                              
-	buffer #(.N(84)) ID_EX_BUFFER(
+	buffer #(.N(69)) ID_EX_BUFFER(
 		.clock(clock),
 		.reset(reset),
 		.buffer_in({
-			id_ex_alu_src_a,
-			id_ex_alu_src_b,
-			ctrl_id_ex_buffer_flush,
-			id_ex_register_write_control,
-			id_ex_data_memory_write_control,
-			id_ex_data_memory_byte_enable_control, 
-			ctrl_id_ex_alu_op,
-			id_pc_branch_result,
-			id_read_data_1,
-			id_read_data_2,
-			id_op1,
-			id_op2,
-			id_function_code,
-			id_zero_extended_immediate
+			id_ex_alu_src_a, //1
+			id_ex_alu_src_b, //1
+			ctrl_id_ex_buffer_flush, //1
+			id_ex_register_write_control, //2
+			id_ex_data_memory_write_control,//1
+			id_ex_data_memory_byte_enable_control, //1
+			ctrl_id_ex_alu_op,//2
+			id_read_data_1,//16
+			id_read_data_2,//16
+			id_op1,//4
+			id_op2,//4
+			id_function_code,//4
+			id_zero_extended_immediate//16
 		}),
 		.buffer_out({
-			ex_alu_src_a,
-			ex_alu_src_b,
-			ctrl_ex_flush,
+			ex_alu_src_a,//1
+			ex_alu_src_b,//1
+			ctrl_ex_flush,//1
 			ex_mem_register_write_control, //2
 			ex_mem_data_memory_write_control, //1
 			ex_mem_data_memory_byte_enable_control, //1
 			ctrl_ex_alu_op, //2
-			ex_pc_branch_result, //16
 			ex_read_data_1, //16
 			ex_read_data_2, //16
 			ex_op1, //4
@@ -236,14 +272,7 @@ module cpu(
 
 
 ///// EXECUTE STAGE /////
-	wire [15:0] mem_ex_forwarded_alu_output, wb_ex_write_data, ex_funct_code_sign_extended, ex_mux_a_output, ex_mux_b_output, ex_mem_alu_output, ex_mem_alu_r0_result;
-	wire [1:0] ex_ctrl_alu_branch_result, ex_mem_reg_wrt_ctrl_flush;
-	wire [1:0] forward_a, forward_b;
-	wire ex_ctrl_alu_overflow_flag, ex_mem_data_mem_wrt_ctrl,ex_mem_data_mem_byte_ctrl;
-	wire [3:0] ex_alu_op_ctrl;
-	wire ctrl_ex_flush;
 
-	wire [15:0] ex_alu_src_a_output,ex_alu_src_b_output;
 	
 	sign_extend #(.N(4)) EX_FUNC_CODE_SIGN_EXTEND_COMP (
 		.in(ex_function_code),
@@ -272,7 +301,7 @@ module cpu(
 	);
 	
 	
-	wire [15:0] mem_ex_read_data;
+
 	mux4 EX_MUX4_A(
 		.in1(ex_read_data_1),
 		.in2(mem_ex_forwarded_alu_output),
@@ -327,10 +356,7 @@ module cpu(
 
 
 ///// EX/MEM BUFFER /////
-	wire [1:0] mem_wb_reg_wrt_ctrl_flush;
-	wire mem_wb_data_mem_wrt_ctrl, mem_wb_data_mem_byte_ctrl;
-	wire [15:0] mem_wb_alu_r0_result, mem_wb_alu_output;
-	wire [3:0] mem_op1;
+
 	
 	buffer #(.N(40)) EX_MEM_BUFFER(
 		.clock(clock),
@@ -357,7 +383,7 @@ module cpu(
 
 
 ///// MEMORY STAGE /////
-	wire [15:0] mem_wb_data_line;
+
 	
 	data_memory MEM_DATA_MEMORY(
 		.memWrite(mem_wb_data_mem_wrt_ctrl),
@@ -369,8 +395,7 @@ module cpu(
 	);
 	
 ///// MEM/WB BUFFER /////
-	wire [15:0] wb_data_line, wb_alu_output;
-	wire mux_c_wb_data_ctrl;
+
 	buffer #(.N(54)) MEM_WB_BUFFER (
 		.clock(clock),
 		.reset(reset),
@@ -427,7 +452,7 @@ module cpu(
 	);
 
 
-///// FORWARDING UNIT /////id_ex_mux_b_ctrl
+///// FORWARDING UNIT /////
 	wire mem_muxc, forward_branch;
 	wire [1:0] ex_regwrite, mem_regwrite, wb_regwrite;
 	wire [3:0] wb_op1;
