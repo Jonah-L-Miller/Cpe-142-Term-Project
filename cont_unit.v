@@ -4,7 +4,8 @@ module control_unit(
 	input overflow_flag, reset,
 	
 	output reg ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c, r0_select, overflow_error_warning,
-	output reg [1:0] alu_op, mux_a, mux_b, reg_write
+	output reg [1:0] alu_op, mux_a, mux_b, reg_write,
+	output reg alu_src_a, alu_src_b
 	);
 	
 	
@@ -27,6 +28,9 @@ module control_unit(
 					reg_write = 2'b11;
 				if (function_code == 4'b0001 || function_code == 4'b0010)
 					reg_write = 2'b01;
+					
+				alu_src_a = 1'b0;
+				alu_src_b = 1'b0;
 			end
 			4'b 0001: begin	//andi
 				alu_op = 2'b 00;
@@ -39,6 +43,9 @@ module control_unit(
 				r0_select =1'b0;
 				
 				{ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write} = 8'h00;
+				
+				alu_src_a = 1'b0;
+				alu_src_b = 1'b1;
 				
 			end
 			4'b 0010: begin	//ori
@@ -53,6 +60,9 @@ module control_unit(
 				r0_select =1'b0;
 				
 				{ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write} = 8'h00;
+				
+				alu_src_a = 1'b0;
+				alu_src_b = 1'b1;
 				
 			end
 			4'b 1010: begin	//lbu
@@ -77,6 +87,9 @@ module control_unit(
 				reg_write[0] = 1'b0;
 				r0_select =1'b0;
 				
+				alu_src_a = 1'b1;
+				alu_src_b = 1'b0;
+				
 			end
 			4'b 1011: begin	//sb
 				alu_op = 2'b 11;
@@ -98,6 +111,9 @@ module control_unit(
 				
 				reg_write = 2'b00;
 				r0_select =1'b0;
+				
+				alu_src_a = 1'b1;
+				alu_src_b = 1'b0;
 				
 			end
 			4'b 1100: begin	//lw
@@ -122,6 +138,9 @@ module control_unit(
 				reg_write[0] = 1'b0;
 				r0_select =1'b0;
 				
+				alu_src_a = 1'b1;
+				alu_src_b = 1'b0;
+				
 			end
 			4'b 1101: begin	//sw
 				alu_op = 2'b 11;
@@ -143,6 +162,9 @@ module control_unit(
 				
 				reg_write = 2'b00;	
 				r0_select =1'b0;
+				
+				alu_src_a = 1'b1;
+				alu_src_b = 1'b0;
 			end
 			4'b 0101: begin	//blt
 				if(branch_result == 2'b11) begin
@@ -165,6 +187,9 @@ module control_unit(
 					
 					reg_write = 2'b00;
 					r0_select =1'b1;
+					
+					alu_src_a = 1'b0;
+				alu_src_b = 1'b0;
 				end
 				else begin
 					alu_op = 2'b 00;
@@ -186,6 +211,9 @@ module control_unit(
 					
 					reg_write = 2'b00;
 					r0_select =1'b0;
+					
+					alu_src_a = 1'b0;
+				alu_src_b = 1'b0;
 				end
 			end
 			4'b 0100: begin	//bgt//
@@ -209,6 +237,9 @@ module control_unit(
 					
 					reg_write = 2'b00;
 					r0_select =1'b1;
+					
+					alu_src_a = 1'b0;
+				alu_src_b = 1'b0;
 				end
 				else begin
 					alu_op = 2'b 00;
@@ -230,6 +261,9 @@ module control_unit(
 					
 					reg_write = 2'b00;
 					r0_select =1'b0;
+					
+					alu_src_a = 1'b0;
+				alu_src_b = 1'b0;
 				end
 				
 			end
@@ -254,6 +288,9 @@ module control_unit(
 					
 					reg_write = 2'b00;
 					r0_select =1'b1;
+					
+					alu_src_a = 1'b0;
+				alu_src_b = 1'b0;
 				end
 				else begin
 					alu_op = 2'b 00;
@@ -275,6 +312,9 @@ module control_unit(
 					
 					reg_write = 2'b00;	
 					r0_select =1'b0;
+					
+					alu_src_a = 1'b0;
+				alu_src_b = 1'b0;
 				end
 				
 			end
@@ -299,6 +339,9 @@ module control_unit(
 				
 				reg_write = 2'b00;
 				r0_select =1'b0;
+				
+				alu_src_a = 1'b0;
+				alu_src_b = 1'b0;
 			end
 			4'b 0000: begin	//halt
 				alu_op = 2'b 00;
@@ -321,6 +364,9 @@ module control_unit(
 				
 				reg_write = 2'b00;
 				r0_select =1'b0;
+				
+				alu_src_a = 1'b0;
+				alu_src_b = 1'b0;
 				
 			end
 			default: {ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c,alu_op, mux_a, mux_b, reg_write} = 17'h00000;
