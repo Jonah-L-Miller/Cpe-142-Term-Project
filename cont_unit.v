@@ -4,7 +4,7 @@ module control_unit(
 	input overflow_flag, reset,
 	
 	output reg ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c, r0_select, overflow_error_warning,
-	output reg [1:0] alu_op, mux_a, mux_b, reg_write,
+	output reg [1:0] alu_op, reg_write,
 	output reg alu_src_a, alu_src_b
 	);
 	
