@@ -394,7 +394,8 @@ module cpu(
 		.alu_op(ctrl_id_ex_alu_op),
 		.mux_a(id_ex_mux_a_ctrl),
 		.mux_b(id_ex_mux_b_ctrl), 
-		.reg_write(id_ex_register_write_control)
+		.reg_write(id_ex_register_write_control),
+		.function_code(id_function_code)
 	);
 
 
