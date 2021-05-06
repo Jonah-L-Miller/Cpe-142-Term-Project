@@ -249,7 +249,7 @@ module cpu_fixture();
 			reset = 1;
 			#40 
 
-			#40
+			#400
 			//#620
 			$finish;
 		end

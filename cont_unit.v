@@ -1,5 +1,5 @@
 module control_unit(
-	input [3:0] opcode, 
+	input [3:0] opcode, function_code
 	input [1:0] branch_result,
 	input overflow_flag, reset,
 	
@@ -19,10 +19,14 @@ module control_unit(
 				mux_a = 2'b00;
 				mux_b = 2'b00;
 				mux_c = 1'b1;
-				reg_write = 2'b11;
+
 				r0_select =1'b0;
 				
 				{ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write} = 8'h00;
+				if (function_code == 4'b1000 || function_code = 4'b0100)
+					reg_write[0] = 1'b1;
+				if (function_code == 4'b0001 || function_code = 4'b0010)
+					reg_write[1] = 1'b1;
 			end
 			4'b 0001: begin	//andi
 				alu_op = 2'b 00;
@@ -30,7 +34,8 @@ module control_unit(
 				mux_a = 2'b00;	//EX MUXA
 				mux_b = 2'b11;	//EX MUXB
 				mux_c = 1'b1;	//WB MUXC
-				reg_write = 2'b11;	//WB_ID REGWRITE
+				reg_write[1] = 1'b1;	
+				reg_write[0] = 1'b0;
 				r0_select =1'b0;
 				
 				{ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write} = 8'h00;
@@ -43,7 +48,8 @@ module control_unit(
 				mux_b = 2'b11;	//EX MUXB
 				
 				mux_c = 1'b1;	//WB MUXC
-				reg_write = 2'b11;	//WB_ID REGWRITE
+				reg_write[1] = 1'b1;	
+				reg_write[0] = 1'b0;	//WB_ID REGWRITE
 				r0_select =1'b0;
 				
 				{ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write} = 8'h00;
@@ -67,7 +73,8 @@ module control_unit(
 				mux_b = 2'b00;
 				mux_c = 1'b0;
 				
-				reg_write = 2'b11;
+				reg_write[1] = 1'b1;	
+				reg_write[0] = 1'b0;
 				r0_select =1'b0;
 				
 			end
@@ -111,7 +118,8 @@ module control_unit(
 				mux_b = 2'b00;
 				mux_c = 1'b0;
 				
-				reg_write = 2'b11;
+				reg_write[1] = 1'b1;	
+				reg_write[0] = 1'b0;
 				r0_select =1'b0;
 				
 			end

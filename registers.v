@@ -30,9 +30,9 @@ module registers(
 			R[4'hF] = 16'h 0000;
 		end
 		
-		if (reg_write == 2'b11)
+		if (reg_write[1] == 1'b1)
 			R[write_reg] = write_data;
-		else if (reg_write == 2'b01)
+		if (reg_write[0] == 1'b1)
 			R[0] = r0;
 				
 		read_data1 = R[read_reg1];
