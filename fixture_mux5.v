@@ -1,5 +1,5 @@
 `include "mux5.v"
-module mux4_fixture();
+module mux5_fixture();
 	reg [15:0] in1, in2, in3, in4, in5;
 	reg [1:0] s;
 	
