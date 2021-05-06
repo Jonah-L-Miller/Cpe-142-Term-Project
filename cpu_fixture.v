@@ -1,7 +1,7 @@
 `include "cpu.v"
 
 module cpu_fixture();
-
+//commment
     reg clock, reset;
     integer clock_cycles;
     
