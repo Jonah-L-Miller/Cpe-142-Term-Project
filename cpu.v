@@ -120,11 +120,8 @@ module cpu(
 	
 	wire ctrl_id_ex_buffer_flush, ctrl_id_buffer_flush, ctrl_id_halt, ctrl_id_if_buffer_flush;
 	
-	wire [1:0] id_ex_mux_a_ctrl, id_ex_mux_b_ctrl;
-	
 	wire id_ex_alu_src_a, id_ex_alu_src_b;
 
-	
 	
 	mux2 #(.N(4)) ID_READ_REG_2_MUX2 (
 		.in1(id_op2),
@@ -200,7 +197,7 @@ module cpu(
 	wire [7:0] id_immediate 	  /
 	wire [3:0] id_function_code  /
    */                              
-	buffer #(.N(82)) ID_EX_BUFFER(
+	buffer #(.N(84)) ID_EX_BUFFER(
 		.clock(clock),
 		.reset(reset),
 		.buffer_in({
@@ -245,7 +242,6 @@ module cpu(
 	wire ex_ctrl_alu_overflow_flag, ex_mem_data_mem_wrt_ctrl,ex_mem_data_mem_byte_ctrl;
 	wire [3:0] ex_alu_op_ctrl;
 	wire ctrl_ex_flush;
-	
 
 	wire [15:0] ex_alu_src_a_output,ex_alu_src_b_output;
 	
@@ -423,8 +419,7 @@ module cpu(
 		.r0_select(id_mux2_selector),
 		.overflow_error_warning(overflow_error_warning),
 		.alu_op(ctrl_id_ex_alu_op),
-		.mux_a(id_ex_mux_a_ctrl),
-		.mux_b(id_ex_mux_b_ctrl), 
+
 		.reg_write(id_ex_register_write_control),
 		.function_code(id_function_code),
 		.alu_src_a(id_ex_alu_src_a),
@@ -432,7 +427,7 @@ module cpu(
 	);
 
 
-///// FORWARDING UNIT /////
+///// FORWARDING UNIT /////id_ex_mux_b_ctrl
 	wire mem_muxc, forward_branch;
 	wire [1:0] ex_regwrite, mem_regwrite, wb_regwrite;
 	wire [3:0] wb_op1;
