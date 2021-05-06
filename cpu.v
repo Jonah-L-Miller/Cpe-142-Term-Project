@@ -238,6 +238,8 @@ module cpu(
 	buffer #(.N(69)) ID_EX_BUFFER(
 		.clock(clock),
 		.reset(reset),
+		.flush(1'b0), //Grounded
+		.hold(1'b0), //Grounded
 		.buffer_in({
 			id_ex_alu_src_a, //1
 			id_ex_alu_src_b, //1
@@ -361,8 +363,8 @@ module cpu(
 	buffer #(.N(40)) EX_MEM_BUFFER(
 		.clock(clock),
 		.reset(reset),
-		//.flush(flush),
-		//.hold(.hold),
+		.flush(1'b0), //Grounded
+		.hold(1'b0), //Grounded
 		.buffer_in({
 			ex_mem_reg_wrt_ctrl_flush,
 			ex_mem_data_mem_wrt_ctrl,
@@ -399,6 +401,8 @@ module cpu(
 	buffer #(.N(54)) MEM_WB_BUFFER (
 		.clock(clock),
 		.reset(reset),
+		.flush(1'b0), //Grounded
+		.hold(1'b0), //Grounded
 		.buffer_in({
 			mem_wb_reg_wrt_ctrl_flush,
 			mem_wb_alu_r0_result, 
@@ -453,7 +457,7 @@ module cpu(
 
 
 ///// FORWARDING UNIT /////
-	wire mem_muxc, forward_branch;
+	wire mem_muxc;
 	wire [1:0] ex_regwrite, mem_regwrite, wb_regwrite;
 	wire [3:0] wb_op1;
 	forwarding_unit FORWARDING_UNIT(
@@ -488,4 +492,4 @@ module cpu(
 	);
 
 
-endmodule
+endmodul
