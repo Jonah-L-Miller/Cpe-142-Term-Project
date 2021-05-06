@@ -34,7 +34,7 @@ module cpu(
 
 
 
-///// WRITEBACK STAGE WIRES /////
+///// WRITEBACK STAGE WIRES /////ex_mem_reg_wrt_ctrl_flush
 
 
 
@@ -198,6 +198,7 @@ module cpu(
 		.clock(clock),
 		.reset(reset),
 		.buffer_in({
+			ctrl_id_ex_buffer_flush,
 			id_ex_register_write_control,
 			id_ex_data_memory_write_control,
 			id_ex_data_memory_byte_enable_control, 
@@ -211,6 +212,7 @@ module cpu(
 			id_zero_extended_immediate
 		}),
 		.buffer_out({
+			ctrl_ex_flush,
 			ex_mem_register_write_control, //2
 			ex_mem_data_memory_write_control, //1
 			ex_mem_data_memory_byte_enable_control, //1
