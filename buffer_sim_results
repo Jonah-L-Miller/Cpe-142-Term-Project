@@ -1,0 +1,243 @@
+Chronologic VCS simulator copyright 1991-2018
+Contains Synopsys proprietary information.
+Compiler version O-2018.09-SP2-3_Full64; Runtime version O-2018.09-SP2-3_Full64;  May  6 10:44 2021
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = 00000000
+buffer_out = 00000000
+insert_bubble = 0
+
+==============
+
+reset      = 0
+flush      = 0
+hold       = 0
+buffer_in  = 00000000
+buffer_out = 00000000
+insert_bubble = 0
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = 00000000
+buffer_out = 00000000
+insert_bubble = 0
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = 00000000
+buffer_out = 00000000
+insert_bubble = 0
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = abcdef12
+buffer_out = abcdef12
+insert_bubble = 0
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = 12345678
+buffer_out = 12345678
+insert_bubble = 0
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 0
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 0
+
+==============
+
+reset      = 1
+flush      = 1
+hold       = 0
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = abcdef12
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = 12345678
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 1
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 1
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 1
+buffer_in  = abcdef12
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 1
+buffer_in  = 12345678
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 1
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 1
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 1
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 1
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 1
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 1
+
+==============
+
+reset      = 1
+flush      = 0
+hold       = 0
+buffer_in  = 12121212
+buffer_out = 12121212
+insert_bubble = 1
+$finish called from file "fixture_buffer.v", line 59.
+$finish at simulation time                  260
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 260
+CPU Time:      0.310 seconds;       Data structure size:   0.0Mb
+Thu May  6 10:44:02 2021

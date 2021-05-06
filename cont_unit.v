@@ -172,7 +172,7 @@ module control_unit(
 					b_jmp = 1'b1;
 					
 					byte_en = 1'b0;
-					mem_write = 1'b1;
+					mem_write = 1'b0;
 
 					mux_c = 1'b0;
 					
@@ -219,7 +219,7 @@ module control_unit(
 					b_jmp = 1'b1;
 					
 					byte_en = 1'b0;
-					mem_write = 1'b1;
+					mem_write = 1'b0;
 
 
 					mux_c = 1'b0;
@@ -268,7 +268,7 @@ module control_unit(
 					b_jmp = 1'b1;
 					
 					byte_en = 1'b0;
-					mem_write = 1'b1;
+					mem_write = 1'b0;
 
 
 					mux_c = 1'b0;
@@ -277,7 +277,7 @@ module control_unit(
 					r0_select =1'b1;
 					
 					alu_src_a = 1'b0;
-				alu_src_b = 1'b0;
+					alu_src_b = 1'b0;
 				end
 				else begin
 					alu_op = 2'b 00;
