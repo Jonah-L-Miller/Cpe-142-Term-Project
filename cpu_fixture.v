@@ -1,38 +1,29 @@
 `include "cpu.v"
-
-module cpu_fixture();
-//commment
+module fixture_cpu();
     reg clock, reset;
     integer clock_cycles;
-    
-   // initial 
-       // $vcdpluson;
     
     cpu CPU (
         .clock(clock),
         .reset(reset)
     );
 
-	initial 
-		begin
-			clock_cycles = 0;
-			clock = 0;
-			forever
-			begin
-				#10 clock = ~clock;
-				/*
-				if(reset == 1 && clock == 1)
-					clock_cycles = clock_cycles + 1;
-				*/
-				if(clock == 1)
-					clock_cycles = clock_cycles + 1;
-				if(reset == 0)
-					clock_cycles = 0;
-			end
+	initial begin
+		clock_cycles = 0;
+		clock = 0;
+		forever begin
+			#10 clock = ~clock;
+
+			if(clock == 1)
+				clock_cycles = clock_cycles + 1;
+			if(reset == 0)
+				clock_cycles = 0;
 		end
-    //\nclock cycles = %d  reset = %h",clock_cycles,reset
-    always@(negedge clock)
-    begin
+	end
+
+	
+
+    always@(negedge clock) begin
 		$display("\n------------------------------------------");
     	$display("\nclock_cycles = %d  reset = %h",clock_cycles,reset);
 		$display("\n------------------------------------------");
@@ -111,7 +102,7 @@ module cpu_fixture();
 		
 			
 
-/* 	//IF-----
+ 	//IF-----
 		$display("\n-----IF-----\n");
 		$display("IF_ADDRESS_FROM_PC           			= %h", CPU.if_address_from_pc);
 		$display("IF_INSTRUCTION       				= %h", CPU.if_instruction);
@@ -119,8 +110,8 @@ module cpu_fixture();
 		$display("IF_PC_STOP  	   				= %h",CPU.if_pc_stop);
 		$display("IF_ADDER_RESULT_ADDRESS 			= %h", CPU.if_adder_result_address);	  
 		$display("EX_IF_BRANCH_LOCATION_RESULT  	   		= %h",CPU.ex_if_branch_location_result);
-		$display("IF_PC_MUX  	   				= %h",CPU.if_pc_mux); */
-/* 	//ID-----
+		$display("IF_PC_MUX  	   				= %h",CPU.if_pc_mux); 
+ 	//ID-----
 		$display("\n-----ID-----\n");
 		$display("IF_ID_BUFFER_FLUSH				= %h",CPU.if_id_buffer_flush);
 		$display("IF_ID_BUFFER_HOLD        			= %h",CPU.if_id_buffer_hold);
@@ -142,10 +133,10 @@ module cpu_fixture();
 		$display("ID_EX_DATA_MEMORY_WRITE_CONTROL			= %h",CPU.id_ex_data_memory_write_control);
 		$display("ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		= %h",CPU.id_ex_data_memory_byte_enable_control);
 		$display("ID_EX_REGISTER_WRITE_CONTROL			= %h",CPU.id_ex_register_write_control);
-		$display("ID_PC_BRANCH_RESULT				= %h",CPU.id_pc_branch_result);	 */
+		$display("ID_PC_BRANCH_RESULT				= %h",CPU.id_pc_branch_result);	 
 	
 				
-/*     	$display("\n-----EX-----");
+     	$display("\n-----EX-----");
 		//$display("			=%h",CPU.);
 		$display("MEM_EX_FORWARDED_ALU_OUTPUT			=%h",CPU.mem_ex_forwarded_alu_output);
 		$display("WB_EX_WRITE_DATA				=%h",CPU.wb_ex_write_data);
@@ -163,14 +154,14 @@ module cpu_fixture();
 		$display("EX_MEM_DATA_MEM_BYTE_CTRL			=%h",CPU.ex_mem_data_mem_byte_ctrl);
 		$display("EX_ALU_OP_CTRL					=%h",CPU.ex_alu_op_ctrl);
 		$display("CTRL_EX_FLUSH					=%h",CPU.ctrl_ex_flush);
- */
-    /*
+ 
+    
  
 	$display("\n-----MEM-----");
 		$display("MEM_WB_DATA_LINE				=%h",CPU.mem_wb_data_line);
 		
 		
-*/	
+	
     
 		$display("\n-----WB-----");
 		$display("WB_DATA_LINE					=%h",CPU.wb_data_line);
@@ -179,7 +170,7 @@ module cpu_fixture();
 		$display("WB_ID_WRITE_DATA				=%h",CPU.wb_id_write_data);
 
     
-/*     $display("\n-----CONTROL_UNIT-----");
+     $display("\n-----CONTROL_UNIT-----");
 		$display("ID_OPCODE					=%h",CPU.id_opcode);
 		$display("EX_CTRL_ALU_BRANCH_RESULT			=%h",CPU.ex_ctrl_alu_branch_result);
 		$display("OVERFLOW_FLAG					=%h",CPU.overflow_error_warning);
@@ -194,8 +185,6 @@ module cpu_fixture();
 		$display("ID_EX_MUX_C_WB_DATA_CTRL			=%h",CPU.id_ex_mux_c_wb_data_ctrl);
 		$display("ID_MUX2_SELECTOR				=%h",CPU.id_mux2_selector);
 		$display("CTRL_ID_EX_ALU_OP				=%h",CPU.ctrl_id_ex_alu_op);
-		$display("ID_EX_MUX_A_CTRL				=%h",CPU.id_ex_mux_a_ctrl);
-		$display("ID_EX_MUX_B_CTRL				=%h",CPU.id_ex_mux_b_ctrl);
 		$display("ID_EX_REGISTER_WRITE_CONTROL			=%h",CPU.id_ex_register_write_control);
     
     $display("\n-----ALU_CONTROL-----");
@@ -228,16 +217,7 @@ module cpu_fixture();
 		$display("Ex_OP2						=%h",CPU.ex_op2);
 		$display("ID_FLUSH					=%h",CPU.id_flush);
 		$display("PC_STOP						=%h",CPU.pc_stop);
-		$display("IF_ID_BUFFER_FLUSH				=%h",CPU.if_id_buffer_flush); */
-;
-		
-    
-    //if(function code error)
-    //  display "ERROR unknown function code"
-    //if(operation code error)
-    //  display "ERROR unknown opcode" 
-    //if(HALT)
-    //  display "Program HALT"      
+		$display("IF_ID_BUFFER_FLUSH				=%h",CPU.if_id_buffer_flush);  
     end
     
 	initial begin
@@ -249,7 +229,7 @@ module cpu_fixture();
 			#40 
 
 			#400
-			//#620
+			//#620 id_ex_mux_b_ctrl)
 			$finish;
 		end
                    
