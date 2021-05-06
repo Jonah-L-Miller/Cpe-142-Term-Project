@@ -1,0 +1,114 @@
+Chronologic VCS simulator copyright 1991-2018
+Contains Synopsys proprietary information.
+Compiler version O-2018.09-SP2-3_Full64; Runtime version O-2018.09-SP2-3_Full64;  May  6 14:44 2021
+
+=====
+
+in = 0000
+in =     0
+out = 0000
+out =     0
+
+=====
+
+in = 0001
+in =     1
+out = 0002
+out =     2
+
+=====
+
+in = 0002
+in =     2
+out = 0004
+out =     4
+
+=====
+
+in = 0003
+in =     3
+out = 0006
+out =     6
+
+=====
+
+in = 0004
+in =     4
+out = 0008
+out =     8
+
+=====
+
+in = 0005
+in =     5
+out = 000a
+out =    10
+
+=====
+
+in = 0006
+in =     6
+out = 000c
+out =    12
+
+=====
+
+in = 0007
+in =     7
+out = 000e
+out =    14
+
+=====
+
+in = 0008
+in =     8
+out = 0010
+out =    16
+
+=====
+
+in = 0009
+in =     9
+out = 0012
+out =    18
+
+=====
+
+in = 000a
+in =    10
+out = 0014
+out =    20
+
+=====
+
+in = 000b
+in =    11
+out = 0016
+out =    22
+
+=====
+
+in = 000c
+in =    12
+out = 0018
+out =    24
+
+=====
+
+in = 000d
+in =    13
+out = 001a
+out =    26
+
+=====
+
+in = 000e
+in =    14
+out = 001c
+out =    28
+$finish called from file "fixture_left_shift.v", line 26.
+$finish at simulation time                  160
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 160
+CPU Time:      0.300 seconds;       Data structure size:   0.0Mb
+Thu May  6 14:44:43 2021
