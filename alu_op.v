@@ -4,7 +4,7 @@ module alu_ctrl(
 	output reg [3:0] out);
 	
 	always@(*) begin
-		if (op == "01")
+		if (op == 2'b01)
 			out = func;
 		else
 			out = {2'b 11, op};
