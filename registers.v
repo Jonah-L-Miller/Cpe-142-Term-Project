@@ -15,7 +15,7 @@ module registers(
 			R[4'h0] = 16'h 0000;
 			R[4'h1] = 16'h 7B18;
 			R[4'h2] = 16'h 245B;
-			R[4'h3] = 16'h FFFF;
+			R[4'h3] = 16'h FF0F;
 			R[4'h4] = 16'h F0FF;
 			R[4'h5] = 16'h 0051;
 			R[4'h6] = 16'h 6666;
@@ -29,15 +29,14 @@ module registers(
 			R[4'hE] = 16'h 0011;
 			R[4'hF] = 16'h 0000;
 		end
-		else if (reg_write == 2'b11)
+		
+		if (reg_write == 2'b11)
 			R[write_reg] = write_data;
 		else if (reg_write == 2'b01)
-				R[0] = r0;
-		else begin
-			read_data1 = R[read_reg1];
-			read_data2 = R[read_reg2];
-		end
-		
+			R[0] = r0;
+				
+		read_data1 = R[read_reg1];
+		read_data2 = R[read_reg2];
 
 	end
 endmodule
