@@ -1,0 +1,214 @@
+Chronologic VCS simulator copyright 1991-2018
+Contains Synopsys proprietary information.
+Compiler version O-2018.09-SP2-3_Full64; Runtime version O-2018.09-SP2-3_Full64;  May  6 13:58 2021
+
+=====
+
+reset = 1
+byte_en = 0
+memWrite = 0
+writeData = 0000
+address = 0000
+readData = xxxx
+
+=====
+
+reset = 0
+byte_en = 0
+memWrite = 0
+writeData = 0000
+address = 0000
+readData = xxxx
+
+=====
+
+reset = 1
+byte_en = 0
+memWrite = 0
+writeData = 0000
+address = 0000
+readData = 3856
+
+=====
+
+reset = 1
+byte_en = 0
+memWrite = 0
+writeData = abcd
+address = 0000
+readData = 3856
+
+=====
+
+reset = 1
+byte_en = 0
+memWrite = 0
+writeData = abcd
+address = 0002
+readData = 0000
+
+=====
+
+reset = 1
+byte_en = 0
+memWrite = 0
+writeData = abcd
+address = 0004
+readData = 4312
+
+=====
+
+reset = 1
+byte_en = 0
+memWrite = 0
+writeData = abcd
+address = 0006
+readData = bede
+
+=====
+
+reset = 1
+byte_en = 0
+memWrite = 0
+writeData = abcd
+address = 0008
+readData = adef
+
+=====
+
+reset = 1
+byte_en = 0
+memWrite = 1
+writeData = abcd
+address = 0008
+readData = adef
+
+=====
+
+reset = 1
+byte_en = 0
+memWrite = 0
+writeData = abcd
+address = 0008
+readData = abcd
+
+=====
+
+reset = 1
+byte_en = 1
+memWrite = 0
+writeData = abcd
+address = 0008
+readData = 00cd
+
+=====
+
+reset = 1
+byte_en = 1
+memWrite = 0
+writeData = abcd
+address = 0000
+readData = 0056
+
+=====
+
+reset = 1
+byte_en = 1
+memWrite = 0
+writeData = abcd
+address = 0001
+readData = 0038
+
+=====
+
+reset = 1
+byte_en = 1
+memWrite = 0
+writeData = abcd
+address = 0002
+readData = 0000
+
+=====
+
+reset = 1
+byte_en = 1
+memWrite = 0
+writeData = abcd
+address = 0003
+readData = 0000
+
+=====
+
+reset = 1
+byte_en = 1
+memWrite = 0
+writeData = abcd
+address = 0004
+readData = 0012
+
+=====
+
+reset = 1
+byte_en = 1
+memWrite = 0
+writeData = abcd
+address = 0005
+readData = 0043
+
+=====
+
+reset = 1
+byte_en = 1
+memWrite = 0
+writeData = abcd
+address = 0006
+readData = 00de
+
+=====
+
+reset = 1
+byte_en = 1
+memWrite = 0
+writeData = abcd
+address = 0007
+readData = 00be
+
+=====
+
+reset = 1
+byte_en = 1
+memWrite = 0
+writeData = abcd
+address = 0008
+readData = 00cd
+
+=====
+
+reset = 1
+byte_en = 1
+memWrite = 0
+writeData = abcd
+address = 0009
+readData = 00ab
+
+=====
+
+reset = 1
+byte_en = 1
+memWrite = 1
+writeData = abcd
+address = 0009
+readData = 00ab
+
+=====
+
+reset = 1
+byte_en = 1
+memWrite = 0
+writeData = abcd
+address = 0009
+readData = 00cd
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 233
+CPU Time:      0.320 seconds;       Data structure size:   0.0Mb
+Thu May  6 13:58:44 2021
