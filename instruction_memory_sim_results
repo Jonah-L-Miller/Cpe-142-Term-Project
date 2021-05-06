@@ -1,0 +1,207 @@
+Chronologic VCS simulator copyright 1991-2018
+Contains Synopsys proprietary information.
+Compiler version O-2018.09-SP2-3_Full64; Runtime version O-2018.09-SP2-3_Full64;  May  6 14:36 2021
+
+=====
+
+from_pc = 0000
+instruction = fe21
+
+=====
+
+from_pc = 0002
+instruction = fb22
+
+=====
+
+from_pc = 0004
+instruction = 2388
+
+=====
+
+from_pc = 0006
+instruction = 149a
+
+=====
+
+from_pc = 0008
+instruction = f564
+
+=====
+
+from_pc = 000a
+instruction = f168
+
+=====
+
+from_pc = 000c
+instruction = d59a
+
+=====
+
+from_pc = 000e
+instruction = 2802
+
+=====
+
+from_pc = 0010
+instruction = ce9a
+
+=====
+
+from_pc = 0012
+instruction = f002
+
+=====
+
+from_pc = 0014
+instruction = f121
+
+=====
+
+from_pc = 0016
+instruction = f122
+
+=====
+
+from_pc = 0018
+instruction = 1802
+
+=====
+
+from_pc = 001a
+instruction = a694
+
+=====
+
+from_pc = 001c
+instruction = b696
+
+=====
+
+from_pc = 001e
+instruction = c696
+
+=====
+
+from_pc = 0020
+instruction = f7d2
+
+=====
+
+from_pc = 0022
+instruction = 6404
+
+=====
+
+from_pc = 0024
+instruction = fb11
+
+=====
+
+from_pc = 0026
+instruction = 5705
+
+=====
+
+from_pc = 0028
+instruction = fb21
+
+=====
+
+from_pc = 002a
+instruction = 4702
+
+=====
+
+from_pc = 002c
+instruction = f111
+
+=====
+
+from_pc = 002e
+instruction = f111
+
+=====
+
+from_pc = 0030
+instruction = c890
+
+=====
+
+from_pc = 0032
+instruction = f881
+
+=====
+
+from_pc = 0034
+instruction = d892
+
+=====
+
+from_pc = 0036
+instruction = ca92
+
+=====
+
+from_pc = 0038
+instruction = fcc1
+
+=====
+
+from_pc = 003a
+instruction = fdd2
+
+=====
+
+from_pc = 003c
+instruction = fcd1
+
+=====
+
+from_pc = 003e
+instruction = 0000
+
+=====
+
+from_pc = 0040
+instruction = 0000
+
+=====
+
+from_pc = 0042
+instruction = 0000
+
+=====
+
+from_pc = 0044
+instruction = 0000
+
+=====
+
+from_pc = 0046
+instruction = 0000
+
+=====
+
+from_pc = 0048
+instruction = 0000
+
+=====
+
+from_pc = 004a
+instruction = 0000
+
+=====
+
+from_pc = 004c
+instruction = 0000
+
+=====
+
+from_pc = 004e
+instruction = 0000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 403
+CPU Time:      0.300 seconds;       Data structure size:   0.0Mb
+Thu May  6 14:36:25 2021

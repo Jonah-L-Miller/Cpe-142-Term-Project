@@ -8,6 +8,9 @@ module fixture_cpu();
         .reset(reset)
     );
 
+	initial
+		$vcdpluson;
+		
 	initial begin
 		clock_cycles = 0;
 		clock = 0;
