@@ -5,7 +5,7 @@ module mux4_fixture();
 	
 	wire [15:0] out;
 	
-	mux4 uut(
+	mux5 uut(
 		.in1(in1),
 		.in2(in2),
 		.in3(in3),
