@@ -1,0 +1,177 @@
+Chronologic VCS simulator copyright 1991-2018
+Contains Synopsys proprietary information.
+Compiler version O-2018.09-SP2-3_Full64; Runtime version O-2018.09-SP2-3_Full64;  May  6 14:59 2021
+
+======
+
+reset = 1
+pc_new_address = 0000
+instruction_address = 0000
+pc_stop = 0
+
+======
+
+reset = 0
+pc_new_address = 0000
+instruction_address = 0000
+pc_stop = 0
+
+======
+
+reset = 1
+pc_new_address = 0000
+instruction_address = 0000
+pc_stop = 0
+
+======
+
+reset = 1
+pc_new_address = 0000
+instruction_address = 0000
+pc_stop = 0
+
+======
+
+reset = 1
+pc_new_address = 0001
+instruction_address = 0001
+pc_stop = 0
+
+======
+
+reset = 1
+pc_new_address = 0002
+instruction_address = 0002
+pc_stop = 0
+
+======
+
+reset = 1
+pc_new_address = 0003
+instruction_address = 0003
+pc_stop = 0
+
+======
+
+reset = 1
+pc_new_address = 0004
+instruction_address = 0004
+pc_stop = 0
+
+======
+
+reset = 1
+pc_new_address = 0005
+instruction_address = 0005
+pc_stop = 0
+
+======
+
+reset = 1
+pc_new_address = 0006
+instruction_address = 0006
+pc_stop = 0
+
+======
+
+reset = 1
+pc_new_address = 0007
+instruction_address = 0007
+pc_stop = 0
+
+======
+
+reset = 1
+pc_new_address = 0008
+instruction_address = 0008
+pc_stop = 0
+
+======
+
+reset = 1
+pc_new_address = 0009
+instruction_address = 0009
+pc_stop = 0
+
+======
+
+reset = 1
+pc_new_address = 0009
+instruction_address = 0009
+pc_stop = 1
+
+======
+
+reset = 1
+pc_new_address = 0000
+instruction_address = 0009
+pc_stop = 1
+
+======
+
+reset = 1
+pc_new_address = 0001
+instruction_address = 0009
+pc_stop = 1
+
+======
+
+reset = 1
+pc_new_address = 0002
+instruction_address = 0009
+pc_stop = 1
+
+======
+
+reset = 1
+pc_new_address = 0003
+instruction_address = 0009
+pc_stop = 1
+
+======
+
+reset = 1
+pc_new_address = 0004
+instruction_address = 0009
+pc_stop = 1
+
+======
+
+reset = 1
+pc_new_address = 0005
+instruction_address = 0009
+pc_stop = 1
+
+======
+
+reset = 1
+pc_new_address = 0006
+instruction_address = 0009
+pc_stop = 1
+
+======
+
+reset = 1
+pc_new_address = 0007
+instruction_address = 0009
+pc_stop = 1
+
+======
+
+reset = 1
+pc_new_address = 0008
+instruction_address = 0009
+pc_stop = 1
+
+======
+
+reset = 1
+pc_new_address = 0009
+instruction_address = 0009
+pc_stop = 1
+$finish called from file "fixture_program_counter.v", line 46.
+$finish at simulation time                  240
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 240
+CPU Time:      0.300 seconds;       Data structure size:   0.0Mb
+Thu May  6 14:59:47 2021
