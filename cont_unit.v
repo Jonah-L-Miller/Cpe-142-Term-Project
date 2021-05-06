@@ -4,7 +4,7 @@ module control_unit(
 	input overflow_flag, reset,
 	
 	output reg ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c, r0_select, overflow_error_warning,
-	output reg [1:0] alu_op, mux_a, mux_b, reg_write,
+	output reg [1:0] alu_op, reg_write,
 	output reg alu_src_a, alu_src_b
 	);
 	
@@ -12,13 +12,12 @@ module control_unit(
 	
 	always@(*) begin
 		if (!reset)
-			{ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c,alu_op, mux_a, mux_b, reg_write, overflow_error_warning} = 18'h00000;
+			{ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c,alu_op, reg_write, overflow_error_warning} = 18'h00000;
 
 		case (opcode)
 			4'b 1111: begin	//a
 				alu_op = 2'b 01;
-				mux_a = 2'b00;
-				mux_b = 2'b00;
+
 				mux_c = 1'b1;
 
 				r0_select =1'b0;
@@ -35,8 +34,7 @@ module control_unit(
 			4'b 0001: begin	//andi
 				alu_op = 2'b 00;
 				
-				mux_a = 2'b00;	//EX MUXA
-				mux_b = 2'b11;	//EX MUXB
+
 				mux_c = 1'b1;	//WB MUXC
 				reg_write[1] = 1'b1;	
 				reg_write[0] = 1'b0;
@@ -51,8 +49,7 @@ module control_unit(
 			4'b 0010: begin	//ori
 				alu_op = 2'b 10;
 				
-				mux_a = 2'b00;	//EX MUXA
-				mux_b = 2'b11;	//EX MUXB
+
 				
 				mux_c = 1'b1;	//WB MUXC
 				reg_write[1] = 1'b1;	
@@ -79,8 +76,7 @@ module control_unit(
 				byte_en = 1'b1;
 				mem_write = 1'b0;
 
-				mux_a = 2'b11; 
-				mux_b = 2'b00;
+
 				mux_c = 1'b0;
 				
 				reg_write[1] = 1'b1;	
@@ -105,8 +101,7 @@ module control_unit(
 				byte_en = 1'b1;
 				mem_write = 1'b1;
 
-				mux_a = 2'b11; 
-				mux_b = 2'b00;
+
 				mux_c = 1'b0;
 				
 				reg_write = 2'b00;
@@ -130,8 +125,7 @@ module control_unit(
 				byte_en = 1'b0;
 				mem_write = 1'b0;
 
-				mux_a = 2'b11; 
-				mux_b = 2'b00;
+
 				mux_c = 1'b0;
 				
 				reg_write[1] = 1'b1;	
@@ -156,8 +150,7 @@ module control_unit(
 				byte_en = 1'b0;
 				mem_write = 1'b1;
 
-				mux_a = 2'b11; 
-				mux_b = 2'b00;
+
 				mux_c = 1'b0;
 				
 				reg_write = 2'b00;	
@@ -181,8 +174,6 @@ module control_unit(
 					byte_en = 1'b0;
 					mem_write = 1'b1;
 
-					mux_a = 2'b00; 
-					mux_b = 2'b00;
 					mux_c = 1'b0;
 					
 					reg_write = 2'b00;
@@ -205,8 +196,7 @@ module control_unit(
 					byte_en = 1'b0;
 					mem_write = 1'b1;
 
-					mux_a = 2'b00; 
-					mux_b = 2'b00;
+
 					mux_c = 1'b0;
 					
 					reg_write = 2'b00;
@@ -231,8 +221,7 @@ module control_unit(
 					byte_en = 1'b0;
 					mem_write = 1'b1;
 
-					mux_a = 2'b00; 
-					mux_b = 2'b00;
+
 					mux_c = 1'b0;
 					
 					reg_write = 2'b00;
@@ -255,8 +244,7 @@ module control_unit(
 					byte_en = 1'b0;
 					mem_write = 1'b1;
 
-					mux_a = 2'b00; 
-					mux_b = 2'b00;
+
 					mux_c = 1'b0;
 					
 					reg_write = 2'b00;
@@ -282,8 +270,7 @@ module control_unit(
 					byte_en = 1'b0;
 					mem_write = 1'b1;
 
-					mux_a = 2'b00; 
-					mux_b = 2'b00;
+
 					mux_c = 1'b0;
 					
 					reg_write = 2'b00;
@@ -306,8 +293,7 @@ module control_unit(
 					byte_en = 1'b0;
 					mem_write = 1'b1;
 
-					mux_a = 2'b00; 
-					mux_b = 2'b00;
+
 					mux_c = 1'b0;
 					
 					reg_write = 2'b00;	
@@ -333,8 +319,7 @@ module control_unit(
 				byte_en = 1'b0;
 				mem_write = 1'b0;
 
-				mux_a = 2'b00; 
-				mux_b = 2'b00;
+
 				mux_c = 1'b0;
 				
 				reg_write = 2'b00;
@@ -358,8 +343,7 @@ module control_unit(
 				byte_en = 1'b0;
 				mem_write = 1'b0;
 
-				mux_a = 2'b00; 
-				mux_b = 2'b00;
+
 				mux_c = 1'b0;
 				
 				reg_write = 2'b00;
@@ -369,7 +353,7 @@ module control_unit(
 				alu_src_b = 1'b0;
 				
 			end
-			default: {ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c,alu_op, mux_a, mux_b, reg_write} = 17'h00000;
+			default: {ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c,alu_op, reg_write} = 17'h00000;
 		endcase
 		
 		if (overflow_flag) begin
