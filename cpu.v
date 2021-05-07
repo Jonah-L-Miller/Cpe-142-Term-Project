@@ -22,7 +22,7 @@ module cpu(
 	input reset
 );
 
-///// FETCH STAGE WIRES /////
+///// FETCH STAGE WIRES /////id_pc_branch_result
 	wire [15:0] if_address_from_pc, if_instruction;
 	wire [15:0] if_pc_new_address, if_adder_result_address, ex_if_branch_location_result;
 	wire if_pc_stop, if_pc_mux, if_id_buffer_flush, if_id_buffer_hold;
@@ -126,7 +126,7 @@ module cpu(
 		
 	mux2 IF_MUX2(
 		.in1(if_adder_result_address),
-		.in2(ex_if_branch_location_result),
+		.in2(id_pc_branch_result),
 		.s(if_pc_mux),
 		.out(if_pc_new_address)
 		);

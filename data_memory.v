@@ -4,15 +4,13 @@ module data_memory(
 		output reg [15:0] readData
 	);
 	
-	reg [7:0] mem [15:0];
+	reg [7:0] mem [65535:0];
 	
 	integer i;
 	
 	always@(*)begin 
 		if(!reset) begin 
-
-			
-			for (i = 0;i<32767;i = i+1)
+			for (i = 0;i<65535;i = i+1)
 				mem[i] <= 8'h00;
 
 			mem[16'h 0000] <= 8'h 56;
@@ -24,9 +22,7 @@ module data_memory(
 			mem[16'h 0006] <= 8'h DE;
 			mem[16'h 0007] <= 8'h BE;
 			mem[16'h 0008] <= 8'h EF;
-			mem[16'h 0009] <= 8'h AD;
-
-			
+			mem[16'h 0009] <= 8'h AD;	
 		end 
 		else if(byte_en)	//control signal managages lbu and su
 			if(memWrite) 
