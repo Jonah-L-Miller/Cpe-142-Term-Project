@@ -359,8 +359,8 @@ module cpu(
 
 ///// EX/MEM BUFFER /////
 
-	
-	buffer #(.N(40)) EX_MEM_BUFFER(
+	wire [15:0] mem_read_data_1;
+	buffer #(.N(56)) EX_MEM_BUFFER(
 		.clock(clock),
 		.reset(reset),
 		.flush(1'b0), //Grounded
@@ -371,7 +371,8 @@ module cpu(
 			ex_mem_data_mem_byte_ctrl,
 			ex_mem_alu_r0_result,
 			ex_mem_alu_output,
-			ex_op1
+			ex_op1,
+			ex_read_data_1
 		}),
 		.buffer_out({
 			mem_wb_reg_wrt_ctrl_flush,
@@ -379,7 +380,8 @@ module cpu(
 			mem_wb_data_mem_byte_ctrl,
 			mem_wb_alu_r0_result,
 			mem_wb_alu_output,
-			mem_op1
+			mem_op1,
+			mem_read_data_1
 		})
 	);
 
@@ -392,7 +394,7 @@ module cpu(
 		.reset(reset),
 		.byte_en(mem_wb_data_mem_byte_ctrl),
 		.address(mem_wb_alu_output),
-		.writeData(mem_wb_alu_output),
+		.writeData(mem_read_data_1),
 		.readData(mem_wb_data_line)
 	);
 	
@@ -487,6 +489,7 @@ module cpu(
 		.id_op2(id_op2),
 		.ex_op2(ex_op2),
 		.id_flush(id_flush),
+		.if_id_hold(if_id_buffer_hold),
 		.pc_pause(pc_stop),
 		.if_id_flush(if_id_buffer_flush)
 	);

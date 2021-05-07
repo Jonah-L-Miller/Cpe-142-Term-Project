@@ -124,7 +124,7 @@ module control_unit(
 				
 				byte_en = 1'b0;
 				mem_write = 1'b0;
-
+				
 
 				mux_c = 1'b0;
 				
@@ -154,12 +154,13 @@ module control_unit(
 				mux_c = 1'b0;
 				
 				reg_write = 2'b00;	
-				r0_select =1'b0;
+				
 				
 				alu_src_a = 1'b1;
-				alu_src_b = 1'b0;
+				alu_src_b = 0'b1;
 			end
 			4'b 0101: begin	//blt
+			r0_select =1'b1;
 				if(branch_result == 2'b11) begin
 					alu_op = 2'b 00;
 					
@@ -177,7 +178,7 @@ module control_unit(
 					mux_c = 1'b0;
 					
 					reg_write = 2'b00;
-					r0_select =1'b1;
+
 					
 					alu_src_a = 1'b0;
 				alu_src_b = 1'b0;
@@ -200,13 +201,14 @@ module control_unit(
 					mux_c = 1'b0;
 					
 					reg_write = 2'b00;
-					r0_select =1'b0;
+
 					
 					alu_src_a = 1'b0;
 				alu_src_b = 1'b0;
 				end
 			end
 			4'b 0100: begin	//bgt//
+			r0_select =1'b1;
 				if(branch_result == 2'b10) begin
 					alu_op = 2'b 00;
 					
@@ -225,7 +227,7 @@ module control_unit(
 					mux_c = 1'b0;
 					
 					reg_write = 2'b00;
-					r0_select =1'b1;
+
 					
 					alu_src_a = 1'b0;
 				alu_src_b = 1'b0;
@@ -248,7 +250,7 @@ module control_unit(
 					mux_c = 1'b0;
 					
 					reg_write = 2'b00;
-					r0_select =1'b0;
+
 					
 					alu_src_a = 1'b0;
 				alu_src_b = 1'b0;
@@ -256,6 +258,7 @@ module control_unit(
 				
 			end
 			4'b 0110: begin	//beq
+				r0_select =1'b1;
 				if(branch_result == 2'b01) begin
 					alu_op = 2'b 00;
 					
@@ -274,7 +277,7 @@ module control_unit(
 					mux_c = 1'b0;
 					
 					reg_write = 2'b00;
-					r0_select =1'b1;
+					
 					
 					alu_src_a = 1'b0;
 					alu_src_b = 1'b0;
@@ -297,7 +300,7 @@ module control_unit(
 					mux_c = 1'b0;
 					
 					reg_write = 2'b00;	
-					r0_select =1'b0;
+
 					
 					alu_src_a = 1'b0;
 				alu_src_b = 1'b0;

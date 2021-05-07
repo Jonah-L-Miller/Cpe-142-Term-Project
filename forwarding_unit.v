@@ -30,12 +30,12 @@ module forwarding_unit(
 		if ((mem_op1 == ex_op1) && (mem_muxc == 1))
 			forward_a = 2'b11;
 		else
-			forward_a = 2'b11;
+			forward_a = 2'b00;
 		
 		if ((mem_op1 == ex_op2) && (mem_muxc == 1))
 			forward_b = 2'b11;
 		else
-			forward_b = 2'b11;
+			forward_b = 2'b00;
 			
 		if ((mem_op1 == id_op1) && (mem_regwrite == 2'b11))
 			forward_branch = 1'b1;

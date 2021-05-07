@@ -17,7 +17,7 @@ module instruction_memory(from_pc,instruction);
 			16'h000E:	instruction=16'h2802;	//		0E	ORi R8, 2
 			16'h0010:	instruction=16'hCE9A;	//		10	LW R14, A(R9)
 			16'h0012:	instruction=16'hF002;	//		12	SUB R0, R0
-			16'h0014:	instruction=16'hF121;	//		14	ADD R1, R2)
+			16'h0014:	instruction=16'hF121;	//		14	ADD R1, R2
 			16'h0016:	instruction=16'hF122;	//		16	SUB R1, R2
 			16'h0018:	instruction=16'h1802;	//		18	ANDi R8, 2
 			16'h001A:	instruction=16'hA694;	//		1A	LBU R6, 4(R9)
