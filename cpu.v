@@ -309,10 +309,10 @@ module cpu(
 
 	mux4 EX_MUX4_A(
 		.in1(ex_read_data_1),
-		.in2(mem_ex_forwarded_alu_output),
-		.in3(wb_ex_write_data), 
+		.in2(mem_wb_alu_output),
+		.in3(wb_id_write_data), 
 
-		.in4(mem_ex_read_data),//SE IMMEDIATE
+		.in4(mem_wb_data_line),//SE IMMEDIATE
 		.s(forward_a),
 		.out(ex_mux_a_output)
 	);
@@ -328,9 +328,9 @@ module cpu(
 	
 	mux4 EX_MUX4_B(
 		.in1(ex_read_data_2),
-		.in2(mem_ex_forwarded_alu_output),
-		.in3(wb_ex_write_data), 
-		.in4(mem_ex_read_data),
+		.in2(mem_wb_alu_output),
+		.in3(wb_id_write_data), 
+		.in4(mem_wb_data_line),
 		.s(forward_b),
 		.out(ex_mux_b_output)
 	);
@@ -403,6 +403,7 @@ module cpu(
 		.writeData(mem_read_data_1),
 		.readData(mem_wb_data_line)
 	);
+
 	
 ///// MEM/WB BUFFER /////
 	wire wb_mux_c_data_ctrl;
@@ -429,6 +430,8 @@ module cpu(
 			wb_id_write_reg
 		})
 	);
+	
+	
 	
 
 ///// WRITEBACK STAGE /////
@@ -468,20 +471,17 @@ module cpu(
 
 
 ///// FORWARDING UNIT /////
-	wire mem_muxc;
-	wire [1:0] ex_regwrite, mem_regwrite, wb_regwrite;
-	wire [3:0] wb_op1;
 	forwarding_unit FORWARDING_UNIT(
-		.ex_regwrite(ex_regwrite),
-		.mem_regwrite(mem_regwrite),
-		.wb_regwrite(wb_regwrite),
+		.ex_regwrite(ex_mem_register_write_control),
+		.mem_regwrite(mem_wb_reg_wrt_ctrl_flush),
+		.wb_regwrite(wb_id_reg_write_control),
 		.id_op1(id_op1),
 		.ex_op1(ex_op1),
-		.wb_op1(wb_op1),
+		.wb_op1(wb_id_write_reg),
 		.mem_op1(mem_op1),
 		.id_op2(id_op2),
 		.ex_op2(ex_op2),
-		.mem_muxc(mem_muxc),
+		.mem_muxc(mem_mux_c_data_ctrl),
 		.forward_a(forward_a),
 		.forward_b(forward_b),
 		.forward_branch(forward_branch)	
