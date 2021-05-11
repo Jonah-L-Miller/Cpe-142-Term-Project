@@ -7,12 +7,12 @@ module program_counter (
 	
 	always@(posedge clock or negedge reset) begin
 		if (!reset)
-			instruction_address = 16'h 0000;
+			instruction_address <= 16'h 0000;
 		else begin
 			if (pc_stop)
-				instruction_address = instruction_address;
+				instruction_address <= instruction_address;
 			else
-				instruction_address = pc_new_address;
+				instruction_address <= pc_new_address;
 		end
 	end
 endmodule

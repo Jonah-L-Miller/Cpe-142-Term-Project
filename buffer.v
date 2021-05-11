@@ -11,7 +11,6 @@ module buffer #(parameter N = 32)(
 		if (!reset || insert_bubble) begin
 			if (!reset)
 				insert_bubble <= 1'b0;
-				
 		
 				buffer_out <= 0;
 		end

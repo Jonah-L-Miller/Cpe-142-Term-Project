@@ -4,11 +4,11 @@ module mux3(input [15:0] in1,in2, in3,
 	
 	always@(*)
 		case (s)
-			2'b 00: out = in1;
-			2'b 01: out = in2;
-			2'b 10: out = in3;
+			2'b 00: out <= in1;
+			2'b 01: out <= in2;
+			2'b 10: out <= in3;
 			
-			default: out = out;
+			default: out <= out;
 		endcase
 endmodule
 // ACTION LOG

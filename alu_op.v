@@ -5,14 +5,8 @@ module alu_ctrl(
 	
 	always@(*) begin
 		if (op == 2'b01)
-			out = func;
+			out <= func;
 		else
-			out = {2'b 11, op};
+			out <= {2'b 11, op};
 	end
 endmodule
-/* ACTION LOG*/
-// ACTION     DATE     USER
-//--------------------------
-// COMPILE    4-18-21  PAYNE
-//
-//--------------------------

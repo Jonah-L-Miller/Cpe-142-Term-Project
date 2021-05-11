@@ -4,5 +4,5 @@ module adder(
 			output reg[15:0] out);
 	
 	always@ (*)
-		out = in1 + in2;
+		out <= in1 + in2;
 endmodule

@@ -236,14 +236,14 @@ module fixture_cpu();
 			$display("ex_alu_op_ctrl					=%h",CPU.ex_alu_op_ctrl);	
 		
 		$display("\n-----FORWARDING_UNIT-----");
-			$display("EX_REGWRITE					=%h",CPU.ex_regwrite);
-			$display("MEM_REGWRITE					=%h",CPU.mem_regwrite);
+			$display("EX_REGWRITE					=%h",CPU.ex_mem_register_write_control);
+			$display("MEM_REGWRITE					=%h",CPU.mem_wb_reg_wrt_ctrl_flush);
 			$display("ID_OP1						=%h",CPU.id_op1);
 			$display("EX_OP1						=%h",CPU.ex_op1);
 			$display("MEM_OP1						=%h",CPU.mem_op1);
 			$display("ID_OP2						=%h",CPU.id_op2);
 			$display("EX_OP2EX_OP2					=%h",CPU.ex_op2);
-			$display("MEM_MUXC					=%h",CPU.mem_muxc);
+			$display("MEM_MUXC					=%h",CPU.mem_mux_c_data_ctrl);
 			$display("FORWARD_A					=%h",CPU.forward_a);
 			$display("FORWARD_B					=%h",CPU.forward_b);
 			$display("FORWARD_BRANCH					=%h",CPU.forward_branch);		

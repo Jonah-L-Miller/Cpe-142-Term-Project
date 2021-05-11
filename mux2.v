@@ -5,9 +5,9 @@ module mux2 #(parameter N = 16)(
 	
 	always@(*)
 		if (!s)
-			out = in1;
+			out <= in1;
 		else
-			out = in2;
+			out <= in2;
 endmodule
 // ACTION LOG
 // ACTION     DATE     USER

@@ -6,10 +6,10 @@ module mux4(
 
     always@(*)
         case (s)
-            2'b 00: out = in1;
-            2'b 01: out = in2;
-            2'b 10: out = in3;
-            2'b 11: out = in4;
-            default: out = out;
+            2'b 00:  out <= in1;
+            2'b 01:  out <= in2;
+            2'b 10:  out <= in3;
+            2'b 11:  out <= in4;
+            default: out <= out;
         endcase
 endmodule
