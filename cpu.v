@@ -36,8 +36,8 @@ module cpu(
 	wire [7:0] id_immediate = id_instruction [7:0];
 	wire [3:0] id_function_code = id_instruction [3:0];
 	wire [15:0]read_reg1, read_reg2;
-	wire [11:0] id_jmp;
-	wire [7:0] id_branch;
+	wire [11:0] id_jmp = id_instruction [11:0];
+	wire [7:0] id_branch = id_instruction [7:0];
 
 	wire [3:0] id_mux2_output;
 	wire id_mux2_selector;
@@ -213,7 +213,7 @@ module cpu(
 	
 	//branch logic
 	mux2 ID_BRANCH_MUX(
-		.in1(id_read_data_1),
+		.in1(id_read_data_1),		
 		.in2(mem_ex_forwarded_alu_output),
 		.s(forward_branch),
 		.out(id_branch_mux_output)
@@ -226,15 +226,7 @@ module cpu(
 	);
 
 ///// ID/EX BUFFER /////
-
-	/*
-	wire [1:0] wb_id_reg_write_control
-	wire [3:0] id_opcode         \
-	wire [3:0] id_op1 			  \	
-	wire [3:0] id_op2 			   > already declared wires that we need for id/ex buffer
-	wire [7:0] id_immediate 	  /
-	wire [3:0] id_function_code  /
-   */                              
+                           
 	buffer #(.N(69)) ID_EX_BUFFER(
 		.clock(clock),
 		.reset(reset),
