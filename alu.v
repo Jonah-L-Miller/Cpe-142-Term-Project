@@ -13,8 +13,8 @@ module alu(	input signed [15:0] in1, in2,
 			
 		case (ctrl)	
 			4'h 1: begin
-				{overflow_flag, out} = in1 + in2;		//0001
-				
+				//{overflow_flag, out} = in1 + in2;		//0001
+				out = in1 + in2;
 				//overflow_flag = 1'b1;
 			end
 			4'h 2:	out = in1 - in2;		//0010
@@ -45,13 +45,10 @@ module alu(	input signed [15:0] in1, in2,
 						overflow_flag = 1'b0;
 			else //in1 negative
 				if (in2 < 0)
-					if(ctrl == 4'h4 || ctrl == 4'h8) && out < 0)	//in2/out negative for mult/divide
+					if((ctrl == 4'h4 || ctrl == 4'h8) && out < 0)	//in2/out negative for mult/divide
 						overflow_flag = 1'b1;
 					else
-						overflow_flag = 1'b0;
-				else	//in1 neg, in2 pos
-					
-				
+						overflow_flag = 1'b0;				
 		end
 		
 

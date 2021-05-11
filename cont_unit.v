@@ -11,8 +11,10 @@ module control_unit(
 	
 	
 	always@(*) begin
-		if (!reset)
+		if (!reset) begin
 			{ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c,alu_op, reg_write, overflow_error_warning} = 18'h00000;
+			mux_c = 1;
+		end
 
 		case (opcode)
 			4'b 1111: begin	//a
