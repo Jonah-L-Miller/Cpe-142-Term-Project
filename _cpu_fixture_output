@@ -1,0 +1,5049 @@
+Chronologic VCS simulator copyright 1991-2018
+Contains Synopsys proprietary information.
+Compiler version O-2018.09-SP2-3_Full64; Runtime version O-2018.09-SP2-3_Full64;  May 11 15:28 2021
+
+------------------------------------------
+
+clock_cycles =           0  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=xxxx
+IF_ADDER_RESULT_ADDRESS		    =xxxx
+
+Outputs
+------
+ID_INSTRUCTION					=xxxx
+ID_PC_NEXT_ADDRESS				=xxxx
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=x
+id_ex_alu_src_a			=x
+id_ex_alu_src_b			=x
+ctrl_id_ex_buffer_flush			=x
+id_ex_register_write_control			=x
+id_ex_data_memory_write_control			=x
+id_ex_data_memory_byte_enable_control	    =x
+ctrl_id_ex_alu_op		=x
+id_read_data_1				=xxxx
+id_read_data_2				=xxxx
+id_op1					=x
+id_op2					=x
+id_function_code						=x
+id_zero_extended_immediate						=00xx
+
+Outputs
+------
+ex_mux_c_data_ctrl			=x
+ex_alu_src_a			=x
+ex_alu_src_b			=x
+ctrl_ex_flush			=x
+ex_mem_register_write_control			=x
+ex_mem_data_memory_write_control			=x
+ex_mem_data_memory_byte_enable_control		=x
+ctrl_ex_alu_op		=x
+ex_read_data_1					=xxxx
+ex_read_data_2					=xxxx
+ex_op1					=x
+ex_op2						=x
+ex_function_code						=x
+ex_zero_extended_immediate				=xxxx
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=x
+ex_mem_reg_wrt_ctrl_flush			=x
+ex_mem_data_mem_wrt_ctrl			=x
+ex_mem_data_mem_byte_ctrl			=x
+ex_mem_alu_r0_result			=xxxx
+ex_mem_alu_output			=xxxx
+ex_op1				=x
+ex_read_data_1				=xxxx
+
+Outputs
+------
+mem_mux_c_data_ctrl			=x
+mem_wb_reg_wrt_ctrl_flush			=x
+mem_wb_data_mem_wrt_ctrl			=x
+mem_wb_data_mem_byte_ctrl			=x
+mem_wb_alu_r0_result			=xxxx
+mem_wb_alu_output				=xxxx
+mem_op1				  =x
+mem_read_data_1						=xxxx
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=x
+MEM_WB_REG_WRT_CTRL_FLUSH			=x
+MEM_WB_ALU_R0_RESULT				=xxxx
+MEM_WB_DATA_LINE				=xxxx
+MEM_WB_ALU_OUTPUT				=xxxx
+MEM_OP1						=x
+
+Outputs
+------
+wb_mux_c_data_ctrl			=x
+WB_ID_REG_WRITE_CONTROL			=x
+WB_ID_R0				=xxxx
+WB_DATA_LINE				=xxxx
+WB_ALU_OUTPUT				=xxxx
+WB_ID_WRITE_REG						=x
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=x
+EX_CTRL_ALU_BRANCH_RESULT			=x
+OVERFLOW_FLAG					=x
+CTRL_ID_EX_BUFFER_FLUSH				=x
+CTRL_ID_BUFFER_FLUSH				=x
+CTRL_ID_HALT					=x
+CTRL_ID_IF_BUFFER_FLUSH				=x
+IF_PC_MUX					=x
+ID_BRANCH_JUMP_SELECTOR				=x
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=x
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=x
+CTRL_MUX_C_DATA_CTRL			=x
+ID_MUX2_SELECTOR				=x
+CTRL_ID_EX_ALU_OP				=x
+ID_EX_REGISTER_WRITE_CONTROL			=x
+
+-----ALU_CONTROL-----
+ex_function_code				=x
+ctrl_ex_alu_op					=x
+ex_alu_op_ctrl					=x
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=x
+MEM_REGWRITE					=x
+ID_OP1						=x
+EX_OP1						=x
+MEM_OP1						=x
+ID_OP2						=x
+EX_OP2EX_OP2					=x
+MEM_MUXC					=x
+FORWARD_A					=x
+FORWARD_B					=x
+FORWARD_BRANCH					=x
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=x
+ID_OP1						=x
+EX_OP1						=x
+ID_OP2						=x
+Ex_OP2						=x
+ID_FLUSH					=x
+hazard_pc_stop						=x
+IF_ID_BUFFER_FLUSH				=x
+if_id_buffer_hold			=x
+
+------------------------------------------
+
+clock_cycles =           0  reset = 0
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=fe21
+IF_ADDER_RESULT_ADDRESS		    =0002
+
+Outputs
+------
+ID_INSTRUCTION					=0000
+ID_PC_NEXT_ADDRESS				=0000
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=0
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=0
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=0
+id_read_data_1				=0000
+id_read_data_2				=0000
+id_op1					=0
+id_op2					=0
+id_function_code						=0
+id_zero_extended_immediate						=0000
+
+Outputs
+------
+ex_mux_c_data_ctrl			=0
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=0
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=0
+ex_read_data_1					=0000
+ex_read_data_2					=0000
+ex_op1					=0
+ex_op2						=0
+ex_function_code						=0
+ex_zero_extended_immediate				=0000
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=0
+ex_mem_reg_wrt_ctrl_flush			=0
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=0000
+ex_mem_alu_output			=0000
+ex_op1				=0
+ex_read_data_1				=0000
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=0
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=0000
+mem_wb_alu_output				=0000
+mem_op1				  =0
+mem_read_data_1						=0000
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=0
+MEM_WB_ALU_R0_RESULT				=0000
+MEM_WB_DATA_LINE				=xxxx
+MEM_WB_ALU_OUTPUT				=0000
+MEM_OP1						=0
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=0
+WB_ID_R0				=0000
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=0000
+WB_ID_WRITE_REG						=0
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=0
+EX_CTRL_ALU_BRANCH_RESULT			=1
+OVERFLOW_FLAG					=0
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=1
+CTRL_ID_HALT					=1
+CTRL_ID_IF_BUFFER_FLUSH				=1
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=0
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=0
+ID_EX_REGISTER_WRITE_CONTROL			=0
+
+-----ALU_CONTROL-----
+ex_function_code				=0
+ctrl_ex_alu_op					=0
+ex_alu_op_ctrl					=c
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=0
+MEM_REGWRITE					=0
+ID_OP1						=0
+EX_OP1						=0
+MEM_OP1						=0
+ID_OP2						=0
+EX_OP2EX_OP2					=0
+MEM_MUXC					=0
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=0
+EX_OP1						=0
+ID_OP2						=0
+Ex_OP2						=0
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =           1  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=fe21
+IF_ADDER_RESULT_ADDRESS		    =0002
+
+Outputs
+------
+ID_INSTRUCTION					=fe21
+ID_PC_NEXT_ADDRESS				=0002
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=0011
+id_read_data_2				=245b
+id_op1					=e
+id_op2					=2
+id_function_code						=1
+id_zero_extended_immediate						=0021
+
+Outputs
+------
+ex_mux_c_data_ctrl			=0
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=0
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=0
+ex_read_data_1					=0000
+ex_read_data_2					=0000
+ex_op1					=0
+ex_op2						=0
+ex_function_code						=0
+ex_zero_extended_immediate				=0000
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=0
+ex_mem_reg_wrt_ctrl_flush			=0
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=0000
+ex_mem_alu_output			=0000
+ex_op1				=0
+ex_read_data_1				=0000
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=0
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=0000
+mem_wb_alu_output				=0000
+mem_op1				  =0
+mem_read_data_1						=0000
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=0
+MEM_WB_ALU_R0_RESULT				=0000
+MEM_WB_DATA_LINE				=3856
+MEM_WB_ALU_OUTPUT				=0000
+MEM_OP1						=0
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=0
+WB_ID_R0				=0000
+WB_DATA_LINE				=xxxx
+WB_ALU_OUTPUT				=0000
+WB_ID_WRITE_REG						=0
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=3
+OVERFLOW_FLAG					=0
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=0
+ctrl_ex_alu_op					=0
+ex_alu_op_ctrl					=c
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=0
+MEM_REGWRITE					=0
+ID_OP1						=e
+EX_OP1						=0
+MEM_OP1						=0
+ID_OP2						=2
+EX_OP2EX_OP2					=0
+MEM_MUXC					=0
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=e
+EX_OP1						=0
+ID_OP2						=2
+Ex_OP2						=0
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =           2  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=fb22
+IF_ADDER_RESULT_ADDRESS		    =0004
+
+Outputs
+------
+ID_INSTRUCTION					=fe21
+ID_PC_NEXT_ADDRESS				=0002
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=0011
+id_read_data_2				=245b
+id_op1					=e
+id_op2					=2
+id_function_code						=1
+id_zero_extended_immediate						=0021
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=0011
+ex_read_data_2					=245b
+ex_op1					=e
+ex_op2						=2
+ex_function_code						=1
+ex_zero_extended_immediate				=0021
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=0000
+ex_mem_alu_output			=246c
+ex_op1				=e
+ex_read_data_1				=0011
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=0
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=0000
+mem_wb_alu_output				=0000
+mem_op1				  =0
+mem_read_data_1						=0000
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=0
+MEM_WB_ALU_R0_RESULT				=0000
+MEM_WB_DATA_LINE				=3856
+MEM_WB_ALU_OUTPUT				=0000
+MEM_OP1						=0
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=0
+WB_ID_R0				=0000
+WB_DATA_LINE				=3856
+WB_ALU_OUTPUT				=0000
+WB_ID_WRITE_REG						=0
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=3
+OVERFLOW_FLAG					=0
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=1
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=1
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=0
+ID_OP1						=e
+EX_OP1						=e
+MEM_OP1						=0
+ID_OP2						=2
+EX_OP2EX_OP2					=2
+MEM_MUXC					=0
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=e
+EX_OP1						=e
+ID_OP2						=2
+Ex_OP2						=2
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =           3  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=2388
+IF_ADDER_RESULT_ADDRESS		    =0006
+
+Outputs
+------
+ID_INSTRUCTION					=fb22
+ID_PC_NEXT_ADDRESS				=0004
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=3099
+id_read_data_2				=245b
+id_op1					=b
+id_op2					=2
+id_function_code						=2
+id_zero_extended_immediate						=0022
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=0011
+ex_read_data_2					=245b
+ex_op1					=e
+ex_op2						=2
+ex_function_code						=1
+ex_zero_extended_immediate				=0021
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=0000
+ex_mem_alu_output			=48c7
+ex_op1				=e
+ex_read_data_1				=0011
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=0000
+mem_wb_alu_output				=246c
+mem_op1				  =e
+mem_read_data_1						=0011
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=0000
+MEM_WB_DATA_LINE				=0000
+MEM_WB_ALU_OUTPUT				=246c
+MEM_OP1						=e
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=0
+WB_ID_R0				=0000
+WB_DATA_LINE				=3856
+WB_ALU_OUTPUT				=0000
+WB_ID_WRITE_REG						=0
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=2
+OVERFLOW_FLAG					=0
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=1
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=1
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=b
+EX_OP1						=e
+MEM_OP1						=e
+ID_OP2						=2
+EX_OP2EX_OP2					=2
+MEM_MUXC					=1
+FORWARD_A					=1
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=b
+EX_OP1						=e
+ID_OP2						=2
+Ex_OP2						=2
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =           4  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=149a
+IF_ADDER_RESULT_ADDRESS		    =0008
+
+Outputs
+------
+ID_INSTRUCTION					=2388
+ID_PC_NEXT_ADDRESS				=0006
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=1
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=2
+id_read_data_1				=ff0f
+id_read_data_2				=ff88
+id_op1					=3
+id_op2					=8
+id_function_code						=8
+id_zero_extended_immediate						=0088
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=3099
+ex_read_data_2					=245b
+ex_op1					=b
+ex_op2						=2
+ex_function_code						=2
+ex_zero_extended_immediate				=0022
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=0000
+ex_mem_alu_output			=0c3e
+ex_op1				=b
+ex_read_data_1				=3099
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=0000
+mem_wb_alu_output				=48c7
+mem_op1				  =e
+mem_read_data_1						=0011
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=0000
+MEM_WB_DATA_LINE				=0000
+MEM_WB_ALU_OUTPUT				=48c7
+MEM_OP1						=e
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=0000
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=246c
+WB_ID_WRITE_REG						=e
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=2
+EX_CTRL_ALU_BRANCH_RESULT			=3
+OVERFLOW_FLAG					=0
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=2
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=2
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=2
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=3
+EX_OP1						=b
+MEM_OP1						=e
+ID_OP2						=8
+EX_OP2EX_OP2					=2
+MEM_MUXC					=1
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=3
+EX_OP1						=b
+ID_OP2						=8
+Ex_OP2						=2
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =           5  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=f564
+IF_ADDER_RESULT_ADDRESS		    =000a
+
+Outputs
+------
+ID_INSTRUCTION					=149a
+ID_PC_NEXT_ADDRESS				=0008
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=1
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=0
+id_read_data_1				=f0ff
+id_read_data_2				=0000
+id_op1					=4
+id_op2					=9
+id_function_code						=a
+id_zero_extended_immediate						=009a
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=1
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=2
+ex_read_data_1					=ff0f
+ex_read_data_2					=ff88
+ex_op1					=3
+ex_op2						=8
+ex_function_code						=8
+ex_zero_extended_immediate				=0088
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=0000
+ex_mem_alu_output			=ff8f
+ex_op1				=3
+ex_read_data_1				=ff0f
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=0000
+mem_wb_alu_output				=0c3e
+mem_op1				  =b
+mem_read_data_1						=3099
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=0000
+MEM_WB_DATA_LINE				=0000
+MEM_WB_ALU_OUTPUT				=0c3e
+MEM_OP1						=b
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=0000
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=48c7
+WB_ID_WRITE_REG						=e
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=1
+EX_CTRL_ALU_BRANCH_RESULT			=3
+OVERFLOW_FLAG					=0
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=0
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=8
+ctrl_ex_alu_op					=2
+ex_alu_op_ctrl					=e
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=4
+EX_OP1						=3
+MEM_OP1						=b
+ID_OP2						=9
+EX_OP2EX_OP2					=8
+MEM_MUXC					=1
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=4
+EX_OP1						=3
+ID_OP2						=9
+Ex_OP2						=8
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =           6  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=f168
+IF_ADDER_RESULT_ADDRESS		    =000c
+
+Outputs
+------
+ID_INSTRUCTION					=f564
+ID_PC_NEXT_ADDRESS				=000a
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=3
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=0051
+id_read_data_2				=6666
+id_op1					=5
+id_op2					=6
+id_function_code						=4
+id_zero_extended_immediate						=0064
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=1
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=0
+ex_read_data_1					=f0ff
+ex_read_data_2					=0000
+ex_op1					=4
+ex_op2						=9
+ex_function_code						=a
+ex_zero_extended_immediate				=009a
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=0000
+ex_mem_alu_output			=009a
+ex_op1				=4
+ex_read_data_1				=f0ff
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=0000
+mem_wb_alu_output				=ff8f
+mem_op1				  =3
+mem_read_data_1						=ff0f
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=0000
+MEM_WB_DATA_LINE				=0000
+MEM_WB_ALU_OUTPUT				=ff8f
+MEM_OP1						=3
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=0000
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=0c3e
+WB_ID_WRITE_REG						=b
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=3
+OVERFLOW_FLAG					=0
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=3
+
+-----ALU_CONTROL-----
+ex_function_code				=a
+ctrl_ex_alu_op					=0
+ex_alu_op_ctrl					=c
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=5
+EX_OP1						=4
+MEM_OP1						=3
+ID_OP2						=6
+EX_OP2EX_OP2					=9
+MEM_MUXC					=1
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=5
+EX_OP1						=4
+ID_OP2						=6
+Ex_OP2						=9
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =           7  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=d59a
+IF_ADDER_RESULT_ADDRESS		    =000e
+
+Outputs
+------
+ID_INSTRUCTION					=f168
+ID_PC_NEXT_ADDRESS				=000c
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=3
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=7b18
+id_read_data_2				=6666
+id_op1					=1
+id_op2					=6
+id_function_code						=8
+id_zero_extended_immediate						=0068
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=3
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=0051
+ex_read_data_2					=6666
+ex_op1					=5
+ex_op2						=6
+ex_function_code						=4
+ex_zero_extended_immediate				=0064
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=3
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=0020
+ex_mem_alu_output			=6646
+ex_op1				=5
+ex_read_data_1				=0051
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=0000
+mem_wb_alu_output				=009a
+mem_op1				  =4
+mem_read_data_1						=f0ff
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=0000
+MEM_WB_DATA_LINE				=0000
+MEM_WB_ALU_OUTPUT				=009a
+MEM_OP1						=4
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=0000
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=ff8f
+WB_ID_WRITE_REG						=3
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=2
+OVERFLOW_FLAG					=0
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=3
+
+-----ALU_CONTROL-----
+ex_function_code				=4
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=4
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=3
+MEM_REGWRITE					=2
+ID_OP1						=1
+EX_OP1						=5
+MEM_OP1						=4
+ID_OP2						=6
+EX_OP2EX_OP2					=6
+MEM_MUXC					=1
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=1
+EX_OP1						=5
+ID_OP2						=6
+Ex_OP2						=6
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =           8  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=2802
+IF_ADDER_RESULT_ADDRESS		    =0010
+
+Outputs
+------
+ID_INSTRUCTION					=d59a
+ID_PC_NEXT_ADDRESS				=000e
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=0
+id_ex_alu_src_a			=1
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=0
+id_ex_data_memory_write_control			=1
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=3
+id_read_data_1				=0051
+id_read_data_2				=0000
+id_op1					=5
+id_op2					=9
+id_function_code						=a
+id_zero_extended_immediate						=009a
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=3
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=7b18
+ex_read_data_2					=6666
+ex_op1					=1
+ex_op2						=6
+ex_function_code						=8
+ex_zero_extended_immediate				=0068
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=3
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0001
+ex_op1				=1
+ex_read_data_1				=7b18
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=3
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=0020
+mem_wb_alu_output				=6646
+mem_op1				  =5
+mem_read_data_1						=0051
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=3
+MEM_WB_ALU_R0_RESULT				=0020
+MEM_WB_DATA_LINE				=0000
+MEM_WB_ALU_OUTPUT				=6646
+MEM_OP1						=5
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=0000
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=009a
+WB_ID_WRITE_REG						=4
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=d
+EX_CTRL_ALU_BRANCH_RESULT			=0
+OVERFLOW_FLAG					=0
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=1
+CTRL_MUX_C_DATA_CTRL			=0
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=3
+ID_EX_REGISTER_WRITE_CONTROL			=0
+
+-----ALU_CONTROL-----
+ex_function_code				=8
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=8
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=3
+MEM_REGWRITE					=3
+ID_OP1						=5
+EX_OP1						=1
+MEM_OP1						=5
+ID_OP2						=9
+EX_OP2EX_OP2					=6
+MEM_MUXC					=1
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=1
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=5
+EX_OP1						=1
+ID_OP2						=9
+Ex_OP2						=6
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =           9  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=ce9a
+IF_ADDER_RESULT_ADDRESS		    =0012
+
+Outputs
+------
+ID_INSTRUCTION					=2802
+ID_PC_NEXT_ADDRESS				=0010
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=1
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=2
+id_read_data_1				=ff88
+id_read_data_2				=0020
+id_op1					=8
+id_op2					=0
+id_function_code						=2
+id_zero_extended_immediate						=0002
+
+Outputs
+------
+ex_mux_c_data_ctrl			=0
+ex_alu_src_a			=1
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=0
+ex_mem_data_memory_write_control			=1
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=3
+ex_read_data_1					=0051
+ex_read_data_2					=0000
+ex_op1					=5
+ex_op2						=9
+ex_function_code						=a
+ex_zero_extended_immediate				=009a
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=0
+ex_mem_reg_wrt_ctrl_flush			=0
+ex_mem_data_mem_wrt_ctrl			=1
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=fffa
+ex_op1				=5
+ex_read_data_1				=0051
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=3
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0001
+mem_op1				  =1
+mem_read_data_1						=7b18
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=3
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0038
+MEM_WB_ALU_OUTPUT				=0001
+MEM_OP1						=1
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=3
+WB_ID_R0				=0020
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=6646
+WB_ID_WRITE_REG						=5
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=2
+EX_CTRL_ALU_BRANCH_RESULT			=3
+OVERFLOW_FLAG					=0
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=2
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=a
+ctrl_ex_alu_op					=3
+ex_alu_op_ctrl					=f
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=0
+MEM_REGWRITE					=3
+ID_OP1						=8
+EX_OP1						=5
+MEM_OP1						=1
+ID_OP2						=0
+EX_OP2EX_OP2					=9
+MEM_MUXC					=1
+FORWARD_A					=2
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=1
+ID_OP1						=8
+EX_OP1						=5
+ID_OP2						=0
+Ex_OP2						=9
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          10  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=f002
+IF_ADDER_RESULT_ADDRESS		    =0014
+
+Outputs
+------
+ID_INSTRUCTION					=ce9a
+ID_PC_NEXT_ADDRESS				=0012
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=0
+id_ex_alu_src_a			=1
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=3
+id_read_data_1				=48c7
+id_read_data_2				=0000
+id_op1					=e
+id_op2					=9
+id_function_code						=a
+id_zero_extended_immediate						=009a
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=1
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=2
+ex_read_data_1					=ff88
+ex_read_data_2					=0020
+ex_op1					=8
+ex_op2						=0
+ex_function_code						=2
+ex_zero_extended_immediate				=0002
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=ff8a
+ex_op1				=8
+ex_read_data_1				=ff88
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=0
+mem_wb_data_mem_wrt_ctrl			=1
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=fffa
+mem_op1				  =5
+mem_read_data_1						=0051
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=0
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0038
+MEM_WB_ALU_OUTPUT				=fffa
+MEM_OP1						=5
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=3
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0038
+WB_ALU_OUTPUT				=0001
+WB_ID_WRITE_REG						=1
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=c
+EX_CTRL_ALU_BRANCH_RESULT			=2
+OVERFLOW_FLAG					=0
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=0
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=3
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=2
+ctrl_ex_alu_op					=2
+ex_alu_op_ctrl					=e
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=0
+ID_OP1						=e
+EX_OP1						=8
+MEM_OP1						=5
+ID_OP2						=9
+EX_OP2EX_OP2					=0
+MEM_MUXC					=0
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=e
+EX_OP1						=8
+ID_OP2						=9
+Ex_OP2						=0
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          11  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=f121
+IF_ADDER_RESULT_ADDRESS		    =0016
+
+Outputs
+------
+ID_INSTRUCTION					=f002
+ID_PC_NEXT_ADDRESS				=0014
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=14b2
+id_read_data_2				=14b2
+id_op1					=0
+id_op2					=0
+id_function_code						=2
+id_zero_extended_immediate						=0002
+
+Outputs
+------
+ex_mux_c_data_ctrl			=0
+ex_alu_src_a			=1
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=3
+ex_read_data_1					=48c7
+ex_read_data_2					=0000
+ex_op1					=e
+ex_op2						=9
+ex_function_code						=a
+ex_zero_extended_immediate				=009a
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=0
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=fffa
+ex_op1				=e
+ex_read_data_1				=48c7
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=ff8a
+mem_op1				  =8
+mem_read_data_1						=ff88
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0000
+MEM_WB_ALU_OUTPUT				=ff8a
+MEM_OP1						=8
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=0
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0038
+WB_ALU_OUTPUT				=fffa
+WB_ID_WRITE_REG						=5
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=1
+OVERFLOW_FLAG					=0
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=a
+ctrl_ex_alu_op					=3
+ex_alu_op_ctrl					=f
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=0
+EX_OP1						=e
+MEM_OP1						=8
+ID_OP2						=0
+EX_OP2EX_OP2					=9
+MEM_MUXC					=1
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=0
+EX_OP1						=e
+ID_OP2						=0
+Ex_OP2						=9
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          12  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=f122
+IF_ADDER_RESULT_ADDRESS		    =0018
+
+Outputs
+------
+ID_INSTRUCTION					=f121
+ID_PC_NEXT_ADDRESS				=0016
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=0001
+id_read_data_2				=245b
+id_op1					=1
+id_op2					=2
+id_function_code						=1
+id_zero_extended_immediate						=0021
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=14b2
+ex_read_data_2					=14b2
+ex_op1					=0
+ex_op2						=0
+ex_function_code						=2
+ex_zero_extended_immediate				=0002
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0000
+ex_op1				=0
+ex_read_data_1				=14b2
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=fffa
+mem_op1				  =e
+mem_read_data_1						=48c7
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0051
+MEM_WB_ALU_OUTPUT				=fffa
+MEM_OP1						=e
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=ff8a
+WB_ID_WRITE_REG						=8
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=3
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=2
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=2
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=1
+EX_OP1						=0
+MEM_OP1						=e
+ID_OP2						=2
+EX_OP2EX_OP2					=0
+MEM_MUXC					=0
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=1
+EX_OP1						=0
+ID_OP2						=2
+Ex_OP2						=0
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          13  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=1802
+IF_ADDER_RESULT_ADDRESS		    =001a
+
+Outputs
+------
+ID_INSTRUCTION					=f122
+ID_PC_NEXT_ADDRESS				=0018
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=0001
+id_read_data_2				=245b
+id_op1					=1
+id_op2					=2
+id_function_code						=2
+id_zero_extended_immediate						=0022
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=0001
+ex_read_data_2					=245b
+ex_op1					=1
+ex_op2						=2
+ex_function_code						=1
+ex_zero_extended_immediate				=0021
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=245c
+ex_op1				=1
+ex_read_data_1				=0001
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0000
+mem_op1				  =0
+mem_read_data_1						=14b2
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=3856
+MEM_WB_ALU_OUTPUT				=0000
+MEM_OP1						=0
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0051
+WB_ALU_OUTPUT				=fffa
+WB_ID_WRITE_REG						=e
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=3
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=1
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=1
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=1
+EX_OP1						=1
+MEM_OP1						=0
+ID_OP2						=2
+EX_OP2EX_OP2					=2
+MEM_MUXC					=1
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=1
+EX_OP1						=1
+ID_OP2						=2
+Ex_OP2						=2
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          14  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=a694
+IF_ADDER_RESULT_ADDRESS		    =001c
+
+Outputs
+------
+ID_INSTRUCTION					=1802
+ID_PC_NEXT_ADDRESS				=001a
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=1
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=0
+id_read_data_1				=ff8a
+id_read_data_2				=0000
+id_op1					=8
+id_op2					=0
+id_function_code						=2
+id_zero_extended_immediate						=0002
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=0001
+ex_read_data_2					=245b
+ex_op1					=1
+ex_op2						=2
+ex_function_code						=2
+ex_zero_extended_immediate				=0022
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0001
+ex_op1				=1
+ex_read_data_1				=0001
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=245c
+mem_op1				  =1
+mem_read_data_1						=0001
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0000
+MEM_WB_ALU_OUTPUT				=245c
+MEM_OP1						=1
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=3856
+WB_ALU_OUTPUT				=0000
+WB_ID_WRITE_REG						=0
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=1
+EX_CTRL_ALU_BRANCH_RESULT			=3
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=0
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=2
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=2
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=8
+EX_OP1						=1
+MEM_OP1						=1
+ID_OP2						=0
+EX_OP2EX_OP2					=2
+MEM_MUXC					=1
+FORWARD_A					=1
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=8
+EX_OP1						=1
+ID_OP2						=0
+Ex_OP2						=2
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          15  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=b696
+IF_ADDER_RESULT_ADDRESS		    =001e
+
+Outputs
+------
+ID_INSTRUCTION					=a694
+ID_PC_NEXT_ADDRESS				=001c
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=0
+id_ex_alu_src_a			=1
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =1
+ctrl_id_ex_alu_op		=3
+id_read_data_1				=6666
+id_read_data_2				=0000
+id_op1					=6
+id_op2					=9
+id_function_code						=4
+id_zero_extended_immediate						=0094
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=1
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=0
+ex_read_data_1					=ff8a
+ex_read_data_2					=0000
+ex_op1					=8
+ex_op2						=0
+ex_function_code						=2
+ex_zero_extended_immediate				=0002
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0002
+ex_op1				=8
+ex_read_data_1				=ff8a
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0001
+mem_op1				  =1
+mem_read_data_1						=0001
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0038
+MEM_WB_ALU_OUTPUT				=0001
+MEM_OP1						=1
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=245c
+WB_ID_WRITE_REG						=1
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=a
+EX_CTRL_ALU_BRANCH_RESULT			=2
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=1
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=0
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=3
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=2
+ctrl_ex_alu_op					=0
+ex_alu_op_ctrl					=c
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=6
+EX_OP1						=8
+MEM_OP1						=1
+ID_OP2						=9
+EX_OP2EX_OP2					=0
+MEM_MUXC					=1
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=6
+EX_OP1						=8
+ID_OP2						=9
+Ex_OP2						=0
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          16  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=c696
+IF_ADDER_RESULT_ADDRESS		    =0020
+
+Outputs
+------
+ID_INSTRUCTION					=b696
+ID_PC_NEXT_ADDRESS				=001e
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=0
+id_ex_alu_src_a			=1
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=0
+id_ex_data_memory_write_control			=1
+id_ex_data_memory_byte_enable_control	    =1
+ctrl_id_ex_alu_op		=3
+id_read_data_1				=6666
+id_read_data_2				=0000
+id_op1					=6
+id_op2					=9
+id_function_code						=6
+id_zero_extended_immediate						=0096
+
+Outputs
+------
+ex_mux_c_data_ctrl			=0
+ex_alu_src_a			=1
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=1
+ctrl_ex_alu_op		=3
+ex_read_data_1					=6666
+ex_read_data_2					=0000
+ex_op1					=6
+ex_op2						=9
+ex_function_code						=4
+ex_zero_extended_immediate				=0094
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=0
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=1
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0004
+ex_op1				=6
+ex_read_data_1				=6666
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0002
+mem_op1				  =8
+mem_read_data_1						=ff8a
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0000
+MEM_WB_ALU_OUTPUT				=0002
+MEM_OP1						=8
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0038
+WB_ALU_OUTPUT				=0001
+WB_ID_WRITE_REG						=1
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=b
+EX_CTRL_ALU_BRANCH_RESULT			=2
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=1
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=1
+CTRL_MUX_C_DATA_CTRL			=0
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=3
+ID_EX_REGISTER_WRITE_CONTROL			=0
+
+-----ALU_CONTROL-----
+ex_function_code				=4
+ctrl_ex_alu_op					=3
+ex_alu_op_ctrl					=f
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=6
+EX_OP1						=6
+MEM_OP1						=8
+ID_OP2						=9
+EX_OP2EX_OP2					=9
+MEM_MUXC					=1
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=6
+EX_OP1						=6
+ID_OP2						=9
+Ex_OP2						=9
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          17  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=f7d2
+IF_ADDER_RESULT_ADDRESS		    =0022
+
+Outputs
+------
+ID_INSTRUCTION					=c696
+ID_PC_NEXT_ADDRESS				=0020
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=0
+id_ex_alu_src_a			=1
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=3
+id_read_data_1				=6666
+id_read_data_2				=0000
+id_op1					=6
+id_op2					=9
+id_function_code						=6
+id_zero_extended_immediate						=0096
+
+Outputs
+------
+ex_mux_c_data_ctrl			=0
+ex_alu_src_a			=1
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=0
+ex_mem_data_memory_write_control			=1
+ex_mem_data_memory_byte_enable_control		=1
+ctrl_ex_alu_op		=3
+ex_read_data_1					=6666
+ex_read_data_2					=0000
+ex_op1					=6
+ex_op2						=9
+ex_function_code						=6
+ex_zero_extended_immediate				=0096
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=0
+ex_mem_reg_wrt_ctrl_flush			=0
+ex_mem_data_mem_wrt_ctrl			=1
+ex_mem_data_mem_byte_ctrl			=1
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0006
+ex_op1				=6
+ex_read_data_1				=6666
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=1
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0004
+mem_op1				  =6
+mem_read_data_1						=6666
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0012
+MEM_WB_ALU_OUTPUT				=0004
+MEM_OP1						=6
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=0002
+WB_ID_WRITE_REG						=8
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=c
+EX_CTRL_ALU_BRANCH_RESULT			=0
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=0
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=3
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=6
+ctrl_ex_alu_op					=3
+ex_alu_op_ctrl					=f
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=0
+MEM_REGWRITE					=2
+ID_OP1						=6
+EX_OP1						=6
+MEM_OP1						=6
+ID_OP2						=9
+EX_OP2EX_OP2					=9
+MEM_MUXC					=0
+FORWARD_A					=1
+FORWARD_B					=0
+FORWARD_BRANCH					=1
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=1
+ID_OP1						=6
+EX_OP1						=6
+ID_OP2						=9
+Ex_OP2						=9
+ID_FLUSH					=1
+hazard_pc_stop						=1
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=1
+
+------------------------------------------
+
+clock_cycles =          18  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=f7d2
+IF_ADDER_RESULT_ADDRESS		    =0022
+
+Outputs
+------
+ID_INSTRUCTION					=c696
+ID_PC_NEXT_ADDRESS				=0020
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=0
+id_ex_alu_src_a			=1
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=3
+id_read_data_1				=0012
+id_read_data_2				=0000
+id_op1					=6
+id_op2					=9
+id_function_code						=6
+id_zero_extended_immediate						=0096
+
+Outputs
+------
+ex_mux_c_data_ctrl			=0
+ex_alu_src_a			=1
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=3
+ex_read_data_1					=6666
+ex_read_data_2					=0000
+ex_op1					=6
+ex_op2						=9
+ex_function_code						=6
+ex_zero_extended_immediate				=0096
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=0
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0006
+ex_op1				=6
+ex_read_data_1				=6666
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=0
+mem_wb_data_mem_wrt_ctrl			=1
+mem_wb_data_mem_byte_ctrl			=1
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0006
+mem_op1				  =6
+mem_read_data_1						=6666
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=0
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0012
+MEM_WB_ALU_OUTPUT				=0006
+MEM_OP1						=6
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0012
+WB_ALU_OUTPUT				=0004
+WB_ID_WRITE_REG						=6
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=c
+EX_CTRL_ALU_BRANCH_RESULT			=2
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=0
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=3
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=6
+ctrl_ex_alu_op					=3
+ex_alu_op_ctrl					=f
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=0
+ID_OP1						=6
+EX_OP1						=6
+MEM_OP1						=6
+ID_OP2						=9
+EX_OP2EX_OP2					=9
+MEM_MUXC					=0
+FORWARD_A					=2
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=6
+EX_OP1						=6
+ID_OP2						=9
+Ex_OP2						=9
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          19  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=6404
+IF_ADDER_RESULT_ADDRESS		    =0024
+
+Outputs
+------
+ID_INSTRUCTION					=f7d2
+ID_PC_NEXT_ADDRESS				=0022
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=00ff
+id_read_data_2				=0002
+id_op1					=7
+id_op2					=d
+id_function_code						=2
+id_zero_extended_immediate						=00d2
+
+Outputs
+------
+ex_mux_c_data_ctrl			=0
+ex_alu_src_a			=1
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=3
+ex_read_data_1					=0012
+ex_read_data_2					=0000
+ex_op1					=6
+ex_op2						=9
+ex_function_code						=6
+ex_zero_extended_immediate				=0096
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=0
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0006
+ex_op1				=6
+ex_read_data_1				=0012
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0006
+mem_op1				  =6
+mem_read_data_1						=6666
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=be66
+MEM_WB_ALU_OUTPUT				=0006
+MEM_OP1						=6
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=0
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0012
+WB_ALU_OUTPUT				=0006
+WB_ID_WRITE_REG						=6
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=2
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=6
+ctrl_ex_alu_op					=3
+ex_alu_op_ctrl					=f
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=7
+EX_OP1						=6
+MEM_OP1						=6
+ID_OP2						=d
+EX_OP2EX_OP2					=9
+MEM_MUXC					=0
+FORWARD_A					=1
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=7
+EX_OP1						=6
+ID_OP2						=d
+Ex_OP2						=9
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          20  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=fb11
+IF_ADDER_RESULT_ADDRESS		    =0026
+
+Outputs
+------
+ID_INSTRUCTION					=6404
+ID_PC_NEXT_ADDRESS				=0024
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=0
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=0
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=0
+id_read_data_1				=009a
+id_read_data_2				=0000
+id_op1					=4
+id_op2					=0
+id_function_code						=4
+id_zero_extended_immediate						=0004
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=00ff
+ex_read_data_2					=0002
+ex_op1					=7
+ex_op2						=d
+ex_function_code						=2
+ex_zero_extended_immediate				=00d2
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=00fd
+ex_op1				=7
+ex_read_data_1				=00ff
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0006
+mem_op1				  =6
+mem_read_data_1						=0012
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=be66
+MEM_WB_ALU_OUTPUT				=0006
+MEM_OP1						=6
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=be66
+WB_ALU_OUTPUT				=0006
+WB_ID_WRITE_REG						=6
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=6
+EX_CTRL_ALU_BRANCH_RESULT			=2
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=0
+ID_MUX2_SELECTOR				=1
+CTRL_ID_EX_ALU_OP				=0
+ID_EX_REGISTER_WRITE_CONTROL			=0
+
+-----ALU_CONTROL-----
+ex_function_code				=2
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=2
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=4
+EX_OP1						=7
+MEM_OP1						=6
+ID_OP2						=0
+EX_OP2EX_OP2					=d
+MEM_MUXC					=0
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=4
+EX_OP1						=7
+ID_OP2						=0
+Ex_OP2						=d
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          21  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=5705
+IF_ADDER_RESULT_ADDRESS		    =0028
+
+Outputs
+------
+ID_INSTRUCTION					=fb11
+ID_PC_NEXT_ADDRESS				=0026
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=0c3e
+id_read_data_2				=0001
+id_op1					=b
+id_op2					=1
+id_function_code						=1
+id_zero_extended_immediate						=0011
+
+Outputs
+------
+ex_mux_c_data_ctrl			=0
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=0
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=0
+ex_read_data_1					=009a
+ex_read_data_2					=0000
+ex_op1					=4
+ex_op2						=0
+ex_function_code						=4
+ex_zero_extended_immediate				=0004
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=0
+ex_mem_reg_wrt_ctrl_flush			=0
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0000
+ex_op1				=4
+ex_read_data_1				=009a
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=00fd
+mem_op1				  =7
+mem_read_data_1						=00ff
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0000
+MEM_WB_ALU_OUTPUT				=00fd
+MEM_OP1						=7
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=be66
+WB_ALU_OUTPUT				=0006
+WB_ID_WRITE_REG						=6
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=2
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=4
+ctrl_ex_alu_op					=0
+ex_alu_op_ctrl					=c
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=0
+MEM_REGWRITE					=2
+ID_OP1						=b
+EX_OP1						=4
+MEM_OP1						=7
+ID_OP2						=1
+EX_OP2EX_OP2					=0
+MEM_MUXC					=1
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=b
+EX_OP1						=4
+ID_OP2						=1
+Ex_OP2						=0
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          22  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=fb21
+IF_ADDER_RESULT_ADDRESS		    =002a
+
+Outputs
+------
+ID_INSTRUCTION					=5705
+ID_PC_NEXT_ADDRESS				=0028
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=0
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=0
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=0
+id_read_data_1				=00fd
+id_read_data_2				=0000
+id_op1					=7
+id_op2					=0
+id_function_code						=5
+id_zero_extended_immediate						=0005
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=0c3e
+ex_read_data_2					=0001
+ex_op1					=b
+ex_op2						=1
+ex_function_code						=1
+ex_zero_extended_immediate				=0011
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0c3f
+ex_op1				=b
+ex_read_data_1				=0c3e
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=0
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0000
+mem_op1				  =4
+mem_read_data_1						=009a
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=0
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=3856
+MEM_WB_ALU_OUTPUT				=0000
+MEM_OP1						=4
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=00fd
+WB_ID_WRITE_REG						=7
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=5
+EX_CTRL_ALU_BRANCH_RESULT			=2
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=0
+ID_MUX2_SELECTOR				=1
+CTRL_ID_EX_ALU_OP				=0
+ID_EX_REGISTER_WRITE_CONTROL			=0
+
+-----ALU_CONTROL-----
+ex_function_code				=1
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=1
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=0
+ID_OP1						=7
+EX_OP1						=b
+MEM_OP1						=4
+ID_OP2						=0
+EX_OP2EX_OP2					=1
+MEM_MUXC					=0
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=7
+EX_OP1						=b
+ID_OP2						=0
+Ex_OP2						=1
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          23  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=4702
+IF_ADDER_RESULT_ADDRESS		    =002c
+
+Outputs
+------
+ID_INSTRUCTION					=fb21
+ID_PC_NEXT_ADDRESS				=002a
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=0c3e
+id_read_data_2				=245b
+id_op1					=b
+id_op2					=2
+id_function_code						=1
+id_zero_extended_immediate						=0021
+
+Outputs
+------
+ex_mux_c_data_ctrl			=0
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=0
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=0
+ex_read_data_1					=00fd
+ex_read_data_2					=0000
+ex_op1					=7
+ex_op2						=0
+ex_function_code						=5
+ex_zero_extended_immediate				=0005
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=0
+ex_mem_reg_wrt_ctrl_flush			=0
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0000
+ex_op1				=7
+ex_read_data_1				=00fd
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0c3f
+mem_op1				  =b
+mem_read_data_1						=0c3e
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0000
+MEM_WB_ALU_OUTPUT				=0c3f
+MEM_OP1						=b
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=0
+WB_ID_R0				=14b2
+WB_DATA_LINE				=3856
+WB_ALU_OUTPUT				=0000
+WB_ID_WRITE_REG						=4
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=0
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=5
+ctrl_ex_alu_op					=0
+ex_alu_op_ctrl					=c
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=0
+MEM_REGWRITE					=2
+ID_OP1						=b
+EX_OP1						=7
+MEM_OP1						=b
+ID_OP2						=2
+EX_OP2EX_OP2					=0
+MEM_MUXC					=1
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=1
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=b
+EX_OP1						=7
+ID_OP2						=2
+Ex_OP2						=0
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          24  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=f111
+IF_ADDER_RESULT_ADDRESS		    =002e
+
+Outputs
+------
+ID_INSTRUCTION					=4702
+ID_PC_NEXT_ADDRESS				=002c
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=0
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=0
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=0
+id_read_data_1				=00fd
+id_read_data_2				=0000
+id_op1					=7
+id_op2					=0
+id_function_code						=2
+id_zero_extended_immediate						=0002
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=0c3e
+ex_read_data_2					=245b
+ex_op1					=b
+ex_op2						=2
+ex_function_code						=1
+ex_zero_extended_immediate				=0021
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=309a
+ex_op1				=b
+ex_read_data_1				=0c3e
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=0
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0000
+mem_op1				  =7
+mem_read_data_1						=00fd
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=0
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=3856
+MEM_WB_ALU_OUTPUT				=0000
+MEM_OP1						=7
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=0c3f
+WB_ID_WRITE_REG						=b
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=4
+EX_CTRL_ALU_BRANCH_RESULT			=2
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=1
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=1
+IF_PC_MUX					=1
+ID_BRANCH_JUMP_SELECTOR				=1
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=0
+ID_MUX2_SELECTOR				=1
+CTRL_ID_EX_ALU_OP				=0
+ID_EX_REGISTER_WRITE_CONTROL			=0
+
+-----ALU_CONTROL-----
+ex_function_code				=1
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=1
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=0
+ID_OP1						=7
+EX_OP1						=b
+MEM_OP1						=7
+ID_OP2						=0
+EX_OP2EX_OP2					=2
+MEM_MUXC					=0
+FORWARD_A					=2
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=7
+EX_OP1						=b
+ID_OP2						=0
+Ex_OP2						=2
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          25  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=c890
+IF_ADDER_RESULT_ADDRESS		    =0032
+
+Outputs
+------
+ID_INSTRUCTION					=f111
+ID_PC_NEXT_ADDRESS				=002e
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=0001
+id_read_data_2				=0001
+id_op1					=1
+id_op2					=1
+id_function_code						=1
+id_zero_extended_immediate						=0011
+
+Outputs
+------
+ex_mux_c_data_ctrl			=0
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=0
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=0
+ex_read_data_1					=00fd
+ex_read_data_2					=0000
+ex_op1					=7
+ex_op2						=0
+ex_function_code						=2
+ex_zero_extended_immediate				=0002
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=0
+ex_mem_reg_wrt_ctrl_flush			=0
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0000
+ex_op1				=7
+ex_read_data_1				=00fd
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=309a
+mem_op1				  =b
+mem_read_data_1						=0c3e
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0000
+MEM_WB_ALU_OUTPUT				=309a
+MEM_OP1						=b
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=0
+WB_ID_R0				=14b2
+WB_DATA_LINE				=3856
+WB_ALU_OUTPUT				=0000
+WB_ID_WRITE_REG						=7
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=1
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=2
+ctrl_ex_alu_op					=0
+ex_alu_op_ctrl					=c
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=0
+MEM_REGWRITE					=2
+ID_OP1						=1
+EX_OP1						=7
+MEM_OP1						=b
+ID_OP2						=1
+EX_OP2EX_OP2					=0
+MEM_MUXC					=1
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=1
+EX_OP1						=7
+ID_OP2						=1
+Ex_OP2						=0
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          26  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=f881
+IF_ADDER_RESULT_ADDRESS		    =0034
+
+Outputs
+------
+ID_INSTRUCTION					=c890
+ID_PC_NEXT_ADDRESS				=0032
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=0
+id_ex_alu_src_a			=1
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=3
+id_read_data_1				=0002
+id_read_data_2				=0000
+id_op1					=8
+id_op2					=9
+id_function_code						=0
+id_zero_extended_immediate						=0090
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=0001
+ex_read_data_2					=0001
+ex_op1					=1
+ex_op2						=1
+ex_function_code						=1
+ex_zero_extended_immediate				=0011
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0002
+ex_op1				=1
+ex_read_data_1				=0001
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=0
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0000
+mem_op1				  =7
+mem_read_data_1						=00fd
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=0
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=3856
+MEM_WB_ALU_OUTPUT				=0000
+MEM_OP1						=7
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=309a
+WB_ID_WRITE_REG						=b
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=c
+EX_CTRL_ALU_BRANCH_RESULT			=2
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=0
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=3
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=1
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=1
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=0
+ID_OP1						=8
+EX_OP1						=1
+MEM_OP1						=7
+ID_OP2						=9
+EX_OP2EX_OP2					=1
+MEM_MUXC					=0
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=8
+EX_OP1						=1
+ID_OP2						=9
+Ex_OP2						=1
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          27  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=d892
+IF_ADDER_RESULT_ADDRESS		    =0036
+
+Outputs
+------
+ID_INSTRUCTION					=f881
+ID_PC_NEXT_ADDRESS				=0034
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=0002
+id_read_data_2				=0002
+id_op1					=8
+id_op2					=8
+id_function_code						=1
+id_zero_extended_immediate						=0081
+
+Outputs
+------
+ex_mux_c_data_ctrl			=0
+ex_alu_src_a			=1
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=3
+ex_read_data_1					=0002
+ex_read_data_2					=0000
+ex_op1					=8
+ex_op2						=9
+ex_function_code						=0
+ex_zero_extended_immediate				=0090
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=0
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0000
+ex_op1				=8
+ex_read_data_1				=0002
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0002
+mem_op1				  =1
+mem_read_data_1						=0001
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0000
+MEM_WB_ALU_OUTPUT				=0002
+MEM_OP1						=1
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=0
+WB_ID_R0				=14b2
+WB_DATA_LINE				=3856
+WB_ALU_OUTPUT				=0000
+WB_ID_WRITE_REG						=7
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=1
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=0
+ctrl_ex_alu_op					=3
+ex_alu_op_ctrl					=f
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=8
+EX_OP1						=8
+MEM_OP1						=1
+ID_OP2						=8
+EX_OP2EX_OP2					=9
+MEM_MUXC					=1
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=8
+EX_OP1						=8
+ID_OP2						=8
+Ex_OP2						=9
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          28  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=ca92
+IF_ADDER_RESULT_ADDRESS		    =0038
+
+Outputs
+------
+ID_INSTRUCTION					=d892
+ID_PC_NEXT_ADDRESS				=0036
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=0
+id_ex_alu_src_a			=1
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=0
+id_ex_data_memory_write_control			=1
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=3
+id_read_data_1				=0002
+id_read_data_2				=0000
+id_op1					=8
+id_op2					=9
+id_function_code						=2
+id_zero_extended_immediate						=0092
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=0002
+ex_read_data_2					=0002
+ex_op1					=8
+ex_op2						=8
+ex_function_code						=1
+ex_zero_extended_immediate				=0081
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0000
+ex_op1				=8
+ex_read_data_1				=0002
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0000
+mem_op1				  =8
+mem_read_data_1						=0002
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=3856
+MEM_WB_ALU_OUTPUT				=0000
+MEM_OP1						=8
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=0002
+WB_ID_WRITE_REG						=1
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=d
+EX_CTRL_ALU_BRANCH_RESULT			=0
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=1
+CTRL_MUX_C_DATA_CTRL			=0
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=3
+ID_EX_REGISTER_WRITE_CONTROL			=0
+
+-----ALU_CONTROL-----
+ex_function_code				=1
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=1
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=8
+EX_OP1						=8
+MEM_OP1						=8
+ID_OP2						=9
+EX_OP2EX_OP2					=8
+MEM_MUXC					=0
+FORWARD_A					=1
+FORWARD_B					=1
+FORWARD_BRANCH					=1
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=8
+EX_OP1						=8
+ID_OP2						=9
+Ex_OP2						=8
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          29  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=fcc1
+IF_ADDER_RESULT_ADDRESS		    =003a
+
+Outputs
+------
+ID_INSTRUCTION					=ca92
+ID_PC_NEXT_ADDRESS				=0038
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=0
+id_ex_alu_src_a			=1
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=3
+id_read_data_1				=0000
+id_read_data_2				=0000
+id_op1					=a
+id_op2					=9
+id_function_code						=2
+id_zero_extended_immediate						=0092
+
+Outputs
+------
+ex_mux_c_data_ctrl			=0
+ex_alu_src_a			=1
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=0
+ex_mem_data_memory_write_control			=1
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=3
+ex_read_data_1					=0002
+ex_read_data_2					=0000
+ex_op1					=8
+ex_op2						=9
+ex_function_code						=2
+ex_zero_extended_immediate				=0092
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=0
+ex_mem_reg_wrt_ctrl_flush			=0
+ex_mem_data_mem_wrt_ctrl			=1
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0002
+ex_op1				=8
+ex_read_data_1				=0002
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0000
+mem_op1				  =8
+mem_read_data_1						=0002
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=3856
+MEM_WB_ALU_OUTPUT				=0000
+MEM_OP1						=8
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=3856
+WB_ALU_OUTPUT				=0000
+WB_ID_WRITE_REG						=8
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=c
+EX_CTRL_ALU_BRANCH_RESULT			=1
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=0
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=3
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=2
+ctrl_ex_alu_op					=3
+ex_alu_op_ctrl					=f
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=0
+MEM_REGWRITE					=2
+ID_OP1						=a
+EX_OP1						=8
+MEM_OP1						=8
+ID_OP2						=9
+EX_OP2EX_OP2					=9
+MEM_MUXC					=1
+FORWARD_A					=1
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=1
+ID_OP1						=a
+EX_OP1						=8
+ID_OP2						=9
+Ex_OP2						=9
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          30  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=fdd2
+IF_ADDER_RESULT_ADDRESS		    =003c
+
+Outputs
+------
+ID_INSTRUCTION					=fcc1
+ID_PC_NEXT_ADDRESS				=003a
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=cccc
+id_read_data_2				=cccc
+id_op1					=c
+id_op2					=c
+id_function_code						=1
+id_zero_extended_immediate						=00c1
+
+Outputs
+------
+ex_mux_c_data_ctrl			=0
+ex_alu_src_a			=1
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=3
+ex_read_data_1					=0000
+ex_read_data_2					=0000
+ex_op1					=a
+ex_op2						=9
+ex_function_code						=2
+ex_zero_extended_immediate				=0092
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=0
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0002
+ex_op1				=a
+ex_read_data_1				=0000
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=0
+mem_wb_data_mem_wrt_ctrl			=1
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0002
+mem_op1				  =8
+mem_read_data_1						=0002
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=0
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=3856
+MEM_WB_ALU_OUTPUT				=0002
+MEM_OP1						=8
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=3856
+WB_ALU_OUTPUT				=0000
+WB_ID_WRITE_REG						=8
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=1
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=2
+ctrl_ex_alu_op					=3
+ex_alu_op_ctrl					=f
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=0
+ID_OP1						=c
+EX_OP1						=a
+MEM_OP1						=8
+ID_OP2						=c
+EX_OP2EX_OP2					=9
+MEM_MUXC					=0
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=c
+EX_OP1						=a
+ID_OP2						=c
+Ex_OP2						=9
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          31  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=fcd1
+IF_ADDER_RESULT_ADDRESS		    =003e
+
+Outputs
+------
+ID_INSTRUCTION					=fdd2
+ID_PC_NEXT_ADDRESS				=003c
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=0002
+id_read_data_2				=0002
+id_op1					=d
+id_op2					=d
+id_function_code						=2
+id_zero_extended_immediate						=00d2
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=cccc
+ex_read_data_2					=cccc
+ex_op1					=c
+ex_op2						=c
+ex_function_code						=1
+ex_zero_extended_immediate				=00c1
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=9998
+ex_op1				=c
+ex_read_data_1				=cccc
+
+Outputs
+------
+mem_mux_c_data_ctrl			=0
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0002
+mem_op1				  =a
+mem_read_data_1						=0000
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=0
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0002
+MEM_WB_ALU_OUTPUT				=0002
+MEM_OP1						=a
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=0
+WB_ID_R0				=14b2
+WB_DATA_LINE				=3856
+WB_ALU_OUTPUT				=0002
+WB_ID_WRITE_REG						=8
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=1
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=1
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=1
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=d
+EX_OP1						=c
+MEM_OP1						=a
+ID_OP2						=d
+EX_OP2EX_OP2					=c
+MEM_MUXC					=0
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=d
+EX_OP1						=c
+ID_OP2						=d
+Ex_OP2						=c
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          32  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=0000
+IF_ADDER_RESULT_ADDRESS		    =0040
+
+Outputs
+------
+ID_INSTRUCTION					=fcd1
+ID_PC_NEXT_ADDRESS				=003e
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=1
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=2
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=1
+id_read_data_1				=cccc
+id_read_data_2				=0002
+id_op1					=c
+id_op2					=d
+id_function_code						=1
+id_zero_extended_immediate						=00d1
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=0002
+ex_read_data_2					=0002
+ex_op1					=d
+ex_op2						=d
+ex_function_code						=2
+ex_zero_extended_immediate				=00d2
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=0000
+ex_op1				=d
+ex_read_data_1				=0002
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=9998
+mem_op1				  =c
+mem_read_data_1						=cccc
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=0000
+MEM_WB_ALU_OUTPUT				=9998
+MEM_OP1						=c
+
+Outputs
+------
+wb_mux_c_data_ctrl			=0
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0002
+WB_ALU_OUTPUT				=0002
+WB_ID_WRITE_REG						=a
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=f
+EX_CTRL_ALU_BRANCH_RESULT			=0
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=0
+CTRL_ID_HALT					=0
+CTRL_ID_IF_BUFFER_FLUSH				=0
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=1
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=1
+ID_EX_REGISTER_WRITE_CONTROL			=2
+
+-----ALU_CONTROL-----
+ex_function_code				=2
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=2
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=c
+EX_OP1						=d
+MEM_OP1						=c
+ID_OP2						=d
+EX_OP2EX_OP2					=d
+MEM_MUXC					=1
+FORWARD_A					=0
+FORWARD_B					=0
+FORWARD_BRANCH					=1
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=c
+EX_OP1						=d
+ID_OP2						=d
+Ex_OP2						=d
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+
+------------------------------------------
+
+clock_cycles =          33  reset = 1
+
+------------------------------------------
+
+----------IF/ID BUFFER-----------
+
+Inputs
+------
+IF_INSTRUCTION					=0000
+IF_ADDER_RESULT_ADDRESS		    =0042
+
+Outputs
+------
+ID_INSTRUCTION					=0000
+ID_PC_NEXT_ADDRESS				=0040
+
+----------ID/EX BUFFER-----------
+
+Inputs
+------
+ctrl_mux_c_data_ctrl			=0
+id_ex_alu_src_a			=0
+id_ex_alu_src_b			=0
+ctrl_id_ex_buffer_flush			=0
+id_ex_register_write_control			=0
+id_ex_data_memory_write_control			=0
+id_ex_data_memory_byte_enable_control	    =0
+ctrl_id_ex_alu_op		=0
+id_read_data_1				=0000
+id_read_data_2				=0000
+id_op1					=0
+id_op2					=0
+id_function_code						=0
+id_zero_extended_immediate						=0000
+
+Outputs
+------
+ex_mux_c_data_ctrl			=1
+ex_alu_src_a			=0
+ex_alu_src_b			=0
+ctrl_ex_flush			=0
+ex_mem_register_write_control			=2
+ex_mem_data_memory_write_control			=0
+ex_mem_data_memory_byte_enable_control		=0
+ctrl_ex_alu_op		=1
+ex_read_data_1					=cccc
+ex_read_data_2					=0002
+ex_op1					=c
+ex_op2						=d
+ex_function_code						=1
+ex_zero_extended_immediate				=00d1
+
+----------EX/MEM BUFFER----------
+
+Inputs
+------
+ex_mem_mux_c_data_ctrl			=1
+ex_mem_reg_wrt_ctrl_flush			=2
+ex_mem_data_mem_wrt_ctrl			=0
+ex_mem_data_mem_byte_ctrl			=0
+ex_mem_alu_r0_result			=14b2
+ex_mem_alu_output			=9998
+ex_op1				=c
+ex_read_data_1				=cccc
+
+Outputs
+------
+mem_mux_c_data_ctrl			=1
+mem_wb_reg_wrt_ctrl_flush			=2
+mem_wb_data_mem_wrt_ctrl			=0
+mem_wb_data_mem_byte_ctrl			=0
+mem_wb_alu_r0_result			=14b2
+mem_wb_alu_output				=0000
+mem_op1				  =d
+mem_read_data_1						=0002
+
+----------MEM/WB BUFFER----------
+
+Inputs
+------
+mem_mux_c_data_ctrl			=1
+MEM_WB_REG_WRT_CTRL_FLUSH			=2
+MEM_WB_ALU_R0_RESULT				=14b2
+MEM_WB_DATA_LINE				=3856
+MEM_WB_ALU_OUTPUT				=0000
+MEM_OP1						=d
+
+Outputs
+------
+wb_mux_c_data_ctrl			=1
+WB_ID_REG_WRITE_CONTROL			=2
+WB_ID_R0				=14b2
+WB_DATA_LINE				=0000
+WB_ALU_OUTPUT				=9998
+WB_ID_WRITE_REG						=c
+
+-----CONTROL_UNIT-----
+ID_OPCODE					=0
+EX_CTRL_ALU_BRANCH_RESULT			=1
+OVERFLOW_FLAG					=1
+CTRL_ID_EX_BUFFER_FLUSH				=0
+CTRL_ID_BUFFER_FLUSH				=1
+CTRL_ID_HALT					=1
+CTRL_ID_IF_BUFFER_FLUSH				=1
+IF_PC_MUX					=0
+ID_BRANCH_JUMP_SELECTOR				=0
+ID_EX_DATA_MEMORY_BYTE_ENABLE_CONTROL		=0
+ID_EX_DATA_MEMORY_WRITE_CONTROL			=0
+CTRL_MUX_C_DATA_CTRL			=0
+ID_MUX2_SELECTOR				=0
+CTRL_ID_EX_ALU_OP				=0
+ID_EX_REGISTER_WRITE_CONTROL			=0
+
+-----ALU_CONTROL-----
+ex_function_code				=1
+ctrl_ex_alu_op					=1
+ex_alu_op_ctrl					=1
+
+-----FORWARDING_UNIT-----
+EX_REGWRITE					=2
+MEM_REGWRITE					=2
+ID_OP1						=0
+EX_OP1						=c
+MEM_OP1						=d
+ID_OP2						=0
+EX_OP2EX_OP2					=d
+MEM_MUXC					=1
+FORWARD_A					=2
+FORWARD_B					=1
+FORWARD_BRANCH					=0
+
+-----HAZARD_UNIT-----
+ex_mem_data_memory_write_control					=0
+ID_OP1						=0
+EX_OP1						=c
+ID_OP2						=0
+Ex_OP2						=d
+ID_FLUSH					=0
+hazard_pc_stop						=0
+IF_ID_BUFFER_FLUSH				=0
+if_id_buffer_hold			=0
+$finish called from file "cpu_fixture.v", line 276.
+$finish at simulation time                  690
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 690
+CPU Time:      0.310 seconds;       Data structure size:   0.3Mb
+Tue May 11 15:28:16 2021
