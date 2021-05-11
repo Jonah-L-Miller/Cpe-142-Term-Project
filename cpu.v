@@ -36,7 +36,7 @@ module cpu(
 	wire [7:0] id_immediate = id_instruction [7:0];
 	wire [3:0] id_function_code = id_instruction [3:0];
 	wire [15:0]read_reg1, read_reg2;
-	wire [11:0] id_jmp = id_instruction [11:0];
+	wire [11:0] id_jmp = id_instruction[11:0];
 	wire [7:0] id_branch = id_instruction [7:0];
 
 	wire [3:0] id_mux2_output;
@@ -112,7 +112,7 @@ module cpu(
 	program_counter IF_PROGRAM_COUNTER(
 		.pc_new_address(if_pc_new_address),				//address from IF_MUX
 		.instruction_address(if_address_from_pc),	//address from PC
-		.pc_stop(if_pc_stop),							//pause pc with PC_pause or halt
+		.pc_stop(hazard_pc_stop||ctrl_id_halt),							//pause pc with PC_pause or halt
 		.clock(clock),
 		.reset(reset)
 		);
@@ -213,7 +213,7 @@ module cpu(
 	
 	//branch logic
 	mux2 ID_BRANCH_MUX(
-		.in1(id_read_data_1),		
+		.in1(id_read_data_1),
 		.in2(mem_ex_forwarded_alu_output),
 		.s(forward_branch),
 		.out(id_branch_mux_output)
@@ -226,7 +226,15 @@ module cpu(
 	);
 
 ///// ID/EX BUFFER /////
-                           
+
+	/*
+	wire [1:0] wb_id_reg_write_control
+	wire [3:0] id_opcode         \
+	wire [3:0] id_op1 			  \	
+	wire [3:0] id_op2 			   > already declared wires that we need for id/ex buffer
+	wire [7:0] id_immediate 	  /
+	wire [3:0] id_function_code  /
+   */                              
 	buffer #(.N(69)) ID_EX_BUFFER(
 		.clock(clock),
 		.reset(reset),
@@ -428,7 +436,7 @@ module cpu(
 	control_unit CTRL_UNIT(
 		.opcode(id_opcode),
 		.branch_result(ex_ctrl_alu_branch_result),
-		.overflow_flag(overflow_error_warning),
+		.overflow_flag(ex_ctrl_alu_overflow_flag),
 		.reset(reset),
 		.ex_flush(ctrl_id_ex_buffer_flush),
 		.id_flush(ctrl_id_buffer_flush),
@@ -472,17 +480,14 @@ module cpu(
 
 
 ///// HAZARD UNIT /////
-	wire mux_c_ex_ctrl;
 	
 	hazard_unit HAZ_UNIT(
-		.ex_memread(mux_c_ex_ctrl),
+		.ex_memwrite(ex_mem_data_memory_write_control),
 		.id_op1(id_op1),
-		.ex_op1(ex_op1),
-		.id_op2(id_op2),
-		.ex_op2(ex_op2),
+		.ex_op1(ex_op1),	
 		.id_flush(id_flush),
 		.if_id_hold(if_id_buffer_hold),
-		.pc_pause(pc_stop),
+		.pc_pause(hazard_pc_stop),
 		.if_id_flush(if_id_buffer_flush)
 	);
 
