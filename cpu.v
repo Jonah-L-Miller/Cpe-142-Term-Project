@@ -445,6 +445,7 @@ module cpu(
 
 ///// CONTROL UNIT /////
 	wire overflow_error_warning;
+	wire bad_op_out;
 	control_unit CTRL_UNIT(
 		.opcode(id_opcode),
 		.branch_result(ex_ctrl_alu_branch_result),
@@ -466,7 +467,8 @@ module cpu(
 		.reg_write(id_ex_register_write_control),
 		.function_code(id_function_code),
 		.alu_src_a(id_ex_alu_src_a),
-		.alu_src_b(id_ex_alu_src_b)
+		.alu_src_b(id_ex_alu_src_b),
+		.bad_op(bad_op_out)
 	);
 
 

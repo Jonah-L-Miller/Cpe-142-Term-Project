@@ -5,7 +5,7 @@ module control_unit(
 	
 	output reg ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c, r0_select, overflow_error_warning,
 	output reg [1:0] alu_op, reg_write,
-	output reg alu_src_a, alu_src_b
+	output reg alu_src_a, alu_src_b, bad_op
 	);
 	
 	
@@ -14,6 +14,7 @@ module control_unit(
 		if (!reset) begin
 			{ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c,alu_op, reg_write, overflow_error_warning} = 18'h00000;
 			mux_c = 1;
+			bad_op = 1'b0;
 		end
 
 		case (opcode)
@@ -23,7 +24,7 @@ module control_unit(
 				mux_c <= 1'b1;
 
 				r0_select <=1'b0;
-				
+				bad_op = 1'b0;
 				{ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write} <= 8'h00;
 				if (function_code == 4'b1000 || function_code == 4'b0100)
 					reg_write <= 2'b11;	//reg write and r0 write
@@ -41,7 +42,7 @@ module control_unit(
 				reg_write[1] <= 1'b1;	
 				reg_write[0] <= 1'b0;
 				r0_select <=1'b0;
-				
+				bad_op = 1'b0;
 				{ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write} <= 8'h00;
 				
 				alu_src_a <= 1'b0;
@@ -50,7 +51,7 @@ module control_unit(
 			end
 			4'b 0010: begin	//ori
 				alu_op <= 2'b 10;
-								
+				bad_op = 1'b0;				
 				mux_c <= 1'b1;	//WB MUXC
 				reg_write[1] <= 1'b1;	
 				reg_write[0] <= 1'b0;	//WB_ID REGWRITE
@@ -69,7 +70,7 @@ module control_unit(
 				id_flush <= 1'b0;
 				halt <= 1'b0;
 				if_flush <= 1'b0;
-				
+				bad_op = 1'b0;
 				pc_op <= 1'b0;
 				b_jmp <= 1'b0;
 				
@@ -89,7 +90,7 @@ module control_unit(
 			end
 			4'b 1011: begin	//sb
 				alu_op <= 2'b 11;
-				
+				bad_op = 1'b0;
 				ex_flush <= 1'b0;
 				id_flush <= 1'b0;
 				halt <= 1'b0;
@@ -113,7 +114,7 @@ module control_unit(
 			end
 			4'b 1100: begin	//lw
 				alu_op <= 2'b 11;
-				
+				bad_op = 1'b0;
 				ex_flush <= 1'b0;
 				id_flush <= 1'b0;
 				halt <= 1'b0;
@@ -138,7 +139,7 @@ module control_unit(
 			end
 			4'b 1101: begin	//sw
 				alu_op <= 2'b 11;
-				
+				bad_op = 1'b0;
 				ex_flush <= 1'b0;
 				id_flush <= 1'b0;
 				halt <= 1'b0;
@@ -161,6 +162,7 @@ module control_unit(
 			end
 			4'b 0101: begin	//blt
 			r0_select <= 1'b1;
+			bad_op = 1'b0;
 				if(branch_result == 2'b11) begin
 					alu_op <= 2'b 00;
 					
@@ -209,6 +211,7 @@ module control_unit(
 			end
 			4'b 0100: begin	//bgt//
 			r0_select <=1'b1;
+			bad_op = 1'b0;
 				if(branch_result == 2'b10) begin
 					alu_op <= 2'b 00;
 					
@@ -259,6 +262,7 @@ module control_unit(
 			end
 			4'b 0110: begin	//beq
 				r0_select <=1'b1;
+				bad_op = 1'b0;
 				if(branch_result == 2'b01) begin
 					alu_op <= 2'b 00;
 					
@@ -309,7 +313,7 @@ module control_unit(
 			end
 			4'b 0111: begin	//jmp
 				alu_op <= 2'b 00;
-				
+				bad_op = 1'b0;
 				ex_flush <= 1'b0;
 				id_flush <= 1'b1;
 				
@@ -333,7 +337,7 @@ module control_unit(
 			end
 			4'b 0000: begin	//halt
 				alu_op <= 2'b 00;
-				
+				bad_op = 1'b0;
 				ex_flush <= 1'b0;
 				id_flush <= 1'b1;
 				
@@ -356,10 +360,12 @@ module control_unit(
 				alu_src_b <= 1'b0;
 				
 			end
-			default: {ex_flush, id_flush, halt, if_flush, pc_op, b_jmp, byte_en, mem_write, mux_c,alu_op, reg_write} <= 17'h00000;
+			default: bad_op = 1'b1;
 		endcase
 		
-		if (overflow_flag) begin
+		
+		
+		if (overflow_flag || bad_op) begin
 			halt <= 1'b1;
 			if_flush <= 1'b1;
 			overflow_error_warning <= 1'b1;
